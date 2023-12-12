@@ -27,30 +27,7 @@ public class BuildTrussSDCenterTape extends CommandBase {
          * It has the pixel delivery after the first step
          */
 
-        if(!ActiveMotionValues.getUseStageDoor()) {
-
-            drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
-
-                    .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
-
-                    .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
-
-                    .waitSeconds(1)
-
-                    .lineToLinearHeading(ActiveMotionValues.getRetractPose())
-
-                    .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
-
-                    .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
-
-                    .waitSeconds(ActiveMotionValues.getStopSecs())
-
-                    .lineToLinearHeading(ActiveMotionValues.getOptionTargetPose())
-
-                    .build();
-        }
-
-        else{
+        if (ActiveMotionValues.getUseStageDoor()) {
 
             drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
 
@@ -74,7 +51,26 @@ public class BuildTrussSDCenterTape extends CommandBase {
 
                     .build();
 
+        } else {
+            drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
 
+                    .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
+
+                    .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
+
+                    .waitSeconds(1)
+
+                    .lineToLinearHeading(ActiveMotionValues.getRetractPose())
+
+                    .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
+
+                    .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
+
+                    .waitSeconds(ActiveMotionValues.getStopSecs())
+
+                    .lineToLinearHeading(ActiveMotionValues.getOptionTargetPose())
+
+                    .build();
         }
 
         drive.trajName = "TSDCenter";

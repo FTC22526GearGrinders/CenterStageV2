@@ -13,7 +13,7 @@ public final class Constants {
         static final double width = 17.;
 
         static double gripperXOffset = 2;
-        public static Pose2d pixelDropPose = new Pose2d(0, -RobotConstants.length / 2 + 1, 0);
+        public static Pose2d pixelDropPose = new Pose2d(-1, -RobotConstants.length / 2 + 1, 0);
         public static Pose2d leftGripperPose = new Pose2d(-gripperXOffset, -RobotConstants.length / 2 + 1, 0);
         public static Pose2d rightGripperPose = new Pose2d(gripperXOffset, -RobotConstants.length / 2 + 1, 0);
 
@@ -115,8 +115,6 @@ public final class Constants {
         //  Set the GAIN constants to control the relationship between the measured position error, and how much power is
         //  applied to the drive motors to correct the error.
         //  Drive = Error * Gain    Make these values smaller for smoother control, or larger for a more aggressive response.
-
-        public static double FORWARD_GAIN = 0.015;   //
         public static double STRAFE_GAIN = 0.015;   //  Strafe Speed Control "Gain".  eg: Ramp up to 25% power at a 25 degree Yaw error.   (0.25 / 25.0)
         public static double TURN_GAIN = 0.01;   //  Turn Control "Gain".  eg: Ramp up to 25% power at a 25 degree error. (0.25 / 25.0)
         public static double MAX_AUTO_SPEED = 0.5;   //  Clip the approach speed to this max value (adjust for your robot)
@@ -131,9 +129,9 @@ public final class Constants {
         public static final double DROP_CLOSED_POSITION = .7;
 
         public enum LeftGripperSet {
-            OPEN(.4),//open position
+            OPEN(.7),//open position
             MID(.7),//mid
-            CLOSED(.1);//closed
+            CLOSED(.4);//closed
 
             public final double position;
 
@@ -144,9 +142,9 @@ public final class Constants {
 
 
         public enum RightGripperSet {
-            OPEN(.2),
+            OPEN(.1),
             MID(.3),
-            CLOSED(.6);
+            CLOSED(.4);
 
             public final double position;
 
@@ -157,9 +155,9 @@ public final class Constants {
 
 
         public enum TurnGripperSet {
-            PICKUP(.79),
+            PICKUP(.2),
             MID(.65),
-            DELIVER(.585);
+            DELIVER(0);
 
             public final double position;
 
@@ -169,11 +167,11 @@ public final class Constants {
         }
 
         public enum FlipGripperSet {
-            PICKUP(.4),
+            PICKUP(0.08),
             LEFT_DOWN(.2),
-            DELIVER(.16),
+            DELIVER(.3),
 
-            RIGHT_DOWN(.09);
+            RIGHT_DOWN(.0);
 
             public final double position;
 
@@ -219,12 +217,12 @@ public final class Constants {
         public static final double JOG_DOWN_POWER = -.4;
         public static final double AUTO_DELIVER_POSITION = 7.5;
         public static final double HOME_POSITION = 1;
-        public static final double MAX_VEL = 4;
-        public static final double MAX_ACCEL = 2;
+        public static final double MAX_VEL = 30;
+        public static final double MAX_ACCEL = 30;
         public static double[] armPositionInches = {0,0.5, 5.8, 9, 13.6, 14.3, 16.8, 19};
 
 
-        public static double kP = .2;
+        public static double kP = 1.5;
         public static double kI = 0;
         public static double kD = 0;
 
@@ -256,16 +254,16 @@ public final class Constants {
         public static final double JOG_DOWN_POWER = -.4;
         public static final double AUTO_DELIVER_POSITION = 7.5;
         public static final double HOME_POSITION = 1;
-        public static final double MAX_VEL = 8;
-        public static final double MAX_ACCEL = 8;
+        public static final double MAX_VEL = 4;
+        public static final double MAX_ACCEL = 2;
 
-        public static double kP = .05;
+        public static double kP = .5;
         public static double kI = 0;
         public static double kD = 0;
 
         public static double POSITION_Kg = 0;
 
-        public static double CLEAR_BAR_HEIGHT = 14;
+        public static double CLEAR_BAR_HEIGHT = 16;
 
         public static double RAISe_ROBOT_HEIGHT = 10;
 
@@ -274,8 +272,8 @@ public final class Constants {
 
     public static final class CatapultConstants {
 
-        public static final double CATAPULT_LOCK_POSITION = .10;
-        public static final double CATAPULT_RELEASE_POSITION = .90;
+        public static final double CATAPULT_LOCK_POSITION = .0;
+        public static final double CATAPULT_RELEASE_POSITION = .10;
 
 
     }

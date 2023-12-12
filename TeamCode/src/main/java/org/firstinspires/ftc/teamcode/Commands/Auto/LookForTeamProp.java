@@ -121,7 +121,7 @@ public class LookForTeamProp extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return !noEnd && (lcrCheckCount >= checklimit && endTimer.seconds() > .2 || endTimer.seconds() > 10);
+        return !noEnd && (lcrCheckCount >= checklimit && endTimer.seconds() > 0.2 || endTimer.seconds() > 10);
     }
 
 

@@ -186,8 +186,10 @@ public class TestMotionData extends CommandOpMode {
 
 
         telemetry.addLine();
-        if (ActiveMotionValues.getBBStart())
+        if (ActiveMotionValues.getBBStart()) {
             telemetry.addData("PreTagPose", ActiveMotionValues.getPreTagPose().toString());
+            telemetry.addData("TagLineupPose", ActiveMotionValues.getTagLineupPose().toString());
+        }
 
         telemetry.addLine();
 
@@ -205,7 +207,6 @@ public class TestMotionData extends CommandOpMode {
 
             telemetry.addData("Atag", ActiveMotionValues.getActTag());
             telemetry.addLine();
-
 
         }
 

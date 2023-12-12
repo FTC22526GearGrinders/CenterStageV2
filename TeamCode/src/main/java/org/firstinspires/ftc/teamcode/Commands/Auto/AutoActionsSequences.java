@@ -42,19 +42,15 @@ public class AutoActionsSequences extends SequentialCommandGroup {
 
                                 new SequentialCommandGroup(
 
-
                                         af.raiseArmToPosition(),
 
-
                                         new InstantCommand(() -> phss.raiseGrippersToDeliver()),
-
-                                        new InstantCommand(() -> phss.flipGrippersToDeliver()),
 
                                         new WaitCommand(500),
 
                                         new InstantCommand(() -> phss.flipGrippersToLeftDown()),
 
-                                        af.positionToBackboard(),
+                                        af.trajToBackboardSimple(),
 
                                         new WaitCommand(500),
 
@@ -63,7 +59,6 @@ public class AutoActionsSequences extends SequentialCommandGroup {
                                         new WaitCommand(500),
 
                                         new InstantCommand(() -> phss.flipGrippersToPickup()),
-
                                         new WaitCommand(500),
 
                                         new InstantCommand(() -> phss.lowerGrippersToPickup()),

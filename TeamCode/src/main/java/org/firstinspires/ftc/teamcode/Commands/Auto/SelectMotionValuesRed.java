@@ -253,11 +253,6 @@ public class SelectMotionValuesRed extends CommandBase {
 
         if (useTruss) {
 
-            if (lcr == 11) ActiveMotionValues.setStrafeDistance(strafeDistance);
-
-            if (lcr == 13) ActiveMotionValues.setStrafeDistance(-strafeDistance);
-
-
             ActiveMotionValues.setTrussSDLineUpPose(FieldConstantsRed.nearTrussLineUpPose);
 
             ActiveMotionValues.setOptionStopPose(FieldConstantsRed.nearOptionPose);
@@ -276,7 +271,7 @@ public class SelectMotionValuesRed extends CommandBase {
         if (useStageDoor) {
 
             if (lcr == 11) {
-                ActiveMotionValues.setStrafeDistance(strafeDistance);
+
                 ActiveMotionValues.setTrussSDLineUpPose((FieldConstantsRed.stageDoorLineUpPose13));
             }
             if (lcr == 12) {
@@ -284,7 +279,7 @@ public class SelectMotionValuesRed extends CommandBase {
                 ActiveMotionValues.setTrussSDLineUpPose((FieldConstantsRed.stageDoorLineUpPose2));
             }
             if (lcr == 13) {
-                ActiveMotionValues.setStrafeDistance(-strafeDistance);
+
                 ActiveMotionValues.setTrussSDLineUpPose((FieldConstantsRed.stageDoorLineUpPose13));
             }
 
