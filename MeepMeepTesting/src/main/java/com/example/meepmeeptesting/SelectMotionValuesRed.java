@@ -60,7 +60,7 @@ public class SelectMotionValuesRed {
 
                 ActiveMotionValues.setParkPose(new Pose2d());
 
-                Pose2d parkPoseOffset = new Pose2d(0, 0, 90);
+                Pose2d parkPoseOffset = new Pose2d(0, 0, Math.toRadians(90));
 
                 if (ActiveMotionValues.getCenterPark())
 
@@ -98,7 +98,7 @@ public class SelectMotionValuesRed {
 
                 ActiveMotionValues.setParkPose(new Pose2d());
 
-                parkPoseOffset = new Pose2d(0, 0, 90);
+                parkPoseOffset = new Pose2d(0, 0, Math.toRadians(90));
 
                 if (ActiveMotionValues.getCenterPark())
 
@@ -134,7 +134,7 @@ public class SelectMotionValuesRed {
 
                 ActiveMotionValues.setParkPose(new Pose2d());
 
-                parkPoseOffset = new Pose2d(0, 0, 90);
+                parkPoseOffset = new Pose2d(0, 0, Math.toRadians(90));
 
                 if (ActiveMotionValues.getCenterPark())
 

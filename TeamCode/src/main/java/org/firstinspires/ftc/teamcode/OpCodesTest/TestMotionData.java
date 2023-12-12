@@ -12,6 +12,7 @@ import org.firstinspires.ftc.teamcode.Commands.Auto.SelectMotionValuesBlue;
 import org.firstinspires.ftc.teamcode.Commands.Auto.SelectMotionValuesRed;
 import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
 import org.firstinspires.ftc.teamcode.FieldConstantsRed;
+import org.firstinspires.ftc.teamcode.util.AssetsTrajectoryManager;
 
 @Config
 @TeleOp(name = "Auto: Values", group = "Test")
@@ -189,6 +190,9 @@ public class TestMotionData extends CommandOpMode {
         if (ActiveMotionValues.getBBStart()) {
             telemetry.addData("PreTagPose", ActiveMotionValues.getPreTagPose().toString());
             telemetry.addData("TagLineupPose", ActiveMotionValues.getTagLineupPose().toString());
+            if(ActiveMotionValues.getCenterPark()|| ActiveMotionValues.getNearPark()){
+                telemetry.addData("ParkPose", ActiveMotionValues.getParkPose());
+            }
         }
 
         telemetry.addLine();
