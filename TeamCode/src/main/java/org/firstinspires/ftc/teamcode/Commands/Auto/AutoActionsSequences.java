@@ -50,15 +50,18 @@ public class AutoActionsSequences extends SequentialCommandGroup {
 
                                         new InstantCommand(() -> phss.flipGrippersToLeftDown()),
 
-                                        af.trajToBackboardSimple(),
+                                     //   af.trajToBackboardSimple(),
+
+                                        af.positionToBackboardUsingTags(),
 
                                         new WaitCommand(500),
 
                                         new InstantCommand(phss::openLeftGripper),
 
-                                        new WaitCommand(500),
+                                        new WaitCommand(1000),
 
                                         new InstantCommand(() -> phss.flipGrippersToPickup()),
+
                                         new WaitCommand(500),
 
                                         new InstantCommand(() -> phss.lowerGrippersToPickup()),

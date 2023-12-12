@@ -11,9 +11,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
-import org.firstinspires.ftc.teamcode.Constants;
-import org.firstinspires.ftc.teamcode.FieldConstantsBlue;
-import org.firstinspires.ftc.teamcode.FieldConstantsRed;
 import org.firstinspires.ftc.teamcode.Subsystems.Vision_Subsystem;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 
@@ -83,9 +80,9 @@ public class DetectAprilTagsCamOffset extends CommandBase {
 
                     Orientation rot = Orientation.getOrientation(detection.rawPose.R, AxesReference.INTRINSIC, AxesOrder.YXZ, outputUnitsAngle);
 
-                    double offsetBearing =outputUnitsAngle.fromUnit(AngleUnit.RADIANS, Math.atan2(-offsetX, offsetY));
+                    double offsetBearing = outputUnitsAngle.fromUnit(AngleUnit.RADIANS, Math.atan2(-offsetX, offsetY));
 
-                    double calcBearing =outputUnitsAngle.fromUnit(AngleUnit.RADIANS, Math.atan2(-detection.ftcPose.x, detection.ftcPose.y));
+                    double calcBearing = outputUnitsAngle.fromUnit(AngleUnit.RADIANS, Math.atan2(-detection.ftcPose.x, detection.ftcPose.y));
 
 
                     ActiveMotionValues.setDetection(detection);
@@ -98,40 +95,26 @@ public class DetectAprilTagsCamOffset extends CommandBase {
 
                     Pose2d tagPose = new Pose2d();
 
-//                    if (n > 3)
-//
-//                        tagPose = FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag());
-//                    else
-//                        tagPose = FieldConstantsBlue.getActiveTagPose(ActiveMotionValues.getActTag());
-//
-//                    Pose2d camFieldPose = tagPose.minus(camPose);
-//
-//                    Pose2d currentRobotPose = camFieldPose.minus(Constants.RobotConstants.kCameraToRobot);
-//
-//                    Pose2d finalTagPose = tagPose;
-
 
                     if (noEnd) {
-                     //   myOpMode.telemetry.addData("Active Tag", n);
+
                         myOpMode.telemetry.addData("Tag ID", detection.id);
                         myOpMode.telemetry.addLine();
 
-                      //  myOpMode.telemetry.addData("TagPose", tagPose.toString());
-                        myOpMode.telemetry.addLine(String.format("Translation X: %.2f in",detection.ftcPose.x));
-                        myOpMode.telemetry.addLine(String.format("OffsetX X: %.2f in",offsetX));
+                        //  myOpMode.telemetry.addData("TagPose", tagPose.toString());
+                        myOpMode.telemetry.addLine(String.format("Translation X: %.2f in", detection.ftcPose.x));
+                        myOpMode.telemetry.addLine(String.format("OffsetX X: %.2f in", offsetX));
 
-                        myOpMode.telemetry.addLine(String.format("Translation Y: %.2f in",detection.ftcPose.y));
-                        myOpMode.telemetry.addLine(String.format("OffsetY: %.2f in",offsetY));
+                        myOpMode.telemetry.addLine(String.format("Translation Y: %.2f in", detection.ftcPose.y));
+                        myOpMode.telemetry.addLine(String.format("OffsetY: %.2f in", offsetY));
                         myOpMode.telemetry.addLine(String.format("Translation Range: %.2f in", detection.ftcPose.range));
-                        myOpMode.telemetry.addLine(String.format("Offset Range: %.2f in",offsetRange));
+                        myOpMode.telemetry.addLine(String.format("Offset Range: %.2f in", offsetRange));
 
-                        myOpMode.telemetry.addLine(String.format("Translation Bearing: %.2f deg",detection.ftcPose.bearing));
-                        myOpMode.telemetry.addLine(String.format("Calc Bearing: %.2f deg",calcBearing));
-                        myOpMode.telemetry.addLine(String.format("Offset Bearing: %.2f deg",offsetBearing));
+                        myOpMode.telemetry.addLine(String.format("Translation Bearing: %.2f deg", detection.ftcPose.bearing));
+                        myOpMode.telemetry.addLine(String.format("Calc Bearing: %.2f deg", calcBearing));
+                        myOpMode.telemetry.addLine(String.format("Offset Bearing: %.2f deg", offsetBearing));
 
                         myOpMode.telemetry.addLine(String.format("Rotation Yaw: %.2f degrees", detection.ftcPose.yaw));
-
-
 
 
                         myOpMode.telemetry.addLine();

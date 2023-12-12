@@ -10,6 +10,7 @@ import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 
 import org.firstinspires.ftc.teamcode.Commands.Arm.PositionArm;
 import org.firstinspires.ftc.teamcode.Commands.Drive.MoveToPark;
+import org.firstinspires.ftc.teamcode.Commands.Drive.PositionToBackboardUsingTags;
 import org.firstinspires.ftc.teamcode.Commands.Drive.TrajectoryToBackboard;
 import org.firstinspires.ftc.teamcode.Commands.Drive.TrajectoryToBackboardSimple;
 import org.firstinspires.ftc.teamcode.Commands.Trajectories.LogTrajectory;
@@ -76,8 +77,8 @@ public class AutoFactory extends CommandBase {
         return new DetectAprilTags(opMode, vss, false);
     }
 
-    public Command trajToBackboard() {
-        return new TrajectoryToBackboard(drive, opMode);
+    public Command positionToBackboardUsingTags(){
+        return new PositionToBackboardUsingTags(drive,vss,opMode,false);
     }
 
     public Command trajToBackboardSimple() {
