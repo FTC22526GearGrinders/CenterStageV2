@@ -65,10 +65,9 @@ public class DetectAprilTagsCamOffset extends CommandBase {
 
                 if (detection.id == n) {
 
-                    double cameraOffsetX = vss.getxCameraOffset();
-                    double cameraOffsetY = vss.getyCameraOffset();
-                    double cameraOffsetZ = vss.getzCameraOffset();
-
+                    double cameraOffsetX = 3;
+                    double cameraOffsetY = 0;
+                    double cameraOffsetZ = 6;
 
                     AngleUnit outputUnitsAngle = AngleUnit.DEGREES;
 

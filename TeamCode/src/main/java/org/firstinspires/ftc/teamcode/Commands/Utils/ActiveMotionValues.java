@@ -27,7 +27,7 @@ public class ActiveMotionValues {
         tagLineupPose = lineupPose;
     }
 
-    public static Pose2d tagLineupPose;
+    public static Pose2d tagLineupPose=new Pose2d();
 
 
 

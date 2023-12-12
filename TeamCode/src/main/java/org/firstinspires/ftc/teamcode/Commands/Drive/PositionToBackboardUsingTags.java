@@ -77,6 +77,7 @@ public class PositionToBackboardUsingTags extends CommandBase {
     public void initialize() {
 
         et = new ElapsedTime();
+
         n = ActiveMotionValues.getActTag();
 
         myOpMode.telemetry.addData("Starting Pos to Tag", "");
@@ -103,8 +104,9 @@ public class PositionToBackboardUsingTags extends CommandBase {
 
                 if (detection.id == n) {
 
-                    double cameraOffsetX = 4;
-                    double cameraOffsetY = -2;
+                    double cameraOffsetX = 3;
+                    double cameraOffsetY = 0;
+                    double cameraOffsetZ = 6;
 
                     double offsetX = detection.ftcPose.x + cameraOffsetX;
                     double offsetY = detection.ftcPose.y + cameraOffsetY;
@@ -112,13 +114,11 @@ public class PositionToBackboardUsingTags extends CommandBase {
                     double offsetRange = Math.hypot(offsetX, offsetY);
 
 
-
                     AngleUnit outputUnitsAngle = AngleUnit.DEGREES;
 
                     Orientation rot = Orientation.getOrientation(detection.rawPose.R, AxesReference.INTRINSIC, AxesOrder.YXZ, outputUnitsAngle);
 
-                    double offsetBearing =outputUnitsAngle.fromUnit(AngleUnit.RADIANS, Math.atan2(-offsetX, offsetY));
-
+                    double offsetBearing = outputUnitsAngle.fromUnit(AngleUnit.RADIANS, Math.atan2(-offsetX, offsetY));
 
 
 //                    headingError = detection.ftcPose.bearing;
@@ -127,9 +127,9 @@ public class PositionToBackboardUsingTags extends CommandBase {
 
                     yawError = detection.ftcPose.yaw;
 
-                 //   rangeError = detection.ftcPose.range - drive.stopDistanceFromTag;
+                    //   rangeError = detection.ftcPose.range - drive.stopDistanceFromTag;
 
-                    rangeError=  offsetRange - drive.stopDistanceFromTag;
+                    rangeError = offsetRange - drive.stopDistanceFromTag;
 
                     forward = Range.clip(rangeError * drive.getForwardGain(), -max_auto_speed, max_auto_speed);
 
@@ -145,15 +145,20 @@ public class PositionToBackboardUsingTags extends CommandBase {
 
                     myOpMode.telemetry.addData("Yaw", detection.ftcPose.yaw);
 
-                    myOpMode.telemetry.addData("Yaw", detection.ftcPose.yaw);
+                    myOpMode.telemetry.addData("Forward", forward);
+
+                    myOpMode.telemetry.addData("Srafe", strafe);
+
+                    myOpMode.telemetry.addData("Turn", turn);
 
 
                     //  drive.drive.jog(forward,strafe,turn);
 
-                    moveRobot(forward, strafe, turn);
+                    //  moveRobot(forward, strafe, turn);
                 }
             }
         }
+        myOpMode.telemetry.update();
     }
 
     @Override
@@ -164,7 +169,7 @@ public class PositionToBackboardUsingTags extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return !noEnd && Math.abs(rangeError) <=.5;
+        return !noEnd && Math.abs(rangeError) <= .5;
     }
 
     public void moveRobot(double x, double y, double yaw) {

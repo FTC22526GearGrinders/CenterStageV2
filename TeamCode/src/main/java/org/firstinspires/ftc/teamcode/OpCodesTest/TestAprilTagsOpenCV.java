@@ -50,9 +50,9 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
  * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list.
  */
-@Config
+//@Config
 @TeleOp(name = "Auto: Test AprilTag OPENCV ", group = "Test")
-//@Disabled
+@Disabled
 public class TestAprilTagsOpenCV extends CommandOpMode {
 
     private static final boolean USE_WEBCAM = true;  // true for webcam, false for phone camera

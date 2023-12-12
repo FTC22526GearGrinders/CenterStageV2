@@ -60,6 +60,7 @@ public final class Constants {
         public static final double AT_BACKBOARD_ANGLE_DISTANCE = 6;
         public static final double POSN_VEL = 4 ;
         public static final double POSN_ACCEL = 4 ;
+        public static final double FORWARD_GAIN = .05;
 
         public static double MAX_VEL = MAX_IPS * .8;
         public static double MAX_ACCEL = 30;

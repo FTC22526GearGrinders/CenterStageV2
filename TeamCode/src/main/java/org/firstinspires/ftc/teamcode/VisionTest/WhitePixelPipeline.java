@@ -55,7 +55,6 @@ public class WhitePixelPipeline extends OpenCvPipeline {
 
     int imgHeight = 0;
 
-
     Scalar blue = new Scalar(7, 197, 235, 255);
     Scalar red = new Scalar(255, 0, 0, 255);
     Scalar green = new Scalar(0, 255, 0, 255);
@@ -97,7 +96,7 @@ public class WhitePixelPipeline extends OpenCvPipeline {
 
         Mat binary = new Mat(blur.rows(), blur.cols(), blur.type(), new Scalar(0));
 
-        Imgproc.threshold(gray, binary, thresh, 255, Imgproc.THRESH_BINARY_INV);
+        Imgproc.threshold(gray, binary, thresh, 255, Imgproc.THRESH_BINARY);
         //Finding Contours
         List<MatOfPoint> contours = new ArrayList<>();
         Mat hierarchy = new Mat();
@@ -107,7 +106,6 @@ public class WhitePixelPipeline extends OpenCvPipeline {
 
         numContours = contours.size();
         usableContours = 0;
-
 
         List<RotatedRect> rr = new ArrayList<>();
 
@@ -152,6 +150,7 @@ public class WhitePixelPipeline extends OpenCvPipeline {
 
         telemetry.addData("NumContours", numContours);
         telemetry.addData("UsableContours", usableContours);
+
         telemetry.addData("RRSize", rr.size());
         for(int n =1;n<rr.size();n++){
             telemetry.addData("XVal "+ String.valueOf(n),rrxval.get(n));

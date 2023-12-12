@@ -42,36 +42,6 @@ public class Vision_Subsystem extends SubsystemBase {
 
     private boolean cameraClosed;
 
-    public double getxCameraOffset() {
-        return xCameraOffset;
-    }
-
-    public void setxCameraOffset(double xOffset) {
-        xCameraOffset = xOffset;
-    }
-
-    public double getyCameraOffset() {
-        return yCameraOffset;
-    }
-
-    public void setyCameraOffset(double yOffset) {
-        yCameraOffset = yOffset;
-    }
-
-    public double getzCameraOffset() {
-        return zCameraOffset;
-    }
-
-    public void setzCameraOffset(double zOffset) {
-        zCameraOffset = zOffset;
-    }
-
-    private double xCameraOffset;
-
-    private double yCameraOffset;
-
-    private double zCameraOffset;
-
 
     public StageSwitchingPipeline sptop = null;
 

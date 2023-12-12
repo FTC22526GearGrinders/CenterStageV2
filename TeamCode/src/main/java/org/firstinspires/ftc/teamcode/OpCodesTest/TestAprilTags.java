@@ -34,14 +34,15 @@ import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.CommandScheduler;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.Commands.Auto.DetectAprilTags;
-import org.firstinspires.ftc.teamcode.Commands.Auto.DetectAprilTagsCamOffset;
+import org.firstinspires.ftc.teamcode.Commands.Drive.PositionToBackboardUsingTags;
 import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
+import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.Subsystems.Drive_Subsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.Vision_Subsystem;
+
+import java.util.concurrent.TimeUnit;
 
 /*
  * This OpMode illustrates the basics of AprilTag recognition and pose estimation, using
@@ -66,21 +67,17 @@ public class TestAprilTags extends CommandOpMode {
     private Vision_Subsystem vss;
 
     public static int reqdTagID = 2;
-
-    public static double xCameraOffset;
-
-    public static double yCameraOffset;
-
-    public static double zCameraOffset;
-
-
-
     public static int closePortal = 0;
+
+    public static double FORWARD_GAIN = .05;
+    public static double STRAFE_GAIN = .005;
+    public static double TURN_GAIN = .005;
+
 
     @Override
     public void initialize() {
 
-        reqdTagID=ActiveMotionValues.getActTag();
+        reqdTagID = ActiveMotionValues.getActTag();
 
         dashboard = FtcDashboard.getInstance();
 
@@ -102,7 +99,9 @@ public class TestAprilTags extends CommandOpMode {
 
         waitForStart();
 
-        CommandScheduler.getInstance().schedule(new DetectAprilTagsCamOffset(this, vss, true));
+//        CommandScheduler.getInstance().schedule(new DetectAprilTagsCamOffset(this, vss, true));
+
+        CommandScheduler.getInstance().schedule(new PositionToBackboardUsingTags(drive, vss, this, true));
 
         while (!isStopRequested() && opModeIsActive()) {
 
@@ -111,16 +110,13 @@ public class TestAprilTags extends CommandOpMode {
             if (ActiveMotionValues.getActTag() != reqdTagID)
                 ActiveMotionValues.setActTag(reqdTagID);
 
-            if (closePortal == 1 ) {
+            if (closePortal == 1) {
                 vss.myVisionPortal.close();
             }
 
-            vss.setxCameraOffset(xCameraOffset);
-
-            vss.setyCameraOffset(yCameraOffset);
-
-            vss.setzCameraOffset(zCameraOffset);
-
+            drive.setForwardGain(FORWARD_GAIN);
+            drive.setStrafe_gain(STRAFE_GAIN);
+            drive.setTurn_gain(TURN_GAIN);
 
 
         }
