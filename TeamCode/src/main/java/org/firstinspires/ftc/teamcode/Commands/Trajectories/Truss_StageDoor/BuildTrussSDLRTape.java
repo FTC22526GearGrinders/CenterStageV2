@@ -52,7 +52,7 @@ public class BuildTrussSDLRTape extends CommandBase {
 
                     .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
 
-                    .waitSeconds(.5)
+                    .waitSeconds(ActiveMotionValues.getStopSecs())
 
                     .lineToLinearHeading(ActiveMotionValues.getOptionTargetPose())
 
@@ -63,6 +63,37 @@ public class BuildTrussSDLRTape extends CommandBase {
 
 
         if (stageDoor) {
+
+            if (trussSideTape) {
+
+                drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
+
+                        .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
+
+                        .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
+
+                        .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
+
+                        .waitSeconds(1)
+
+                        .lineToLinearHeading(ActiveMotionValues.getRetractPose())
+
+                        .strafeLeft(ActiveMotionValues.getStrafeDistance())
+
+                        .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
+
+                        .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
+
+                        .turn(ActiveMotionValues.getTurnAngle())
+
+                        .waitSeconds(ActiveMotionValues.getStopSecs())
+
+                        .lineToLinearHeading(ActiveMotionValues.getOptionTargetPose())
+
+
+                        .build();
+
+            }
 
             if (!trussSideTape) {
 
@@ -85,33 +116,6 @@ public class BuildTrussSDLRTape extends CommandBase {
                         .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
 
                         .waitSeconds(ActiveMotionValues.getStopSecs())
-
-                        .lineToLinearHeading(ActiveMotionValues.getOptionTargetPose())
-
-
-                        .build();
-
-            }
-
-            if (trussSideTape) {
-
-                drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
-
-                        .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
-
-                        .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
-
-                        .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
-
-                        .waitSeconds(1)
-
-                        .lineToLinearHeading(ActiveMotionValues.getRetractPose())
-
-                        .strafeLeft(ActiveMotionValues.getStrafeDistance())
-
-                        .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
-
-                        .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
 
                         .lineToLinearHeading(ActiveMotionValues.getOptionTargetPose())
 

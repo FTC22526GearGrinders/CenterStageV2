@@ -15,6 +15,8 @@ public class SelectMotionValuesRed {
 
         ActiveMotionValues.setParkPose(new Pose2d());
 
+        ActiveMotionValues.setStopSecs(.1);
+
 
         if (lcr < 1 || lcr > 3) lcr = 1;
 
@@ -140,10 +142,11 @@ public class SelectMotionValuesRed {
 
                     ActiveMotionValues.setParkPose(FieldConstantsRed.centerParkPose.plus(parkPoseOffset));
 
-                if (ActiveMotionValues.getNearPark())
+                if (ActiveMotionValues.getNearPark()) {
+
 
                     ActiveMotionValues.setParkPose(FieldConstantsRed.nearParkPose.plus(parkPoseOffset));
-
+                }
 
                 break;
 
@@ -272,9 +275,15 @@ public class SelectMotionValuesRed {
 
             ActiveMotionValues.setOptionStopPose(FieldConstantsRed.centerOptionPose);
 
-            if (!secondPixel)
-                ActiveMotionValues.setOptionTargetPose(FieldConstantsRed.centerParkPose);
-            else {
+            if (!secondPixel) {
+                {
+                    ActiveMotionValues.setTurnAngle(Math.toRadians(0));
+                    ActiveMotionValues.setOptionTargetPose(FieldConstantsRed.centerParkPose);
+
+                }
+
+            } else {
+                ActiveMotionValues.setTurnAngle(Math.toRadians(90));
                 ActiveMotionValues.setOptionTargetPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
                         .plus(FieldConstantsRed.AprilTagConstants.tagStrafeOffsetPose));
             }

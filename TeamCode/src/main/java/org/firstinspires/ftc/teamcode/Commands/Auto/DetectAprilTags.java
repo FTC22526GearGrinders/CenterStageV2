@@ -50,6 +50,7 @@ public class DetectAprilTags extends CommandBase {
             n = ActiveMotionValues.getActTag();
 
         List<AprilTagDetection> currentDetections = vss.myAprilTagProcessor.getDetections();
+
         myOpMode.telemetry.addData("Camera State", vss.myVisionPortal.getCameraState());
 
         myOpMode.telemetry.addData("Camera FPS", vss.myVisionPortal.getFps());
@@ -68,26 +69,7 @@ public class DetectAprilTags extends CommandBase {
 
                     ActiveMotionValues.setAprilTagSeen(true);
 
-                    Pose2d camPose = new Pose2d(detection.ftcPose.y, detection.ftcPose.x, Math.toRadians(detection.ftcPose.yaw));
-                    Pose2d amvcamPose = new Pose2d(ActiveMotionValues.getDetection().ftcPose.y,
-                            ActiveMotionValues.getDetection().ftcPose.x, Math.toRadians(ActiveMotionValues.getDetection().ftcPose.yaw));
-
-                    Pose2d tagPose = new Pose2d();
-
                     ActiveMotionValues.setActiveTagDistance(detection.ftcPose.range);
-
-                    if (n > 3)
-
-                        tagPose = FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag());
-                    else
-                        tagPose = FieldConstantsBlue.getActiveTagPose(ActiveMotionValues.getActTag());
-
-                    Pose2d camFieldPose = tagPose.minus(camPose);
-
-                    Pose2d currentRobotPose = camFieldPose.minus(Constants.RobotConstants.kCameraToRobot);
-
-                    Pose2d finalTagPose = tagPose;
-
 
                     if (noEnd) {
                         myOpMode.telemetry.addData("Active Tag", n);
@@ -95,11 +77,13 @@ public class DetectAprilTags extends CommandBase {
                         myOpMode.telemetry.addLine();
 
                       //  myOpMode.telemetry.addData("TagPose", tagPose.toString());
-                        myOpMode.telemetry.addLine(String.format("Translation X: %.2f in",detection.ftcPose.x));
-                        myOpMode.telemetry.addLine(String.format("Translation Y: %.2f in",detection.ftcPose.y));
-                        myOpMode.telemetry.addLine(String.format("Rotation Yaw: %.2f degrees", detection.ftcPose.yaw));
+
+
                         myOpMode.telemetry.addLine(String.format("Translation Range: %.2f in", detection.ftcPose.range));
+
                         myOpMode.telemetry.addLine(String.format("Translation Bearing: %.2f deg",detection.ftcPose.bearing));
+
+                        myOpMode.telemetry.addLine(String.format("Translation Yaw: %.2f deg",detection.ftcPose.yaw));
 
 
 

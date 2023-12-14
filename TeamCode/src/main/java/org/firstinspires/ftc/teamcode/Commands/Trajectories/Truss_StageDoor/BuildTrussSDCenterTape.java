@@ -45,6 +45,8 @@ public class BuildTrussSDCenterTape extends CommandBase {
 
                     .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
 
+                    .turn(ActiveMotionValues.getTurnAngle())
+
                     .waitSeconds(ActiveMotionValues.getStopSecs())
 
                     .lineToLinearHeading(ActiveMotionValues.getOptionTargetPose())
@@ -52,6 +54,7 @@ public class BuildTrussSDCenterTape extends CommandBase {
                     .build();
 
         } else {
+
             drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
 
                     .lineToLinearHeading(ActiveMotionValues.getDropOffPose())

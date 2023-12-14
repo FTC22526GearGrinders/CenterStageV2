@@ -41,6 +41,7 @@ public class SelectMotionValuesBlue extends CommandBase {
         ActiveMotionValues.setClearPose(new Pose2d());
         ActiveMotionValues.setParkPose(new Pose2d());
 
+        ActiveMotionValues.setStopSecs(.1);
 
         if (lcr < 1 || lcr > 3) lcr = 1;
 
@@ -57,7 +58,7 @@ public class SelectMotionValuesBlue extends CommandBase {
 
             case 1://left tape
 
-                Pose2d  xyOffsetPose = new Pose2d(-2,0);
+                Pose2d xyOffsetPose = new Pose2d(-2, 0);
 
                 ActiveMotionValues.setStartPose(FieldConstantsBlue.XPYP.startPos);//start pose
 
@@ -255,6 +256,8 @@ public class SelectMotionValuesBlue extends CommandBase {
 
         double strafeDistance = -11.5;
 
+        double stop2PixelSecs = 10;
+
         if (ActiveMotionValues.getCenterPark())
 
             ActiveMotionValues.setParkPose(FieldConstantsBlue.centerParkPose);
@@ -274,6 +277,7 @@ public class SelectMotionValuesBlue extends CommandBase {
 
 
             else {
+                ActiveMotionValues.setStopSecs(stop2PixelSecs);
                 ActiveMotionValues.setOptionTargetPose(FieldConstantsBlue.getActiveTagPose(ActiveMotionValues.getActTag())
                         .plus(FieldConstantsBlue.AprilTagConstants.tagStrafeOffsetPose));
 
@@ -300,9 +304,13 @@ public class SelectMotionValuesBlue extends CommandBase {
 
             ActiveMotionValues.setOptionStopPose(FieldConstantsBlue.centerOptionPose);
 
-            if (!secondPixel)
+            if (!secondPixel){
+                ActiveMotionValues.setTurnAngle(Math.toRadians(0));
                 ActiveMotionValues.setOptionTargetPose(FieldConstantsBlue.centerParkPose);
+        }
             else {
+                ActiveMotionValues.setTurnAngle(Math.toRadians(-90));
+                ActiveMotionValues.setStopSecs(stop2PixelSecs);
                 ActiveMotionValues.setOptionTargetPose(FieldConstantsBlue.getActiveTagPose(ActiveMotionValues.getActTag())
                         .plus(FieldConstantsBlue.AprilTagConstants.tagStrafeOffsetPose));
 

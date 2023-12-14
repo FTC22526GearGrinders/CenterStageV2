@@ -250,6 +250,8 @@ public class SelectMotionValuesRed extends CommandBase {
 
         double strafeDistance = 11.5;
 
+        double stop2PixelSecs = 10;
+
         if (useTruss) {
 
             ActiveMotionValues.setTrussSDLineUpPose(FieldConstantsRed.nearTrussLineUpPose);
@@ -261,7 +263,7 @@ public class SelectMotionValuesRed extends CommandBase {
                 ActiveMotionValues.setOptionTargetPose(FieldConstantsRed.nearParkPose);
 
             else {
-                ActiveMotionValues.setStopSecs(10);
+                ActiveMotionValues.setStopSecs(stop2PixelSecs);
                 ActiveMotionValues.setOptionTargetPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
                         .plus(FieldConstantsRed.AprilTagConstants.tagStrafeOffsetPose));
             }
@@ -284,9 +286,12 @@ public class SelectMotionValuesRed extends CommandBase {
 
             ActiveMotionValues.setOptionStopPose(FieldConstantsRed.centerOptionPose);
 
-            if (!secondPixel)
+            if (!secondPixel) {
+                ActiveMotionValues.setTurnAngle(Math.toRadians(0));
                 ActiveMotionValues.setOptionTargetPose(FieldConstantsRed.centerParkPose);
-            else {
+            } else {
+                ActiveMotionValues.setTurnAngle(Math.toRadians(90));
+                ActiveMotionValues.setStopSecs(stop2PixelSecs);
                 ActiveMotionValues.setOptionTargetPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
                         .plus(FieldConstantsRed.AprilTagConstants.tagStrafeOffsetPose));
             }

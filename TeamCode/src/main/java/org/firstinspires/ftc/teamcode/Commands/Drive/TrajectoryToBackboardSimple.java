@@ -39,7 +39,8 @@ public class TrajectoryToBackboardSimple extends CommandBase {
         myOpMode.telemetry.addData("RunToTagInit", "");
         myOpMode.telemetry.update();
         et = new ElapsedTime();
-        distance = ActiveMotionValues.getActiveTagDistance();
+        distance = ActiveMotionValues.getActiveTagDistance() - drive.stopDistanceFromTag;
+
         if (distance > 10 | distance < 6) distance = 8;
 
         Pose2d currentRobotPose = new Pose2d();

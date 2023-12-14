@@ -15,9 +15,9 @@ public class MeepMeepTesting {
 
         boolean redAlliance = false;
 
-        boolean bbstart = true;//aaset to false for start on stack side of truss
+        boolean bbstart = false;//aaset to false for start on stack side of truss
 
-        int lcr = 3;//left tape ==1, center tape = 2, right tape = 3 from robot view
+        int lcr = 1;//left tape ==1, center tape = 2, right tape = 3 from robot view
 
         if (lcr < 0 || lcr > 3) lcr = 2;
 
@@ -25,11 +25,11 @@ public class MeepMeepTesting {
 
         boolean truss = !useStageDoor;
 
-        boolean nearPark = true;
+        boolean nearPark = false;
 
-        boolean centerPark =false;
+        boolean centerPark = false;
 
-        boolean secondPixel = false;
+        boolean secondPixel = true;
 
 
         ActiveMotionValues.setRedAlliance(redAlliance);
@@ -56,63 +56,93 @@ public class MeepMeepTesting {
 
         MeepMeep meepMeep = new MeepMeep(800);
 
+        if (ActiveMotionValues.getBBStart()) {
 
-        RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
 
-                .setDimensions(Constants.RobotConstants.width, Constants.RobotConstants.length)
+            RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
 
-                // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
+                    .setDimensions(Constants.RobotConstants.width, Constants.RobotConstants.length)
 
-                .followTrajectorySequence(drive ->
+                    // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
+                    .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
 
-                        drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
+                    .followTrajectorySequence(drive ->
+
+                            drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
+
+                                    .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
+
+                                    .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
+
+                                    .waitSeconds(1)
+
+                                    .lineToLinearHeading(ActiveMotionValues.getRetractPose())//LR tapes only
+//
+                                    .lineToLinearHeading(ActiveMotionValues.getClearPose()) // truss side tape only
+
+                                    .lineToLinearHeading(ActiveMotionValues.getTagLineupPose())
+
+                                    .lineToLinearHeading(ActiveMotionValues.getPreTagPose())
+
+                                    .lineToLinearHeading(ActiveMotionValues.getParkPose())//patk only
+
+                                    .build());
+
+
+            myBot.getDrive().setPoseEstimate(startPose);
+
+            ShowField.showIt(meepMeep, myBot);
+
+
+        } else {
+
+            RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
+
+                    .setDimensions(Constants.RobotConstants.width, Constants.RobotConstants.length)
+
+                    // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
+                    .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
+
+                    .followTrajectorySequence(drive ->
+
+                            drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
 
 //
-                                .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
+                                    .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
 
-                                .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
+                                    .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
 
-                                .waitSeconds(1)
+                                    .waitSeconds(1)
 
-//                                .lineToLinearHeading(ActiveMotionValues.getRetractPose())
+                                    .lineToLinearHeading(ActiveMotionValues.getRetractPose())
 //
-//                                .lineToLinearHeading(ActiveMotionValues.getClearPose())
+                                    .lineToLinearHeading(ActiveMotionValues.getClearPose())
 
+                                    //               .strafeRight(ActiveMotionValues.getStrafeDistance())
+                                    //.strafeLeft(0.1)
+                                    .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
 
+                                    .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
 
-                                .lineToLinearHeading(ActiveMotionValues.getTagLineupPose())
+                                    .turn(ActiveMotionValues.getTurnAngle())
 
-                                .turn(ActiveMotionValues.getTurnAngle())
-
-                                //     .lineToLinearHeading(ActiveMotionValues.getStartPose())
-                                //  .strafeRight(ActiveMotionValues.getStrafeDistance())
-
-                                .lineToLinearHeading(ActiveMotionValues.getPreTagPose())
-
-                                //     .lineToLinearHeading(ActiveMotionValues.getT
+                                    .waitSeconds(ActiveMotionValues.getStopSecs())
 //
 //
-                                //    .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
-//
-                                //    .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
-////
-//                                .turn(Math.toRadians(-90))
-//                                  .waitSeconds(.1)
-//
-//                                  .lineToLinearHeading(ActiveMotionValues.getOptionTargetPose())
-//
-
-                                 .lineToLinearHeading(ActiveMotionValues.getParkPose())
+                                    .lineToLinearHeading(ActiveMotionValues.getOptionTargetPose())
 
 
-                                .build());
+                                    .build());
 
 
-        myBot.getDrive().setPoseEstimate(startPose);
+            myBot.getDrive().setPoseEstimate(startPose);
 
-        ShowField.showIt(meepMeep, myBot);
+            ShowField.showIt(meepMeep, myBot);
 
+
+        }
 
     }
+
 }
+

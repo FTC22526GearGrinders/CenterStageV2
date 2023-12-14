@@ -16,6 +16,8 @@ public class SelectMotionValuesBlue {
         ActiveMotionValues.setClearPose(new Pose2d());
         ActiveMotionValues.setParkPose(new Pose2d());
 
+        ActiveMotionValues.setStopSecs(.1);
+
 
         if (lcr < 1 || lcr > 3) lcr = 1;
 
@@ -242,11 +244,6 @@ public class SelectMotionValuesBlue {
 
         if (useTruss) {
 
-            if (lcr == 11) ActiveMotionValues.setStrafeDistance(strafeDistance);
-
-            if (lcr == 13) ActiveMotionValues.setStrafeDistance(-strafeDistance);
-
-
             ActiveMotionValues.setTrussSDLineUpPose(FieldConstantsBlue.nearTrussLineUpPose);
 
             ActiveMotionValues.setOptionStopPose(FieldConstantsBlue.nearOptionPose);
@@ -257,6 +254,8 @@ public class SelectMotionValuesBlue {
 
 
             else {
+
+                ActiveMotionValues.setStopSecs(5);
                 ActiveMotionValues.setOptionTargetPose(FieldConstantsBlue.getActiveTagPose(ActiveMotionValues.getActTag())
                         .plus(FieldConstantsBlue.AprilTagConstants.tagStrafeOffsetPose));
 
@@ -281,9 +280,13 @@ public class SelectMotionValuesBlue {
 
             ActiveMotionValues.setOptionStopPose(FieldConstantsBlue.centerOptionPose);
 
-            if (!secondPixel)
+            if (!secondPixel) {
+                ActiveMotionValues.setTurnAngle(Math.toRadians(0));
                 ActiveMotionValues.setOptionTargetPose(FieldConstantsBlue.centerParkPose);
+            }
             else {
+                ActiveMotionValues.setTurnAngle(Math.toRadians(-90));
+                ActiveMotionValues.setStopSecs(10);
                 ActiveMotionValues.setOptionTargetPose(FieldConstantsBlue.getActiveTagPose(ActiveMotionValues.getActTag())
                         .plus(FieldConstantsBlue.AprilTagConstants.tagStrafeOffsetPose));
 

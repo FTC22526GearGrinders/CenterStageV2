@@ -14,6 +14,16 @@ public class ActiveMotionValues {
 
     public static double turnAngle;
 
+    public static double getStopSecs() {
+        return stopSecs;
+    }
+
+    public static void setStopSecs(double secs) {stopSecs = secs;
+    }
+
+    public static double stopSecs=.1;
+
+
     public static Pose2d getTagLineupPose() {
         return tagLineupPose;
     }

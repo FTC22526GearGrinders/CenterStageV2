@@ -36,6 +36,7 @@ import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.CommandScheduler;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.teamcode.Commands.Auto.DetectAprilTags;
 import org.firstinspires.ftc.teamcode.Commands.Drive.PositionToBackboardUsingTags;
 import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
 import org.firstinspires.ftc.teamcode.Constants;
@@ -99,9 +100,9 @@ public class TestAprilTags extends CommandOpMode {
 
         waitForStart();
 
-//        CommandScheduler.getInstance().schedule(new DetectAprilTagsCamOffset(this, vss, true));
+        CommandScheduler.getInstance().schedule(new DetectAprilTags(this, vss, true));
 
-        CommandScheduler.getInstance().schedule(new PositionToBackboardUsingTags(drive, vss, this, true));
+   //     CommandScheduler.getInstance().schedule(new PositionToBackboardUsingTags(drive, vss, this, true));
 
         while (!isStopRequested() && opModeIsActive()) {
 
