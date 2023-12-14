@@ -41,8 +41,11 @@ public class Drive_Subsystem extends SubsystemBase {
 
     //  Turn Control "Gain".  eg: Ramp up to 25% power at a 25 degree error. (0.25 / 25.0)
 
-    public double stopDistanceFromTag = 5;
+    public double stopDistanceFromTag = 11;
 
+    public double[] leftPixelData = new double[6];
+
+    public double[] rightPixelData = new double[6];
 
     public Drive_Subsystem(CommandOpMode opMode) {
         myOpmode = opMode;

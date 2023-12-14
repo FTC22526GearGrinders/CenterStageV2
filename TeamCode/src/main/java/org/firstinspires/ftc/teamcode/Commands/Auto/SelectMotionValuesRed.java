@@ -6,7 +6,6 @@ import com.arcrobotics.ftclib.command.CommandBase;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 
 import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
-import org.firstinspires.ftc.teamcode.FieldConstantsBlue;
 import org.firstinspires.ftc.teamcode.FieldConstantsRed;
 
 public class SelectMotionValuesRed extends CommandBase {
@@ -145,7 +144,7 @@ public class SelectMotionValuesRed extends CommandBase {
 
                 ActiveMotionValues.setActTag(6);
 
-                ActiveMotionValues.setTagLineupPose(FieldConstantsBlue.getActiveTagClearPose(ActiveMotionValues.getActTag()));
+                ActiveMotionValues.setTagLineupPose(FieldConstantsRed.getActiveTagClearPose(ActiveMotionValues.getActTag()));
 
                 ActiveMotionValues.setPreTagPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
                         .minus(FieldConstantsRed.AprilTagConstants.tagLookAheadPose));
@@ -182,7 +181,7 @@ public class SelectMotionValuesRed extends CommandBase {
 
                 ActiveMotionValues.setClearPose(FieldConstantsRed.XMYM.clearPose);
 
-                ActiveMotionValues.setTagLineupPose(FieldConstantsBlue.getActiveTagClearPose(ActiveMotionValues.getActTag()));
+                ActiveMotionValues.setTagLineupPose(FieldConstantsRed.getActiveTagClearPose(ActiveMotionValues.getActTag()));
 
                 ActiveMotionValues.setActTag(4);
 

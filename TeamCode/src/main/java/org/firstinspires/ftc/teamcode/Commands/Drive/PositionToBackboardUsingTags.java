@@ -9,7 +9,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.Subsystems.Drive_Subsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.Vision_Subsystem;
@@ -78,7 +77,7 @@ public class PositionToBackboardUsingTags extends CommandBase {
 
         et = new ElapsedTime();
 
-        n = ActiveMotionValues.getActTag();
+        n = 5;//ActiveMotionValues.getActTag();
 
         myOpMode.telemetry.addData("Starting Pos to Tag", "");
         myOpMode.telemetry.update();
@@ -121,15 +120,15 @@ public class PositionToBackboardUsingTags extends CommandBase {
                     double offsetBearing = outputUnitsAngle.fromUnit(AngleUnit.RADIANS, Math.atan2(-offsetX, offsetY));
 
 
-//                    headingError = detection.ftcPose.bearing;
+               //     headingError = detection.ftcPose.bearing;
 
                     headingError = offsetBearing;
 
                     yawError = detection.ftcPose.yaw;
 
-                    //   rangeError = detection.ftcPose.range - drive.stopDistanceFromTag;
+                //    rangeError = detection.ftcPose.range - drive.stopDistanceFromTag;
 
-                    rangeError = offsetRange - drive.stopDistanceFromTag;
+                          rangeError = offsetRange - drive.stopDistanceFromTag;
 
                     forward = Range.clip(rangeError * drive.getForwardGain(), -max_auto_speed, max_auto_speed);
 
@@ -143,6 +142,9 @@ public class PositionToBackboardUsingTags extends CommandBase {
 
                     myOpMode.telemetry.addData("Bearing", detection.ftcPose.bearing);
 
+                    myOpMode.telemetry.addData("BearingError", headingError);
+
+
                     myOpMode.telemetry.addData("Yaw", detection.ftcPose.yaw);
 
                     myOpMode.telemetry.addData("Forward", forward);
@@ -152,10 +154,14 @@ public class PositionToBackboardUsingTags extends CommandBase {
                     myOpMode.telemetry.addData("Turn", turn);
 
 
-                    //  drive.drive.jog(forward,strafe,turn);
-
                     //  moveRobot(forward, strafe, turn);
                 }
+                if (detection.id != n) {
+                    forward = 0;
+                    strafe = 0;
+                    turn = 0;
+                }
+                moveRobot(forward, strafe, turn);
             }
         }
         myOpMode.telemetry.update();

@@ -69,7 +69,7 @@ public class TestAprilTags extends CommandOpMode {
     public static int reqdTagID = 2;
     public static int closePortal = 0;
 
-    public static double FORWARD_GAIN = .05;
+    public static double FORWARD_GAIN = .032;
     public static double STRAFE_GAIN = .005;
     public static double TURN_GAIN = .005;
 

@@ -3,14 +3,12 @@ package org.firstinspires.ftc.teamcode.Commands.Auto;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.ConditionalCommand;
 import com.arcrobotics.ftclib.command.InstantCommand;
-import com.arcrobotics.ftclib.command.ParallelCommandGroup;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.command.WaitCommand;
 
-import org.firstinspires.ftc.teamcode.Commands.Arm.PositionArm;
+import org.firstinspires.ftc.teamcode.Commands.Drive.MoveToPark;
 import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
 import org.firstinspires.ftc.teamcode.Commands.Utils.DoNothing;
-import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.Subsystems.ArmSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.Drive_Subsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.PixelHandlerSubsystem;
@@ -44,17 +42,13 @@ public class AutoActionsSequences extends SequentialCommandGroup {
 
                                         af.raiseArmToPosition(),
 
-                                        new InstantCommand(() -> phss.raiseGrippersToDeliver()),
-
-                                        new WaitCommand(500),
-
                                         new InstantCommand(() -> phss.flipGrippersToLeftDown()),
 
-                                     //   af.trajToBackboardSimple(),
+                                        af.detectMoveToBackboard(),
 
-                                        af.positionToBackboardUsingTags(),
+                                        //   af.positionToBackboardUsingTags(),
 
-                                        new WaitCommand(500),
+                                        new WaitCommand(1000),
 
                                         new InstantCommand(phss::openLeftGripper),
 
@@ -68,12 +62,16 @@ public class AutoActionsSequences extends SequentialCommandGroup {
 
                                         new WaitCommand(500),
 
-                                        af.positionArmHome()),
+                                        af.positionArmHome(),
+
+                                        new ConditionalCommand(new MoveToPark(drive), new DoNothing(), () -> ActiveMotionValues.getBBStart()
+                                                && (ActiveMotionValues.getCenterPark() || ActiveMotionValues.getNearPark()))),
 
 
                                 new DoNothing(),
 
-                                () -> ActiveMotionValues.getBBStart() || !ActiveMotionValues.getBBStart() && ActiveMotionValues.getSecondPixel())));
+                                () -> ActiveMotionValues.getBBStart() || !ActiveMotionValues.getBBStart() && ActiveMotionValues.getSecondPixel())))
+        ;
 
 
     }

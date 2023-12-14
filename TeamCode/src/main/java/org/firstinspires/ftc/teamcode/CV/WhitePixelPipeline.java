@@ -28,7 +28,7 @@ public class WhitePixelPipeline extends OpenCvPipeline {
 
     public int thresh = 191;
 
-    private int lpctr = 0;
+    public int lpctr = 0;
 
     Mat src = new Mat();
 

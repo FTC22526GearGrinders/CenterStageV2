@@ -29,18 +29,15 @@
 
 package org.firstinspires.ftc.teamcode.OpCodesTest;
 
-import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
-import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.CommandScheduler;
+import com.arcrobotics.ftclib.command.ParallelCommandGroup;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.Commands.Auto.DetectAprilTagsCamOffset;
 import org.firstinspires.ftc.teamcode.Commands.Auto.DetectWhitePixelsCamOffset;
-import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
+import org.firstinspires.ftc.teamcode.Commands.Auto.DetectWhitePixelsCamOffset2;
 import org.firstinspires.ftc.teamcode.Subsystems.Drive_Subsystem;
-import org.firstinspires.ftc.teamcode.Subsystems.Vision_Subsystem;
 
 /*
  * This OpMode illustrates the basics of AprilTag recognition and pose estimation, using
@@ -67,6 +64,7 @@ public class TestWhitePixels extends CommandOpMode {
 
     public static double zCameraOffset;
 
+    public static boolean show2;
 
 
     public static int closePortal = 0;
@@ -90,14 +88,23 @@ public class TestWhitePixels extends CommandOpMode {
         waitForStart();
 
 
+        CommandScheduler.getInstance().schedule(new ParallelCommandGroup(
+                new DetectWhitePixelsCamOffset(this, drive,true),
+                new DetectWhitePixelsCamOffset2(this, drive,true)));
+
+//        CommandScheduler.getInstance().schedule(
+//                new DetectWhitePixelsCamOffset2(this, drive,true));
 
 
-        CommandScheduler.getInstance().schedule(new DetectWhitePixelsCamOffset(this, true));
+//       CommandScheduler.getInstance().schedule(
+//                new DetectWhitePixelsCamOffset(this, drive,true));
+
 
         while (!isStopRequested() && opModeIsActive()) {
 
             run();
 
+         //   drive.setShow2(show2);
 
         }
         reset();

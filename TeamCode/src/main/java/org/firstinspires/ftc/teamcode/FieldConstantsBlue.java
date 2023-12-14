@@ -16,7 +16,7 @@ public final class FieldConstantsBlue {
 
     public static final double startAngle = Math.toRadians(90);
 
-    public static double turnToTagRadians=Math.toRadians(-90);
+    public static double turnToTagRadians = Math.toRadians(-90);
 
 
     public static Pose2d stageDoorLineUpPose13 = new Pose2d(-36, 12, startAngle);
@@ -49,14 +49,14 @@ public final class FieldConstantsBlue {
         static final double atagAngle = 0;
         static final double audienceAngle = 180;
 
-        public static final Pose2d tagLookAheadPose = new Pose2d(12 + Constants.RobotConstants.length / 2, 0, Math.toRadians(0));
+        public static final Pose2d tagLookAheadPose = new Pose2d(12 + Constants.RobotConstants.length / 2, 1, Math.toRadians(0));
 
         public static final Pose2d tagStrafeOffsetPose = new Pose2d(-60.25 + 36, 0, 0);
 
 
-        public static final Pose2d atag1 = new Pose2d(60.25, 42, Math.toRadians(atagAngle));
-        public static final Pose2d atag2 = new Pose2d(60.25, 36, Math.toRadians(atagAngle));
-        public static final Pose2d atag3 = new Pose2d(60.25, 30, Math.toRadians(atagAngle));
+        public static final Pose2d atag1 = new Pose2d(60.25, 43, Math.toRadians(atagAngle));
+        public static final Pose2d atag2 = new Pose2d(60.25, 37, Math.toRadians(atagAngle));
+        public static final Pose2d atag3 = new Pose2d(60.25, 31, Math.toRadians(atagAngle));
 
         public static final Pose2d tag1LineupPose = new Pose2d(23.5, 42, startAngle);
 

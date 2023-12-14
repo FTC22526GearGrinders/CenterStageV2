@@ -65,7 +65,7 @@ public class DetectAprilTagsCamOffset extends CommandBase {
 
                 if (detection.id == n) {
 
-                    double cameraOffsetX = 3;
+                    double cameraOffsetX = 3.75;
                     double cameraOffsetY = 0;
                     double cameraOffsetZ = 6;
 

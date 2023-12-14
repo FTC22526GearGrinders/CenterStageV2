@@ -74,6 +74,8 @@ public class DetectAprilTags extends CommandBase {
 
                     Pose2d tagPose = new Pose2d();
 
+                    ActiveMotionValues.setActiveTagDistance(detection.ftcPose.range);
+
                     if (n > 3)
 
                         tagPose = FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag());

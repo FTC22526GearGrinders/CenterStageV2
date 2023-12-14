@@ -7,11 +7,7 @@ import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
-import org.firstinspires.ftc.teamcode.Constants;
-import org.firstinspires.ftc.teamcode.FieldConstantsBlue;
-import org.firstinspires.ftc.teamcode.FieldConstantsRed;
 import org.firstinspires.ftc.teamcode.Subsystems.Drive_Subsystem;
-import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 
 
 public class TrajectoryToBackboardSimple extends CommandBase {
@@ -25,6 +21,8 @@ public class TrajectoryToBackboardSimple extends CommandBase {
     private CommandOpMode myOpMode;
 
     private ElapsedTime et;
+
+    private double distance;
 
     ;
 
@@ -41,10 +39,11 @@ public class TrajectoryToBackboardSimple extends CommandBase {
         myOpMode.telemetry.addData("RunToTagInit", "");
         myOpMode.telemetry.update();
         et = new ElapsedTime();
-
+        distance = ActiveMotionValues.getActiveTagDistance();
+        if (distance > 10 | distance < 6) distance = 8;
 
         Pose2d currentRobotPose = new Pose2d();
-        Pose2d finalPose = new Pose2d(6, 0);
+        Pose2d finalPose = new Pose2d(distance, 0);
 
 
         tagTraj = drive.drive.trajectoryBuilder(currentRobotPose)

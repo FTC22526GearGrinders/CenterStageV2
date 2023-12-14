@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.CV.WhitePixelPipeline;
 import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
+import org.firstinspires.ftc.teamcode.Subsystems.Drive_Subsystem;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
@@ -35,9 +36,11 @@ public class DetectWhitePixelsCamOffset extends CommandBase {
 
     private FtcDashboard dashboard;
 
+    private Drive_Subsystem drive;
 
-    public DetectWhitePixelsCamOffset(CommandOpMode opMode, boolean noEnd) {
+    public DetectWhitePixelsCamOffset(CommandOpMode opMode, Drive_Subsystem drive, boolean noEnd) {
         myOpMode = opMode;
+        this.drive = drive;
         this.noEnd = noEnd;
     }
 
@@ -120,7 +123,7 @@ public class DetectWhitePixelsCamOffset extends CommandBase {
         }
 
         double pixelWidth = 5;
-        double cameraXOffxet=4;
+        double cameraXOffxet = 4;
 
         double pixelsPerInch = wpp.getWidth(1) / pixelWidth;
         double cameraPixelOffset = pixelsPerInch * cameraXOffxet;
@@ -128,24 +131,23 @@ public class DetectWhitePixelsCamOffset extends CommandBase {
 
         {
 
-
+            myOpMode.telemetry.addData("Cam1 ", "");
             myOpMode.telemetry.addData("NumContours", wpp.numContours);
-
+            myOpMode.telemetry.addData("LPCTR", wpp.lpctr);
             myOpMode.telemetry.addData("UsableContours", wpp.usableContours);
 
-            for (int n = 1; n < wpp.usableContours; n++) {
-
-                myOpMode.telemetry.addData("Area " + String.valueOf(n), wpp.getArea(n));
-
-                myOpMode.telemetry.addData("XVal " + String.valueOf(n), wpp.getXValue(n));
-
-                myOpMode.telemetry.addData("YVal " + String.valueOf(n), wpp.getYValue(n));
-            }
-
+//                for (int n = 1; n < wpp.usableContours; n++) {
+//
+//                    myOpMode.telemetry.addData("Area " + String.valueOf(n), wpp.getArea(n));
+//
+//                    myOpMode.telemetry.addData("XVal " + String.valueOf(n), wpp.getXValue(n));
+//
+//                    myOpMode.telemetry.addData("YVal " + String.valueOf(n), wpp.getYValue(n));
+//                }
+            myOpMode.telemetry.update();
         }
 
 
-        myOpMode.telemetry.update();
     }
 
 

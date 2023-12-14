@@ -34,7 +34,7 @@ public class WhitePixelPipeline extends OpenCvPipeline {
     int maskTop = 92;
     int maskBottom = 180;
 
-    private int lpctr = 0;
+    public int lpctr = 0;
 
     Mat src = new Mat();
     Mat dst = new Mat(src.rows(), src.cols(), src.type(), new Scalar(0));
@@ -62,11 +62,12 @@ public class WhitePixelPipeline extends OpenCvPipeline {
 
     Telemetry telemetry;
 
+
     public WhitePixelPipeline(Telemetry telemetry) {
         frameList = new ArrayList<>();
         this.telemetry = telemetry;
 
-        lpctr = 0;
+     //   lpctr = 0;
 
     }
 
@@ -78,7 +79,7 @@ public class WhitePixelPipeline extends OpenCvPipeline {
         if (src.empty()) {
             return input;
         }
-
+        lpctr++;
         Imgproc.resize(input, src, new Size(320, 240));
 
         if (!src.empty()) {
@@ -113,6 +114,9 @@ public class WhitePixelPipeline extends OpenCvPipeline {
         List<Double> rryval = new ArrayList<>();
 
         List<Double> rrAreas = new ArrayList<>();
+        List<Double> rrWidth = new ArrayList<>();
+        List<Double> rrHeight = new ArrayList<>();
+        List<Double> rrAngle = new ArrayList<>();
 
         Point points[] = new Point[4];
 
@@ -131,7 +135,7 @@ public class WhitePixelPipeline extends OpenCvPipeline {
 
             RotatedRect temp = Imgproc.minAreaRect(contour2f);
 
-            if (temp.size.area() > 500  && temp.center.y>100) {
+            if (temp.size.area() > 1000 && temp.center.y > 100) {
 
                 rr.add(temp);
 
@@ -139,38 +143,42 @@ public class WhitePixelPipeline extends OpenCvPipeline {
 
                 rrxval.add(temp.center.x);
                 rryval.add(temp.center.y);
+                rrHeight.add((temp.size.height));
+                rrHeight.add((temp.size.width));
+                rrAngle.add((temp.angle));
+
 
                 usableContours++;
 
-                drawRR(temp,red,src);
+                drawRR(temp, red, src);
 
             }
 
         }
 
-        telemetry.addData("NumContours", numContours);
-        telemetry.addData("UsableContours", usableContours);
+//        telemetry.addData("NumContours", numContours);
+//        telemetry.addData("UsableContours", usableContours);
 
-        telemetry.addData("RRSize", rr.size());
-        for(int n =1;n<rr.size();n++){
-            telemetry.addData("XVal "+ String.valueOf(n),rrxval.get(n));
-            telemetry.addData("YVal "+ String.valueOf(n),rryval.get(n));
-            telemetry.addData("Area "+ String.valueOf(n),rrAreas.get(n));
-
-
-
-        }
-
+        // telemetry.addData("RRSize", rr.size());
+//        for (int n = 0; n < rr.size(); n++) {
+//            telemetry.addData("XVal " + String.valueOf(n), rrxval.get(n));
+//            telemetry.addData("YVal " + String.valueOf(n), rryval.get(n));
+//            telemetry.addData("Area " + String.valueOf(n), rrAreas.get(n));
+//            telemetry.addData("Width " + String.valueOf(n), rrWidth.get(n));
+//            telemetry.addData("Height " + String.valueOf(n), rrHeight.get(n));
+//            telemetry.addData("Angle " + String.valueOf(n), rrAngle.get(n));
+//
+//          ;
+//        }
+        telemetry.update();
 
         if (frameList.size() > 5) {
             frameList.remove(0);
         }
 
 
-        telemetry.update();
-
-      //  return binary;
-          return src;
+        //  return binary;
+        return src;
         // return hierarchey;
         //return grey;
         // return binary;
@@ -181,7 +189,7 @@ public class WhitePixelPipeline extends OpenCvPipeline {
         Point points[] = new Point[4];
         rr.points(points);
         for (int l = 0; l < 4; ++l) {
-            Imgproc.line(mat, points[l], points[(l + 1) % 4], color,4);
+            Imgproc.line(mat, points[l], points[(l + 1) % 4], color, 4);
         }
     }
 }

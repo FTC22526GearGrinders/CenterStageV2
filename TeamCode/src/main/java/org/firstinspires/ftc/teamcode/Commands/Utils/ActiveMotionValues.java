@@ -9,6 +9,16 @@ import java.util.List;
 
 public class ActiveMotionValues {
 
+    public static double getActiveTagDistance() {
+        return activeTagDistance;
+    }
+
+    public static void setActiveTagDistance(double tagDistance) {
+        activeTagDistance = tagDistance;
+    }
+
+    public static double activeTagDistance=0;
+
     public static double getTurnAngle() {
         return turnAngle;
     }
