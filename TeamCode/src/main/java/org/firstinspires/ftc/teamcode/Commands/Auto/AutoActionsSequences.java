@@ -50,7 +50,7 @@ public class AutoActionsSequences extends SequentialCommandGroup {
 
                                         new WaitCommand(1000),
 
-                                        new InstantCommand(phss::openLeftGripper),
+                                        new InstantCommand(phss::openLeftGripperWide),
 
                                         new WaitCommand(1000),
 
@@ -64,7 +64,8 @@ public class AutoActionsSequences extends SequentialCommandGroup {
 
                                         af.positionArmHome(),
 
-                                        new ConditionalCommand(new MoveToPark(drive), new DoNothing(), () -> ActiveMotionValues.getBBStart()
+                                        new ConditionalCommand(new MoveToPark(drive), new DoNothing(),
+                                                () -> ActiveMotionValues.getBBStart()
                                                 && (ActiveMotionValues.getCenterPark() || ActiveMotionValues.getNearPark()))),
 
 

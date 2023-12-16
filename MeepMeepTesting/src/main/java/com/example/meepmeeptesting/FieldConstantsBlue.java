@@ -79,7 +79,7 @@ public final class FieldConstantsBlue {
         }
     }
 
-    public static Pose2d getActiveTagClearPose(int num) {
+    public static Pose2d getActiveTagLineupPose(int num) {
         int sel = num;
         switch (sel) {
             case 1:
@@ -109,8 +109,8 @@ public final class FieldConstantsBlue {
                 leftTapeMid.getY() + addedYdist, startAngle)
                 .minus(Constants.RobotConstants.pixelDropPose);
         public static final Pose2d centerDropPose = new Pose2d(centerTapeMid.getX(),
-                centerTapeMid.getY() + pixelCenterComp, startAngle)
-                .minus(Constants.RobotConstants.pixelDropPose);
+                centerTapeMid.getY() + pixelCenterComp + Constants.RobotConstants.length / 2, startAngle);
+        // .minus(Constants.RobotConstants.pixelDropPose);
         public static final Pose2d rightDropPose = new Pose2d(rightTapeMid.getX() - pixelCenterComp,
                 rightTapeMid.getY() + addedYdist, startAngle)
                 .minus(Constants.RobotConstants.pixelDropPose);
@@ -146,12 +146,12 @@ public final class FieldConstantsBlue {
                 leftTapeMid.getY() + addedYdist + Constants.RobotConstants.length / 2, startAngle);
 
 
-        public static final Pose2d leftDropPose = new Pose2d(leftTapeMid.getX() + pixelCenterComp ,
+        public static final Pose2d leftDropPose = new Pose2d(leftTapeMid.getX() + pixelCenterComp,
                 leftTapeMid.getY() + addedYdist, startAngle)
                 .minus(Constants.RobotConstants.pixelDropPose);
         public static final Pose2d centerDropPose = new Pose2d(centerTapeMid.getX(),
-                centerTapeMid.getY() + pixelCenterComp, startAngle)
-                .minus(Constants.RobotConstants.pixelDropPose);
+                centerTapeMid.getY() + pixelCenterComp + Constants.RobotConstants.length / 2, startAngle);
+        // .minus(Constants.RobotConstants.pixelDropPose);
         public static final Pose2d rightDropPose = new Pose2d(rightTapeMid.getX() - pixelCenterComp,
                 rightTapeMid.getY() + addedYdist, startAngle)
                 .minus(Constants.RobotConstants.pixelDropPose);

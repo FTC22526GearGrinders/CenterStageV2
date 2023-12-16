@@ -91,6 +91,8 @@ public class DetectAprilTags extends CommandBase {
 
                         myOpMode.telemetry.addLine(String.format("Translation Yaw: %.2f deg", detection.ftcPose.yaw));
 
+                        myOpMode.telemetry.addLine(String.format("Hupot Distance %.2f deg", distance));
+
 
                         myOpMode.telemetry.addLine();
 //                        myOpMode.telemetry.addData("CamFieldPose", camFieldPose.toString());

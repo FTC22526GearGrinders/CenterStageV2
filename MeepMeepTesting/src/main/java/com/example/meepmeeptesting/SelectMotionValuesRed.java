@@ -53,7 +53,7 @@ public class SelectMotionValuesRed {
 
                 ActiveMotionValues.setClearPose(FieldConstantsRed.XPYM.clearPose);
 
-                ActiveMotionValues.setTagLineupPose(FieldConstantsRed.getActiveTagClearPose(ActiveMotionValues.getActTag()));
+                ActiveMotionValues.setTagLineupPose(FieldConstantsRed.getActiveTagLineupPose(ActiveMotionValues.getActTag()));
 
 
                 ActiveMotionValues.setPreTagPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
@@ -93,7 +93,7 @@ public class SelectMotionValuesRed {
 
                 ActiveMotionValues.setActTag(5);
 
-                ActiveMotionValues.setTagLineupPose(FieldConstantsRed.getActiveTagClearPose(ActiveMotionValues.getActTag()));
+                ActiveMotionValues.setTagLineupPose(FieldConstantsRed.getActiveTagLineupPose(ActiveMotionValues.getActTag()));
 
                 ActiveMotionValues.setPreTagPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
                         .minus(FieldConstantsRed.AprilTagConstants.tagLookAheadPose));
@@ -117,6 +117,10 @@ public class SelectMotionValuesRed {
             //******************************************************************************************
             case 3://right ta
 
+                double dropOffsetX = Constants.RobotConstants.activeDropOffsetPose.getX();
+
+                Pose2d dropOffsetPose = new Pose2d(dropOffsetX, 0, 0);
+
                 xyOffsetPose = new Pose2d();
 
                 ActiveMotionValues.setStartPose(FieldConstantsRed.XPYM.startPos);//start pose
@@ -129,7 +133,8 @@ public class SelectMotionValuesRed {
 
                 ActiveMotionValues.setActTag(6);
 
-                ActiveMotionValues.setTagLineupPose(FieldConstantsRed.getActiveTagClearPose(ActiveMotionValues.getActTag()));
+                ActiveMotionValues.setTagLineupPose(FieldConstantsRed.getActiveTagLineupPose(ActiveMotionValues.getActTag())
+                        .plus(dropOffsetPose));
 
                 ActiveMotionValues.setPreTagPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
                         .minus(FieldConstantsRed.AprilTagConstants.tagLookAheadPose));

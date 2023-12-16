@@ -34,16 +34,14 @@ import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.CommandScheduler;
+import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Commands.Auto.DetectAprilTags;
-import org.firstinspires.ftc.teamcode.Commands.Drive.PositionToBackboardUsingTags;
+import org.firstinspires.ftc.teamcode.Commands.Drive.TrajectoryToBackboardSimple;
 import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
-import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.Subsystems.Drive_Subsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.Vision_Subsystem;
-
-import java.util.concurrent.TimeUnit;
 
 /*
  * This OpMode illustrates the basics of AprilTag recognition and pose estimation, using
@@ -102,7 +100,10 @@ public class TestAprilTags extends CommandOpMode {
 
         CommandScheduler.getInstance().schedule(new DetectAprilTags(this, vss, true));
 
-   //     CommandScheduler.getInstance().schedule(new PositionToBackboardUsingTags(drive, vss, this, true));
+//        CommandScheduler.getInstance().schedule(new SequentialCommandGroup(
+//                new DetectAprilTags(this, vss, false),
+//                new TrajectoryToBackboardSimple(drive, this)));
+//
 
         while (!isStopRequested() && opModeIsActive()) {
 

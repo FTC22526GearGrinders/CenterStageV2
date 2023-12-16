@@ -17,7 +17,7 @@ public class MeepMeepTesting {
 
         boolean bbstart = true;//aaset to false for start on stack side of truss
 
-        int lcr = 3;//left tape ==1, center tape = 2, right tape = 3 from robot view
+        int lcr = 1;//left tape ==1, center tape = 2, right tape = 3 from robot view
 
         if (lcr < 0 || lcr > 3) lcr = 2;
 
@@ -76,9 +76,9 @@ public class MeepMeepTesting {
 
                                     .waitSeconds(1)
 
-                                    .lineToLinearHeading(ActiveMotionValues.getRetractPose())//LR tapes only
+                                   // .lineToLinearHeading(ActiveMotionValues.getRetractPose())//LR tapes only
 
-                                    .lineToLinearHeading(ActiveMotionValues.getClearPose()) // truss side tape only
+                                   // .lineToLinearHeading(ActiveMotionValues.getClearPose()) // truss side tape only
 
                                     .lineToLinearHeading(ActiveMotionValues.getTagLineupPose())
 

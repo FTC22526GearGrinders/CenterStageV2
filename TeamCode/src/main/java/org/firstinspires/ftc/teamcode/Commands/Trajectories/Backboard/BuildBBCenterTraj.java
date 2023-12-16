@@ -56,7 +56,6 @@ public class BuildBBCenterTraj extends CommandBase {
 
                 .lineToLinearHeading(ActiveMotionValues.getPreTagPose())
 
-
                 .build();
 
         drive.trajName = "BBCenter";

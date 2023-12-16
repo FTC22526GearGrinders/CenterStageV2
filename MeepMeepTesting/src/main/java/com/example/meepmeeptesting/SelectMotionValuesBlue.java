@@ -34,6 +34,9 @@ public class SelectMotionValuesBlue {
 
             case 1://left tape not truss side
 
+                double dropOffsetX = Constants.RobotConstants.activeDropOffsetPose.getX();
+
+                Pose2d dropOffsetPose = new Pose2d(dropOffsetX, 0, 0);
 
                 Pose2d xyOffsetPose = new Pose2d();
 
@@ -47,7 +50,8 @@ public class SelectMotionValuesBlue {
 
                 ActiveMotionValues.setActTag(1);
 
-                ActiveMotionValues.setTagLineupPose(FieldConstantsBlue.getActiveTagClearPose(ActiveMotionValues.getActTag()));
+                ActiveMotionValues.setTagLineupPose(FieldConstantsBlue.getActiveTagLineupPose(ActiveMotionValues.getActTag())
+                        .minus(dropOffsetPose));
 
                 ActiveMotionValues.setPreTagPose(FieldConstantsBlue.getActiveTagPose(ActiveMotionValues.getActTag())
                         .minus(FieldConstantsBlue.AprilTagConstants.tagLookAheadPose));
@@ -84,7 +88,7 @@ public class SelectMotionValuesBlue {
 
                 ActiveMotionValues.setActTag(2);
 
-                ActiveMotionValues.setTagLineupPose(FieldConstantsBlue.getActiveTagClearPose(ActiveMotionValues.getActTag()));
+                ActiveMotionValues.setTagLineupPose(FieldConstantsBlue.getActiveTagLineupPose(ActiveMotionValues.getActTag()));
 
                 ActiveMotionValues.setPreTagPose(FieldConstantsBlue.getActiveTagPose(ActiveMotionValues.getActTag())
                         .minus(FieldConstantsBlue.AprilTagConstants.tagLookAheadPose));
@@ -127,7 +131,7 @@ public class SelectMotionValuesBlue {
 
                 ActiveMotionValues.setActTag(3);
 
-                ActiveMotionValues.setTagLineupPose(FieldConstantsBlue.getActiveTagClearPose(ActiveMotionValues.getActTag()));
+                ActiveMotionValues.setTagLineupPose(FieldConstantsBlue.getActiveTagLineupPose(ActiveMotionValues.getActTag()));
 
                 ActiveMotionValues.setPreTagPose(FieldConstantsBlue.getActiveTagPose(ActiveMotionValues.getActTag())
                         .minus(FieldConstantsBlue.AprilTagConstants.tagLookAheadPose));

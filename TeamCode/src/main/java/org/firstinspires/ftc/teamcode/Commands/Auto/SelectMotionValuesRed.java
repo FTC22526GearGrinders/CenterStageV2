@@ -6,6 +6,7 @@ import com.arcrobotics.ftclib.command.CommandBase;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 
 import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
+import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.FieldConstantsRed;
 
 public class SelectMotionValuesRed extends CommandBase {
@@ -69,11 +70,11 @@ public class SelectMotionValuesRed extends CommandBase {
 
                 ActiveMotionValues.setTurnAngle(FieldConstantsRed.turnToTagRadians);
 
-                ActiveMotionValues.setActTag(4);
-
                 ActiveMotionValues.setClearPose(FieldConstantsRed.XPYM.clearPose);
 
-                ActiveMotionValues.setTagLineupPose(FieldConstantsRed.getActiveTagClearPose(ActiveMotionValues.getActTag()));
+                ActiveMotionValues.setActTag(4);
+
+                ActiveMotionValues.setTagLineupPose(FieldConstantsRed.getActiveTagLineupPose(ActiveMotionValues.getActTag()));
 
 
                 ActiveMotionValues.setPreTagPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
@@ -111,7 +112,7 @@ public class SelectMotionValuesRed extends CommandBase {
 
                 ActiveMotionValues.setActTag(5);
 
-                ActiveMotionValues.setTagLineupPose(FieldConstantsRed.getActiveTagClearPose(ActiveMotionValues.getActTag()));
+                ActiveMotionValues.setTagLineupPose(FieldConstantsRed.getActiveTagLineupPose(ActiveMotionValues.getActTag()));
 
                 ActiveMotionValues.setPreTagPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
                         .minus(FieldConstantsRed.AprilTagConstants.tagLookAheadPose));
@@ -135,6 +136,10 @@ public class SelectMotionValuesRed extends CommandBase {
             //******************************************************************************************
             case 3://right ta
 
+                double dropOffsetX = Constants.RobotConstants.pixelDropPose.getX();
+
+                Pose2d dropOffsetPose = new Pose2d(dropOffsetX, 0, 0);
+
                 xyOffsetPose = new Pose2d();
 
                 ActiveMotionValues.setStartPose(FieldConstantsRed.XPYM.startPos);//start pose
@@ -147,7 +152,9 @@ public class SelectMotionValuesRed extends CommandBase {
 
                 ActiveMotionValues.setActTag(6);
 
-                ActiveMotionValues.setTagLineupPose(FieldConstantsRed.getActiveTagClearPose(ActiveMotionValues.getActTag()));
+                ActiveMotionValues.setTagLineupPose(FieldConstantsRed.getActiveTagLineupPose(ActiveMotionValues.getActTag())
+                        .plus(dropOffsetPose));
+
 
                 ActiveMotionValues.setPreTagPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
                         .minus(FieldConstantsRed.AprilTagConstants.tagLookAheadPose));
@@ -183,8 +190,6 @@ public class SelectMotionValuesRed extends CommandBase {
                 ActiveMotionValues.setRetractPose(FieldConstantsRed.XMYM.leftRetractPose);
 
                 ActiveMotionValues.setClearPose(FieldConstantsRed.XMYM.clearPose);
-
-                ActiveMotionValues.setTagLineupPose(FieldConstantsRed.getActiveTagClearPose(ActiveMotionValues.getActTag()));
 
                 ActiveMotionValues.setActTag(4);
 

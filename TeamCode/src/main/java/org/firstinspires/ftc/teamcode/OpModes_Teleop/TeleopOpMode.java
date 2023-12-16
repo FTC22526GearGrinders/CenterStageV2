@@ -128,7 +128,8 @@ public class TeleopOpMode extends CommandOpMode {
 
         driver.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenPressed(new InstantCommand(() -> climber.climberToLiftPosition()));
 
-        driver.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenPressed(new JogDrive2(drive, driver))
+        driver.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenPressed(
+                new JogDrive2(drive, driver))
                 .whenPressed(new InstantCommand(() -> phss.toWideOpen()));
 
         coDriver.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenPressed(new InstantCommand(() -> dcatss.releaseCatapult()));
