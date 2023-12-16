@@ -6,7 +6,6 @@ import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.command.WaitCommand;
 
-import org.firstinspires.ftc.teamcode.Commands.Drive.MoveToPark;
 import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
 import org.firstinspires.ftc.teamcode.Commands.Utils.DoNothing;
 import org.firstinspires.ftc.teamcode.Subsystems.ArmSubsystem;
@@ -42,9 +41,11 @@ public class AutoActionsSequences extends SequentialCommandGroup {
 
                                         af.raiseArmToPosition(),
 
-                                        new InstantCommand(() -> phss.flipGrippersToLeftDown()),
+                                        new InstantCommand(phss::flipGrippersToLeftDown),
 
-                                        af.detectMoveToBackboard(),
+                                        af.detectTags(),
+
+                                        af.trajToBackboard(),
 
                                         //   af.positionToBackboardUsingTags(),
 
@@ -54,19 +55,17 @@ public class AutoActionsSequences extends SequentialCommandGroup {
 
                                         new WaitCommand(1000),
 
-                                        new InstantCommand(() -> phss.flipGrippersToPickup()),
+                                        new InstantCommand(phss::flipGrippersToPickup),
 
                                         new WaitCommand(500),
 
-                                        new InstantCommand(() -> phss.lowerGrippersToPickup()),
+                                        new InstantCommand(phss::lowerGrippersToPickup),
 
                                         new WaitCommand(500),
 
                                         af.positionArmHome(),
 
-                                        new ConditionalCommand(new MoveToPark(drive), new DoNothing(),
-                                                () -> ActiveMotionValues.getBBStart()
-                                                && (ActiveMotionValues.getCenterPark() || ActiveMotionValues.getNearPark()))),
+                                        af.parkCheck()),
 
 
                                 new DoNothing(),

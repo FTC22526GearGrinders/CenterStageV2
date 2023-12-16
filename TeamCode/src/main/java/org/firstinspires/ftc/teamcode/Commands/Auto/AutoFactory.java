@@ -100,15 +100,26 @@ public class AutoFactory extends CommandBase {
         return new PositionArm(arm, 10).asProxy();
     }
 
-    public Command detectMoveToBackboard() {
+    public Command detectTags() {
 
-        return new SequentialCommandGroup(new DetectAprilTags(opMode, vss, false),
+        return new DetectAprilTags(opMode, vss, false);
 
-                new TrajectoryToBackboardSimple(drive, opMode));
+
+    }
+
+    public Command trajToBackboard(){
+
+        return  new TrajectoryToBackboardSimple(drive, opMode);
     }
 
     public Command positionArmHome() {
         return new PositionArm(arm, 0).asProxy();
+    }
+
+    public Command parkCheck() {
+        return new ConditionalCommand(new MoveToPark(drive), new DoNothing(),
+                () -> ActiveMotionValues.getBBStart()
+                        && (ActiveMotionValues.getCenterPark() || ActiveMotionValues.getNearPark()));
     }
 
 }
