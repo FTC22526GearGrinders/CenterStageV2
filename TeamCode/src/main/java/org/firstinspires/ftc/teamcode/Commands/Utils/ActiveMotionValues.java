@@ -4,9 +4,6 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ActiveMotionValues {
 
     public static double getActiveTagDistance() {
@@ -17,7 +14,17 @@ public class ActiveMotionValues {
         activeTagDistance = tagDistance;
     }
 
-    public static double activeTagDistance=0;
+    public static double activeTagDistance = 0;
+
+    public static double getCameraYaw() {
+        return cameraYaw;
+    }
+
+    public static void setCameraYaw(double yaw) {
+        cameraYaw = yaw;
+    }
+    
+    static double cameraYaw = 0;
 
     public static double getTurnAngle() {
         return turnAngle;
@@ -37,18 +44,18 @@ public class ActiveMotionValues {
         tagLineupPose = lineupPose;
     }
 
-    public static Pose2d tagLineupPose=new Pose2d();
-
+    public static Pose2d tagLineupPose = new Pose2d();
 
 
     public static double getStopSecs() {
         return stopSecs;
     }
 
-    public static void setStopSecs(double secs) {stopSecs = secs;
+    public static void setStopSecs(double secs) {
+        stopSecs = secs;
     }
 
-    public static double stopSecs=.1;
+    public static double stopSecs = .1;
 
     public static boolean getAprilTagSeen() {
         return aprilTagSeen;
@@ -62,12 +69,12 @@ public class ActiveMotionValues {
 
     private static AprilTagDetection detection;
 
-    public static AprilTagDetection getDetection(){
+    public static AprilTagDetection getDetection() {
         return detection;
     }
 
-    public static void setDetection(AprilTagDetection detect){
-        detection=detect;
+    public static void setDetection(AprilTagDetection detect) {
+        detection = detect;
     }
 
 
@@ -187,11 +194,6 @@ public class ActiveMotionValues {
     private static Pose2d clearPose = new Pose2d();
 
 
-
-
-
-
-
     public static boolean getRedAlliance() {
         return redAlliance;
     }
@@ -291,8 +293,6 @@ public class ActiveMotionValues {
     public static Pose2d getEndAutoPose() {
         return endAutoPose;
     }
-
-
 
 
 }

@@ -13,11 +13,12 @@ public final class Constants {
         static final double width = 17.;
 
         static double gripperXOffset = 2;
-        public static Pose2d pixelDropPose = new Pose2d(-1, -RobotConstants.length / 2 + 1, 0);
+
+        public static Pose2d pixelDropPose= new Pose2d(-2, -RobotConstants.length / 2 , 0);
+
         public static Pose2d leftGripperPose = new Pose2d(-gripperXOffset, -RobotConstants.length / 2 + 1, 0);
         public static Pose2d rightGripperPose = new Pose2d(gripperXOffset, -RobotConstants.length / 2 + 1, 0);
 
-        public static Pose2d activeDropOffsetPose = pixelDropPose;
 
         public static Pose2d kCameraToRobot = new Pose2d(RobotConstants.length / 2, 2);
     }
@@ -130,6 +131,7 @@ public final class Constants {
         public static final double DROP_CLOSED_POSITION = .7;
 
         public enum LeftGripperSet {
+            WIDE_OPEN(.85),
             OPEN(.7),//open position
             MID(.7),//mid
             CLOSED(.4);//closed
@@ -143,6 +145,7 @@ public final class Constants {
 
 
         public enum RightGripperSet {
+            WIDE_OPEN(0),
             OPEN(.1),
             MID(.3),
             CLOSED(.4);
@@ -276,7 +279,8 @@ public final class Constants {
         public static final double CATAPULT_LOCK_POSITION = .0;
         public static final double CATAPULT_RELEASE_POSITION = .10;
 
-
+        public static final double CATAPULT_MOTOR_POWER = .5;
+        public static final long MOTOR_RUN_MILLISECONDS = 1000 ;
     }
 
 

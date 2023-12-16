@@ -1,15 +1,12 @@
 package org.firstinspires.ftc.teamcode.Commands.Auto;
 
 
-import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.arcrobotics.ftclib.command.CommandBase;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
 import org.firstinspires.ftc.teamcode.Constants;
-import org.firstinspires.ftc.teamcode.FieldConstantsBlue;
-import org.firstinspires.ftc.teamcode.FieldConstantsRed;
 import org.firstinspires.ftc.teamcode.Subsystems.Vision_Subsystem;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 
@@ -69,22 +66,30 @@ public class DetectAprilTags extends CommandBase {
 
                     ActiveMotionValues.setAprilTagSeen(true);
 
-                    ActiveMotionValues.setActiveTagDistance(detection.ftcPose.range);
+
+                    //assuming camera is square to target
+
+                    double range = detection.ftcPose.range;
+
+                    double cameraOffset = Constants.RobotConstants.kCameraToRobot.getY();
+
+                    double distance = Math.sqrt(range * range - cameraOffset * cameraOffset);
+
+                    ActiveMotionValues.setActiveTagDistance(distance);
+
+                    ActiveMotionValues.setCameraYaw( detection.ftcPose.yaw);
 
                     if (noEnd) {
                         myOpMode.telemetry.addData("Active Tag", n);
                         myOpMode.telemetry.addData("Tag ID", detection.id);
                         myOpMode.telemetry.addLine();
 
-                      //  myOpMode.telemetry.addData("TagPose", tagPose.toString());
-
 
                         myOpMode.telemetry.addLine(String.format("Translation Range: %.2f in", detection.ftcPose.range));
 
-                        myOpMode.telemetry.addLine(String.format("Translation Bearing: %.2f deg",detection.ftcPose.bearing));
+                        myOpMode.telemetry.addLine(String.format("Translation Bearing: %.2f deg", detection.ftcPose.bearing));
 
-                        myOpMode.telemetry.addLine(String.format("Translation Yaw: %.2f deg",detection.ftcPose.yaw));
-
+                        myOpMode.telemetry.addLine(String.format("Translation Yaw: %.2f deg", detection.ftcPose.yaw));
 
 
                         myOpMode.telemetry.addLine();

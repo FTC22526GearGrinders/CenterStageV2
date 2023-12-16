@@ -30,8 +30,11 @@ public class SelectMotionValuesRed extends CommandBase {
         int lcr = ActiveMotionValues.getLcrpos();
         ActiveMotionValues.setStrafeDistance(0);
         ActiveMotionValues.setAdvancePose(new Pose2d());
+        ActiveMotionValues.setRetractPose(new Pose2d());
         ActiveMotionValues.setClearPose(new Pose2d());
+        ActiveMotionValues.setTagLineupPose(new Pose2d());
         ActiveMotionValues.setParkPose(new Pose2d());
+        ActiveMotionValues.setTurnAngle(0);
 
         ActiveMotionValues.setStopSecs(.1);
 

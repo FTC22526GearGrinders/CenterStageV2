@@ -5,14 +5,12 @@ import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.CommandScheduler;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Commands.Auto.SelectMotionValuesBlue;
 import org.firstinspires.ftc.teamcode.Commands.Auto.SelectMotionValuesRed;
 import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
 import org.firstinspires.ftc.teamcode.FieldConstantsRed;
-import org.firstinspires.ftc.teamcode.util.AssetsTrajectoryManager;
 
 @Config
 @TeleOp(name = "Auto: Values", group = "Test")
@@ -188,9 +186,12 @@ public class TestMotionData extends CommandOpMode {
 
         telemetry.addLine();
         if (ActiveMotionValues.getBBStart()) {
-            telemetry.addData("PreTagPose", ActiveMotionValues.getPreTagPose().toString());
+
             telemetry.addData("TagLineupPose", ActiveMotionValues.getTagLineupPose().toString());
-            if(ActiveMotionValues.getCenterPark()|| ActiveMotionValues.getNearPark()){
+            telemetry.addData("Turn Angle", Math.toDegrees(ActiveMotionValues.getTurnAngle()));
+            telemetry.addData("PreTagPose", ActiveMotionValues.getPreTagPose().toString());
+
+            if (ActiveMotionValues.getCenterPark() || ActiveMotionValues.getNearPark()) {
                 telemetry.addData("ParkPose", ActiveMotionValues.getParkPose());
             }
         }

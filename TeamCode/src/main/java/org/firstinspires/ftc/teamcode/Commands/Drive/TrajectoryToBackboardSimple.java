@@ -43,7 +43,8 @@ public class TrajectoryToBackboardSimple extends CommandBase {
 
         if (distance > 10 | distance < 6) distance = 8;
 
-        Pose2d currentRobotPose = new Pose2d();
+        Pose2d currentRobotPose = new Pose2d(0,0,0);// Math.toRadians(ActiveMotionValues.getCameraYaw()));
+
         Pose2d finalPose = new Pose2d(distance, 0);
 
 

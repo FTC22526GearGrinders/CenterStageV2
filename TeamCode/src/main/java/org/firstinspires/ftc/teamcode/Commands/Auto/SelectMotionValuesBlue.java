@@ -38,8 +38,11 @@ public class SelectMotionValuesBlue extends CommandBase {
         int lcr = ActiveMotionValues.getLcrpos();
         ActiveMotionValues.setStrafeDistance(0);
         ActiveMotionValues.setAdvancePose(new Pose2d());
+        ActiveMotionValues.setRetractPose(new Pose2d());
         ActiveMotionValues.setClearPose(new Pose2d());
         ActiveMotionValues.setParkPose(new Pose2d());
+        ActiveMotionValues.setTagLineupPose(new Pose2d());
+        ActiveMotionValues.setTurnAngle(0);
 
         ActiveMotionValues.setStopSecs(.1);
 
@@ -58,7 +61,7 @@ public class SelectMotionValuesBlue extends CommandBase {
 
             case 1://left tape
 
-                Pose2d xyOffsetPose = new Pose2d(-2, 0);
+                Pose2d xyOffsetPose = new Pose2d();
 
                 ActiveMotionValues.setStartPose(FieldConstantsBlue.XPYP.startPos);//start pose
 
