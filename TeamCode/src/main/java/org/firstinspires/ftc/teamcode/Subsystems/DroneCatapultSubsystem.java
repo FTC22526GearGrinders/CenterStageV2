@@ -15,7 +15,7 @@ public class DroneCatapultSubsystem extends SubsystemBase {
 
     public Servo catapult;
 
-    public MotorEx catapultMotor;
+   // public MotorEx catapultMotor;
 
     private final CommandOpMode myOpMode;
     private FtcDashboard dashboard;
@@ -31,12 +31,12 @@ public class DroneCatapultSubsystem extends SubsystemBase {
 
         catapult.setDirection(Servo.Direction.FORWARD);
 
-        catapultMotor = new MotorEx(myOpMode.hardwareMap, "climber motor", Motor.GoBILDA.RPM_1150);
+      //  catapultMotor = new MotorEx(myOpMode.hardwareMap, "climber motor", Motor.GoBILDA.RPM_1150);
 
 
-        catapultMotor.setInverted(false);
+      //  catapultMotor.setInverted(false);
 
-        catapultMotor.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
+      //  catapultMotor.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
 
     }
 
@@ -60,13 +60,13 @@ public class DroneCatapultSubsystem extends SubsystemBase {
 
     }
 
-    public void fireCatapultMotor() {
-        catapultMotor.set(motorpower);
-    }
-
-    public void stopMotor() {
-        catapultMotor.set(0);
-    }
+//    public void fireCatapultMotor() {
+//        catapultMotor.set(motorpower);
+//    }
+//
+//    public void stopMotor() {
+//        catapultMotor.set(0);
+//    }
 
 
 }

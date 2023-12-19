@@ -112,7 +112,6 @@ public class ActiveMotionValues {
 
     private static Pose2d startPose = new Pose2d();
 
-    private static Pose2d parkPose = new Pose2d();
 
     public static Pose2d getPreTagPose() {
         return preTagPose;
@@ -226,13 +225,23 @@ public class ActiveMotionValues {
         actTag = act;
     }
 
+    private static Pose2d parkPose = new Pose2d();
     public static void setParkPose(Pose2d pose) {
         parkPose = pose;
     }
-
     public static Pose2d getParkPose() {
         return parkPose;
     }
+
+    private static Pose2d preParkPose = new Pose2d();
+    public static void setPreParkPose(Pose2d pose) {
+        preParkPose = pose;
+    }
+    public static Pose2d getPreParkPose() {
+        return preParkPose;
+    }
+
+
 
     //auto running
     private static boolean redAlliance;
@@ -294,5 +303,14 @@ public class ActiveMotionValues {
         return endAutoPose;
     }
 
+
+    public static Pose2d getClearToTurnPose() {
+        return clearToTurnPose;
+    }
+    public static void setClearToTurnPose(Pose2d clearTurnPose) {
+        ActiveMotionValues.clearToTurnPose = clearTurnPose;
+    }
+
+    private static Pose2d clearToTurnPose = new Pose2d();
 
 }

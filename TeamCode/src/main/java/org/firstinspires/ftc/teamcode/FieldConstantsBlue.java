@@ -27,8 +27,15 @@ public final class FieldConstantsBlue {
     public static Pose2d centerOptionPose = new Pose2d(36, 12, startAngle);
 
 
-    public static Pose2d nearParkPose = new Pose2d(50, 60, startAngle);
-    public static Pose2d centerParkPose = new Pose2d(50, 12, startAngle);
+
+    public static Pose2d nearParkPose = new Pose2d(59, 60, startAngle);
+    public static Pose2d centerParkPose = new Pose2d(59, 12, startAngle);
+
+    public static Pose2d nearPreParkPoseBB = new Pose2d(50, 60, 0);
+    public static Pose2d centerPreParkPoseBB = new Pose2d(50, 12,0);
+    public static Pose2d nearParkPoseBB = new Pose2d(59, 60, 0);
+    public static Pose2d centerParkPoseBB = new Pose2d(59, 12,0);
+
 
     public static Pose2d nearTrussLineUpPose = new Pose2d(-36, 60, startAngle);
 
@@ -164,6 +171,9 @@ public final class FieldConstantsBlue {
         public static final Pose2d centerRetractPose = centerDropPose.plus(retPose);
         public static final Pose2d rightRetractPose = rightDropPose.plus(retPose);
         public static final Pose2d clearPose = advancePose.plus(retPose);
+        public static final Pose2d centerSDClearPixePose = new Pose2d(rightTapeMid.getX(),centerRetractPose.getY(),startAngle);
+        public static final Pose2d clearToTurnPose = new Pose2d(36, 50, startAngle);
+
     }
 
 

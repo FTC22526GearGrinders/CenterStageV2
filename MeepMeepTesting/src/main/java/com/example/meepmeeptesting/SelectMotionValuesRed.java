@@ -9,10 +9,10 @@ public class SelectMotionValuesRed {
 
         boolean bbstart = ActiveMotionValues.getBBStart();
         int lcr = ActiveMotionValues.getLcrpos();
-        ActiveMotionValues.setStrafeDistance(0);
         ActiveMotionValues.setAdvancePose(new Pose2d());
         ActiveMotionValues.setClearPose(new Pose2d());
 
+        ActiveMotionValues.setPreParkPose(new Pose2d());
         ActiveMotionValues.setParkPose(new Pose2d());
 
         ActiveMotionValues.setStopSecs(.1);
@@ -59,19 +59,17 @@ public class SelectMotionValuesRed {
                 ActiveMotionValues.setPreTagPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
                         .minus(FieldConstantsRed.AprilTagConstants.tagLookAheadPose));
 
-
                 ActiveMotionValues.setParkPose(new Pose2d());
+                ActiveMotionValues.setPreParkPose(new Pose2d());
 
-                Pose2d parkPoseOffset = new Pose2d(0, 0, Math.toRadians(90));
-
-                if (ActiveMotionValues.getCenterPark())
-
-                    ActiveMotionValues.setParkPose(FieldConstantsRed.centerParkPose.plus(parkPoseOffset));
-
-                if (ActiveMotionValues.getNearPark())
-
-                    ActiveMotionValues.setParkPose(FieldConstantsRed.nearParkPose.plus(parkPoseOffset));
-
+                if (ActiveMotionValues.getCenterPark()) {
+                    ActiveMotionValues.setPreParkPose(FieldConstantsRed.centerPreParkPoseBB);
+                    ActiveMotionValues.setParkPose(FieldConstantsRed.centerParkPoseBB);
+                }
+                if (ActiveMotionValues.getNearPark()) {
+                    ActiveMotionValues.setPreParkPose(FieldConstantsRed.nearPreParkPoseBB);
+                    ActiveMotionValues.setParkPose(FieldConstantsRed.nearParkPoseBB);
+                }
 
                 break;
 
@@ -99,17 +97,16 @@ public class SelectMotionValuesRed {
                         .minus(FieldConstantsRed.AprilTagConstants.tagLookAheadPose));
 
                 ActiveMotionValues.setParkPose(new Pose2d());
+                ActiveMotionValues.setPreParkPose(new Pose2d());
 
-                parkPoseOffset = new Pose2d(0, 0, Math.toRadians(90));
-
-                if (ActiveMotionValues.getCenterPark())
-
-                    ActiveMotionValues.setParkPose(FieldConstantsRed.centerParkPose.plus(parkPoseOffset));
-
-                if (ActiveMotionValues.getNearPark())
-
-                    ActiveMotionValues.setParkPose(FieldConstantsRed.nearParkPose.plus(parkPoseOffset));
-
+                if (ActiveMotionValues.getCenterPark()) {
+                    ActiveMotionValues.setPreParkPose(FieldConstantsRed.centerPreParkPoseBB);
+                    ActiveMotionValues.setParkPose(FieldConstantsRed.centerParkPoseBB);
+                }
+                if (ActiveMotionValues.getNearPark()) {
+                    ActiveMotionValues.setPreParkPose(FieldConstantsRed.nearPreParkPoseBB);
+                    ActiveMotionValues.setParkPose(FieldConstantsRed.nearParkPoseBB);
+                }
 
                 break;
 
@@ -140,17 +137,15 @@ public class SelectMotionValuesRed {
                         .minus(FieldConstantsRed.AprilTagConstants.tagLookAheadPose));
 
                 ActiveMotionValues.setParkPose(new Pose2d());
+                ActiveMotionValues.setPreParkPose(new Pose2d());
 
-                parkPoseOffset = new Pose2d(0, 0, Math.toRadians(90));
-
-                if (ActiveMotionValues.getCenterPark())
-
-                    ActiveMotionValues.setParkPose(FieldConstantsRed.centerParkPose.plus(parkPoseOffset));
-
+                if (ActiveMotionValues.getCenterPark()) {
+                    ActiveMotionValues.setPreParkPose(FieldConstantsRed.centerPreParkPoseBB);
+                    ActiveMotionValues.setParkPose(FieldConstantsRed.centerParkPoseBB);
+                }
                 if (ActiveMotionValues.getNearPark()) {
-
-
-                    ActiveMotionValues.setParkPose(FieldConstantsRed.nearParkPose.plus(parkPoseOffset));
+                    ActiveMotionValues.setPreParkPose(FieldConstantsRed.nearPreParkPoseBB);
+                    ActiveMotionValues.setParkPose(FieldConstantsRed.nearParkPoseBB);
                 }
 
                 break;
@@ -238,43 +233,40 @@ public class SelectMotionValuesRed {
 
         boolean useTruss = !useStageDoor;
 
-        double strafeDistance = 11.5;
+        double stopTimeSecs = 10;
 
         if (useTruss) {
-
-            if (lcr == 11) ActiveMotionValues.setStrafeDistance(strafeDistance);
-
-            if (lcr == 13) ActiveMotionValues.setStrafeDistance(-strafeDistance);
 
 
             ActiveMotionValues.setTrussSDLineUpPose(FieldConstantsRed.nearTrussLineUpPose);
 
             ActiveMotionValues.setOptionStopPose(FieldConstantsRed.nearOptionPose);
 
-            if (!secondPixel)
-
+            if (!secondPixel) {
                 ActiveMotionValues.setOptionTargetPose(FieldConstantsRed.nearParkPose);
 
-            else {
-
+            } else {
+                ActiveMotionValues.setClearToTurnPose(FieldConstantsRed.XMYM.clearToTurnPose);
+                ActiveMotionValues.setTurnAngle(FieldConstantsRed.turnToTagRadians);
+                ActiveMotionValues.setStopSecs(stopTimeSecs);
                 ActiveMotionValues.setOptionTargetPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
                         .plus(FieldConstantsRed.AprilTagConstants.tagStrafeOffsetPose));
-
             }
         }
 
         if (useStageDoor) {
 
             if (lcr == 11) {
-                ActiveMotionValues.setStrafeDistance(strafeDistance);
+
                 ActiveMotionValues.setTrussSDLineUpPose((FieldConstantsRed.stageDoorLineUpPose13));
             }
             if (lcr == 12) {
-                ActiveMotionValues.setStrafeDistance(strafeDistance);
+                ActiveMotionValues.setClearPose(FieldConstantsRed.XMYM.centerSDClearPixelPose);
+
                 ActiveMotionValues.setTrussSDLineUpPose((FieldConstantsRed.stageDoorLineUpPose2));
             }
             if (lcr == 13) {
-                ActiveMotionValues.setStrafeDistance(-strafeDistance);
+
                 ActiveMotionValues.setTrussSDLineUpPose((FieldConstantsRed.stageDoorLineUpPose13));
             }
 
@@ -288,7 +280,8 @@ public class SelectMotionValuesRed {
                 }
 
             } else {
-                ActiveMotionValues.setTurnAngle(Math.toRadians(90));
+                ActiveMotionValues.setStopSecs(stopTimeSecs);
+                ActiveMotionValues.setTurnAngle(FieldConstantsRed.turnToTagRadians);
                 ActiveMotionValues.setOptionTargetPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
                         .plus(FieldConstantsRed.AprilTagConstants.tagStrafeOffsetPose));
             }

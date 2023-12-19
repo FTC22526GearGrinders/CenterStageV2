@@ -6,8 +6,10 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Commands.Trajectories.Backboard.BuildBBCenterTraj;
 import org.firstinspires.ftc.teamcode.Commands.Trajectories.Backboard.BuildBBLRTraj;
-import org.firstinspires.ftc.teamcode.Commands.Trajectories.Truss_StageDoor.BuildTrussSDCenterTape;
-import org.firstinspires.ftc.teamcode.Commands.Trajectories.Truss_StageDoor.BuildTrussSDLRTape;
+import org.firstinspires.ftc.teamcode.Commands.Trajectories.StageDoor.BuildStageDoorCenterTape;
+import org.firstinspires.ftc.teamcode.Commands.Trajectories.StageDoor.BuildStageDoorLRTape;
+import org.firstinspires.ftc.teamcode.Commands.Trajectories.Truss.BuildTrussCenterTape;
+import org.firstinspires.ftc.teamcode.Commands.Trajectories.Truss.BuildTrussLRTape;
 import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
 import org.firstinspires.ftc.teamcode.Subsystems.Drive_Subsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.PixelHandlerSubsystem;
@@ -42,7 +44,6 @@ public class SelectAndBuildTrajectory extends CommandBase {
         bbstart = ActiveMotionValues.getBBStart();
         useSD = ActiveMotionValues.getUseStageDoor();
         lcr = ActiveMotionValues.getLcrpos();
-        secondPixel = ActiveMotionValues.getSecondPixel();
         drive.trajectoryBuilding = false;
         runTime = new ElapsedTime();
         opmode.telemetry.addData("SABTinit", "");
@@ -63,22 +64,36 @@ public class SelectAndBuildTrajectory extends CommandBase {
 
         if (bbstart && (lcr == 1 || lcr == 3)) {
             drive.runningTrajName = "BB LR";
-            new BuildBBLRTraj(drive, phss,opmode).schedule();
+            new BuildBBLRTraj(drive, phss, opmode).schedule();
             drive.trajectoryBuilding = true;
             found = true;
         }
 
 
-        if (!bbstart && (lcr == 1 || lcr == 3)) {
+        if (!bbstart && useSD && (lcr == 1 || lcr == 3)) {
             drive.runningTrajName = "Not BB Center";
-            new BuildTrussSDLRTape(drive, phss).schedule();
+            new BuildStageDoorLRTape(drive, phss).schedule();
             drive.trajectoryBuilding = true;
             found = true;
         }
 
-        if (!bbstart && lcr == 2) {
+        if (!bbstart && useSD && lcr == 2) {
             drive.runningTrajName = "Not BB LR";
-            new BuildTrussSDCenterTape(drive, phss).schedule();
+            new BuildStageDoorCenterTape(drive, phss).schedule();
+            drive.trajectoryBuilding = true;
+            found = true;
+        }
+
+        if (!bbstart && !useSD && (lcr == 1 || lcr == 3)) {
+            drive.runningTrajName = "Not BB Center";
+            new BuildTrussLRTape(drive, phss).schedule();
+            drive.trajectoryBuilding = true;
+            found = true;
+        }
+
+        if (!bbstart && !useSD && lcr == 2) {
+            drive.runningTrajName = "Not BB LR";
+            new BuildTrussCenterTape(drive, phss).schedule();
             drive.trajectoryBuilding = true;
             found = true;
         }

@@ -54,6 +54,8 @@ public class Drive_Subsystem extends SubsystemBase {
 
         drive = new SampleMecanumDrive(myOpmode.hardwareMap);
 
+        drive.setPoseEstimate(new Pose2d());
+
 
         runtime.reset();
 
@@ -61,7 +63,9 @@ public class Drive_Subsystem extends SubsystemBase {
 
     public void periodic() {
 
-        currentPoseEstimate = drive.getPoseEstimate();
+        if (drive.getPoseEstimate() != null)
+
+            currentPoseEstimate = drive.getPoseEstimate();
     }
 
     public void setForwardGain(double gain) {
@@ -98,9 +102,7 @@ public class Drive_Subsystem extends SubsystemBase {
     }
 
     public void showtelemetry(Telemetry telemetry) {
-        myOpmode.telemetry.addData("X Position", currentPoseEstimate.getX());
-        myOpmode.telemetry.addData("Y Position", currentPoseEstimate.getY());
-        myOpmode.telemetry.addData("Heading", currentPoseEstimate.getHeading());
+
         telemetry.update();
     }
 

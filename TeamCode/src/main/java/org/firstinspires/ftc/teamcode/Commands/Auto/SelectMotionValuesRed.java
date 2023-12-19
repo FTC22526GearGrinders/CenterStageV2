@@ -34,7 +34,9 @@ public class SelectMotionValuesRed extends CommandBase {
         ActiveMotionValues.setRetractPose(new Pose2d());
         ActiveMotionValues.setClearPose(new Pose2d());
         ActiveMotionValues.setTagLineupPose(new Pose2d());
+        ActiveMotionValues.setPreParkPose(new Pose2d());
         ActiveMotionValues.setParkPose(new Pose2d());
+
         ActiveMotionValues.setTurnAngle(0);
 
         ActiveMotionValues.setStopSecs(.1);
@@ -68,30 +70,31 @@ public class SelectMotionValuesRed extends CommandBase {
 
                 ActiveMotionValues.setRetractPose(FieldConstantsRed.XPYM.leftRetractPose);
 
-                ActiveMotionValues.setTurnAngle(FieldConstantsRed.turnToTagRadians);
+
 
                 ActiveMotionValues.setClearPose(FieldConstantsRed.XPYM.clearPose);
+
+                ActiveMotionValues.setTurnAngle(FieldConstantsRed.turnToTagRadians);
 
                 ActiveMotionValues.setActTag(4);
 
                 ActiveMotionValues.setTagLineupPose(FieldConstantsRed.getActiveTagLineupPose(ActiveMotionValues.getActTag()));
-
 
                 ActiveMotionValues.setPreTagPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
                         .minus(FieldConstantsRed.AprilTagConstants.tagLookAheadPose));
 
 
                 ActiveMotionValues.setParkPose(new Pose2d());
+                ActiveMotionValues.setPreParkPose(new Pose2d());
 
-                Pose2d parkPoseOffset = new Pose2d(0, 0, Math.toRadians(90));
-
-                if (ActiveMotionValues.getCenterPark())
-
-                    ActiveMotionValues.setParkPose(FieldConstantsRed.centerParkPose.plus(parkPoseOffset));
-
-                if (ActiveMotionValues.getNearPark())
-
-                    ActiveMotionValues.setParkPose(FieldConstantsRed.nearParkPose.plus(parkPoseOffset));
+                if (ActiveMotionValues.getCenterPark()) {
+                    ActiveMotionValues.setPreParkPose(FieldConstantsRed.centerPreParkPoseBB);
+                    ActiveMotionValues.setParkPose(FieldConstantsRed.centerParkPoseBB);
+                }
+                if (ActiveMotionValues.getNearPark()) {
+                    ActiveMotionValues.setPreParkPose(FieldConstantsRed.nearPreParkPoseBB);
+                    ActiveMotionValues.setParkPose(FieldConstantsRed.nearParkPoseBB);
+                }
 
 
                 break;
@@ -119,16 +122,17 @@ public class SelectMotionValuesRed extends CommandBase {
 
                 ActiveMotionValues.setParkPose(new Pose2d());
 
-                parkPoseOffset = new Pose2d(0, 0, Math.toRadians(90));
+                ActiveMotionValues.setParkPose(new Pose2d());
+                ActiveMotionValues.setPreParkPose(new Pose2d());
 
-                if (ActiveMotionValues.getCenterPark())
-
-                    ActiveMotionValues.setParkPose(FieldConstantsRed.centerParkPose.plus(parkPoseOffset));
-
-                if (ActiveMotionValues.getNearPark())
-
-                    ActiveMotionValues.setParkPose(FieldConstantsRed.nearParkPose.plus(parkPoseOffset));
-
+                if (ActiveMotionValues.getCenterPark()) {
+                    ActiveMotionValues.setPreParkPose(FieldConstantsRed.centerPreParkPoseBB);
+                    ActiveMotionValues.setParkPose(FieldConstantsRed.centerParkPoseBB);
+                }
+                if (ActiveMotionValues.getNearPark()) {
+                    ActiveMotionValues.setPreParkPose(FieldConstantsRed.nearPreParkPoseBB);
+                    ActiveMotionValues.setParkPose(FieldConstantsRed.nearParkPoseBB);
+                }
 
                 break;
 
@@ -160,17 +164,16 @@ public class SelectMotionValuesRed extends CommandBase {
                         .minus(FieldConstantsRed.AprilTagConstants.tagLookAheadPose));
 
                 ActiveMotionValues.setParkPose(new Pose2d());
+                ActiveMotionValues.setPreParkPose(new Pose2d());
 
-                parkPoseOffset = new Pose2d(0, 0, Math.toRadians(90));
-
-                if (ActiveMotionValues.getCenterPark())
-
-                    ActiveMotionValues.setParkPose(FieldConstantsRed.centerParkPose.plus(parkPoseOffset));
-
-                if (ActiveMotionValues.getNearPark())
-
-                    ActiveMotionValues.setParkPose(FieldConstantsRed.nearParkPose.plus(parkPoseOffset));
-
+                if (ActiveMotionValues.getCenterPark()) {
+                    ActiveMotionValues.setPreParkPose(FieldConstantsRed.centerPreParkPoseBB);
+                    ActiveMotionValues.setParkPose(FieldConstantsRed.centerParkPoseBB);
+                }
+                if (ActiveMotionValues.getNearPark()) {
+                    ActiveMotionValues.setPreParkPose(FieldConstantsRed.nearPreParkPoseBB);
+                    ActiveMotionValues.setParkPose(FieldConstantsRed.nearParkPoseBB);
+                }
 
                 break;
 
@@ -209,7 +212,6 @@ public class SelectMotionValuesRed extends CommandBase {
 
                 ActiveMotionValues.setDropOffPose(FieldConstantsRed.XMYM.centerDropPose.minus(xyOffsetPose));
 
-                ActiveMotionValues.setRetractPose(FieldConstantsRed.XMYM.centerRetractPose);
 
 
                 ActiveMotionValues.setActTag(5);
@@ -251,12 +253,9 @@ public class SelectMotionValuesRed extends CommandBase {
         int lcr = ActiveMotionValues.getLcrpos() + 10;
         boolean useStageDoor = ActiveMotionValues.getUseStageDoor();
         boolean secondPixel = ActiveMotionValues.getSecondPixel();
-        ActiveMotionValues.setStrafeDistance(0);
         ActiveMotionValues.setParkPose(new Pose2d());
 
         boolean useTruss = !useStageDoor;
-
-        double strafeDistance = 11.5;
 
         double stop2PixelSecs = 10;
 
@@ -271,6 +270,8 @@ public class SelectMotionValuesRed extends CommandBase {
                 ActiveMotionValues.setOptionTargetPose(FieldConstantsRed.nearParkPose);
 
             else {
+                ActiveMotionValues.setClearToTurnPose(FieldConstantsRed.XMYM.clearToTurnPose);
+                ActiveMotionValues.setTurnAngle(FieldConstantsRed.turnToTagRadians);
                 ActiveMotionValues.setStopSecs(stop2PixelSecs);
                 ActiveMotionValues.setOptionTargetPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
                         .plus(FieldConstantsRed.AprilTagConstants.tagStrafeOffsetPose));
@@ -284,7 +285,7 @@ public class SelectMotionValuesRed extends CommandBase {
                 ActiveMotionValues.setTrussSDLineUpPose((FieldConstantsRed.stageDoorLineUpPose13));
             }
             if (lcr == 12) {
-                ActiveMotionValues.setStrafeDistance(strafeDistance);
+
                 ActiveMotionValues.setTrussSDLineUpPose((FieldConstantsRed.stageDoorLineUpPose2));
             }
             if (lcr == 13) {
@@ -295,10 +296,10 @@ public class SelectMotionValuesRed extends CommandBase {
             ActiveMotionValues.setOptionStopPose(FieldConstantsRed.centerOptionPose);
 
             if (!secondPixel) {
-                ActiveMotionValues.setTurnAngle(Math.toRadians(0));
+                ActiveMotionValues.setTurnAngle(0);
                 ActiveMotionValues.setOptionTargetPose(FieldConstantsRed.centerParkPose);
             } else {
-                ActiveMotionValues.setTurnAngle(Math.toRadians(90));
+                ActiveMotionValues.setTurnAngle(FieldConstantsRed.turnToTagRadians);
                 ActiveMotionValues.setStopSecs(stop2PixelSecs);
                 ActiveMotionValues.setOptionTargetPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
                         .plus(FieldConstantsRed.AprilTagConstants.tagStrafeOffsetPose));

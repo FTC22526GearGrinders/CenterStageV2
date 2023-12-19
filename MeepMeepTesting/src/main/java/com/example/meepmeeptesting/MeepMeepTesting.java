@@ -13,11 +13,11 @@ public class MeepMeepTesting {
     public static void main(String[] args) {
 
 
-        boolean redAlliance = false;
+        boolean redAlliance =false;
 
-        boolean bbstart = true;//aaset to false for start on stack side of truss
+        boolean bbstart = false;//aaset to false for start on stack side of truss
 
-        int lcr = 1;//left tape ==1, center tape = 2, right tape = 3 from robot view
+        int lcr = 2;//left tape ==1, center tape = 2, right tape = 3 from robot view
 
         if (lcr < 0 || lcr > 3) lcr = 2;
 
@@ -29,13 +29,15 @@ public class MeepMeepTesting {
 
         boolean centerPark = false;
 
-        boolean secondPixel = true;
+        boolean secondPixel =true;
 
 
         ActiveMotionValues.setRedAlliance(redAlliance);
 
         ActiveMotionValues.setBBStart(bbstart);
+
         ActiveMotionValues.setLcrpos(lcr);
+
         ActiveMotionValues.setUseStageDoor(useStageDoor);
 
         ActiveMotionValues.setSecondPixel(secondPixel);
@@ -76,9 +78,9 @@ public class MeepMeepTesting {
 
                                     .waitSeconds(1)
 
-                                   // .lineToLinearHeading(ActiveMotionValues.getRetractPose())//LR tapes only
+                                    .lineToLinearHeading(ActiveMotionValues.getRetractPose())//LR tapes only
 
-                                   // .lineToLinearHeading(ActiveMotionValues.getClearPose()) // truss side tape only
+                                   .lineToLinearHeading(ActiveMotionValues.getClearPose()) // truss side tape only
 
                                     .lineToLinearHeading(ActiveMotionValues.getTagLineupPose())
 
@@ -86,7 +88,13 @@ public class MeepMeepTesting {
 
                                     .lineToLinearHeading(ActiveMotionValues.getPreTagPose())
 
-                                    //  .lineToLinearHeading(ActiveMotionValues.getParkPose())//patk only
+                                    .waitSeconds(.1)
+
+                                    .forward(5)
+
+                                 .lineToLinearHeading(ActiveMotionValues.getPreParkPose())//park only
+
+                                  .lineToLinearHeading(ActiveMotionValues.getParkPose())//park only
 
                                     .build());
 
@@ -110,28 +118,30 @@ public class MeepMeepTesting {
                             drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
 
 //
-                                    .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
+                          //          .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
 
                                     .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
 
                                     .waitSeconds(1)
 
-                                    .lineToLinearHeading(ActiveMotionValues.getRetractPose())
-//
-                                    .lineToLinearHeading(ActiveMotionValues.getClearPose())
+                                //    .lineToLinearHeading(ActiveMotionValues.getRetractPose())
 
-                                    //.strafeRight(ActiveMotionValues.getStrafeDistance())
+                                 //   .lineToLinearHeading(ActiveMotionValues.getClearPose())
 
-//                                    .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
-//
-//                                    .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
-//
-//                                    .turn(ActiveMotionValues.getTurnAngle())
-//
-//                                    .waitSeconds(ActiveMotionValues.getStopSecs())
-////
-////
-//                                    .lineToLinearHeading(ActiveMotionValues.getOptionTargetPose())
+                                   .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
+
+                                    .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
+
+                                    .waitSeconds(ActiveMotionValues.getStopSecs())
+
+                                    .lineToLinearHeading(ActiveMotionValues.getClearToTurnPose())
+
+                                   .turn(ActiveMotionValues.getTurnAngle())
+
+
+
+
+                                   .lineToLinearHeading(ActiveMotionValues.getOptionTargetPose())
 
 
                                     .build());

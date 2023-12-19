@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Commands.Trajectories.Truss_StageDoor;
+package org.firstinspires.ftc.teamcode.Commands.Trajectories.StageDoor;
 
 import com.arcrobotics.ftclib.command.CommandBase;
 
@@ -7,12 +7,12 @@ import org.firstinspires.ftc.teamcode.Subsystems.Drive_Subsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.PixelHandlerSubsystem;
 
 
-public class BuildTrussSDLRTape extends CommandBase {
+public class BuildStageDoorLRTape extends CommandBase {
     private final Drive_Subsystem drive;
     private final PixelHandlerSubsystem phss;
 
 
-    public BuildTrussSDLRTape(Drive_Subsystem drive, PixelHandlerSubsystem phss) {
+    public BuildStageDoorLRTape(Drive_Subsystem drive, PixelHandlerSubsystem phss) {
         this.drive = drive;
         this.phss = phss;
 
@@ -21,7 +21,6 @@ public class BuildTrussSDLRTape extends CommandBase {
     @Override
     public void initialize() {
 
-        boolean stageDoor = ActiveMotionValues.getUseStageDoor();
 
         boolean trussSideTapeRed = ActiveMotionValues.getRedAlliance() &&
                 ActiveMotionValues.getLcrpos() == 3;
@@ -31,7 +30,7 @@ public class BuildTrussSDLRTape extends CommandBase {
 
         boolean trussSideTape = trussSideTapeRed || trussSideTapeBlue;
 
-        if (!stageDoor) {
+        if (ActiveMotionValues.getSecondPixel() && trussSideTape) {
 
 
             drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
@@ -54,15 +53,15 @@ public class BuildTrussSDLRTape extends CommandBase {
 
                     .waitSeconds(ActiveMotionValues.getStopSecs())
 
+                    .lineToLinearHeading(ActiveMotionValues.getClearToTurnPose())
+
+                    .turn(ActiveMotionValues.getTurnAngle())
+
                     .lineToLinearHeading(ActiveMotionValues.getOptionTargetPose())
 
                     .build();
-        }
 
-
-        if (stageDoor) {
-
-            if (trussSideTape) {
+            if (ActiveMotionValues.getSecondPixel() && !trussSideTape) {
 
                 drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
 

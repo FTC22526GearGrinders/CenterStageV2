@@ -11,6 +11,7 @@ public class JogDrive extends CommandBase {
 
     private GamepadEx gamepad;
 
+    private double startRadians;
 
     public JogDrive(Drive_Subsystem drive, GamepadEx gamepad) {
         this.drive = drive;
@@ -22,7 +23,7 @@ public class JogDrive extends CommandBase {
 
     @Override
     public void initialize() {
-
+        double gyro_radians = startRadians - drive.drive.getRawExternalHeading();
     }
 
     //    public void driveFieldCentric(double yaxis, double turn, double xaxis, double speed) {
@@ -52,7 +53,7 @@ public class JogDrive extends CommandBase {
 
             /* Adjust Joystick X/Y inputs by navX MXP yaw angle */
 
-            double gyro_radians = drive.drive.startRadians - drive.drive.getRawExternalHeading();
+            double gyro_radians = startRadians - drive.drive.getRawExternalHeading();
 
             //     new drive  = strafe * sin(heading) + drive * cos(heading)
             //    new strafe = strafe * cos(heading) - drive * sin(heading)

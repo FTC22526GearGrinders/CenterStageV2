@@ -1,9 +1,9 @@
 package org.firstinspires.ftc.teamcode.Commands.Drive;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.arcrobotics.ftclib.command.CommandBase;
 
+import org.firstinspires.ftc.teamcode.Commands.Trajectories.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
 import org.firstinspires.ftc.teamcode.Subsystems.Drive_Subsystem;
 
@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.Subsystems.Drive_Subsystem;
 public class MoveToPark extends CommandBase {
     private Drive_Subsystem drive;
 
-    private Trajectory parkTraj;
+    private TrajectorySequence parkTraj;
 
     public MoveToPark(Drive_Subsystem drive) {
         this.drive = drive;
@@ -19,19 +19,25 @@ public class MoveToPark extends CommandBase {
 
     @Override
     public void initialize() {
-        parkTraj = drive.drive.trajectoryBuilder(ActiveMotionValues.getFinalTagPose())
+
+        parkTraj = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getFinalTagPose())
+
+                .lineToLinearHeading(ActiveMotionValues.getPreParkPose())
+
+                .waitSeconds(.1)
+
                 .lineToLinearHeading(ActiveMotionValues.getParkPose())
+
                 .build();
 
+        drive.drive.setPoseEstimate(ActiveMotionValues.getFinalTagPose());
     }
 
     @Override
     public void execute() {
 
 
-        drive.drive.setPoseEstimate(ActiveMotionValues.getFinalTagPose());
-
-        drive.drive.followTrajectory(parkTraj);
+        drive.drive.followTrajectorySequence(parkTraj);
 
     }
 

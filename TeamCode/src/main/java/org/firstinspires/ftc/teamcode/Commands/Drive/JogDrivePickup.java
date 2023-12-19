@@ -10,6 +10,7 @@ public class JogDrivePickup extends CommandBase {
     private Drive_Subsystem drive;
 
     private GamepadEx gamepad;
+    private double startRadians;
 
 
     public JogDrivePickup(Drive_Subsystem drive, GamepadEx gamepad) {
@@ -22,20 +23,20 @@ public class JogDrivePickup extends CommandBase {
 
     @Override
     public void initialize() {
-
+        startRadians = drive.drive.getRawExternalHeading();
     }
 
     @Override
     public void execute() {
-        double yDivide=4;
-        double xDivide=4;
+        double yDivide = 4;
+        double xDivide = 4;
         double rDivide = 4;
 
         if (!drive.drive.fieldCentric) {
 
-            double y = this.gamepad.getLeftY()/yDivide;
-            double x = this.gamepad.getLeftX()/xDivide;
-            double rx = this.gamepad.getRightX()/rDivide;
+            double y = this.gamepad.getLeftY() / yDivide;
+            double x = this.gamepad.getLeftX() / xDivide;
+            double rx = this.gamepad.getRightX() / rDivide;
 
             drive.drive.jog(y, x, rx);
 
@@ -43,13 +44,13 @@ public class JogDrivePickup extends CommandBase {
 
         if (drive.drive.fieldCentric) {
 
-            double forward = this.gamepad.getLeftY()/yDivide; /* Invert stick Y axis */
-            double strafe = this.gamepad.getLeftX()/xDivide;
-            double rcw = this.gamepad.getRightX()/rDivide;
+            double forward = this.gamepad.getLeftY() / yDivide; /* Invert stick Y axis */
+            double strafe = this.gamepad.getLeftX() / xDivide;
+            double rcw = this.gamepad.getRightX() / rDivide;
 
             /* Adjust Joystick X/Y inputs by navX MXP yaw angle */
 
-            double gyro_radians = drive.drive.startRadians - drive.drive.getRawExternalHeading();
+            double gyro_radians = startRadians - drive.drive.getRawExternalHeading();
 
             //     new drive  = strafe * sin(heading) + drive * cos(heading)
             //    new strafe = strafe * cos(heading) - drive * sin(heading)

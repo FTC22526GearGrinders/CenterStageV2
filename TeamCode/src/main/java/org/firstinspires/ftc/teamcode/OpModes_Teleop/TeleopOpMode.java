@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.OpModes_Teleop;
 
+import com.acmerobotics.roadrunner.drive.MecanumDrive;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.InstantCommand;
@@ -38,7 +39,6 @@ public class TeleopOpMode extends CommandOpMode {
     GamepadEx coDriver;
     private DroneCatapultSubsystem dcatss;
 
-
     int ctr;
 
     private int teleSwitch;
@@ -73,7 +73,6 @@ public class TeleopOpMode extends CommandOpMode {
         drive.setDefaultCommand(new JogDrive(this.drive, driver));
 
         climber.setDefaultCommand(new PositionHoldClimber(climber));
-
 
 /**
  * Driver gamepad assignmnents
@@ -209,11 +208,8 @@ public class TeleopOpMode extends CommandOpMode {
         coDriver.getGamepadButton(GamepadKeys.Button.START).whenPressed(
                 new InstantCommand(() -> drive.drive.toggleFieldCentric()));
 
-        coDriver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenPressed(
-                new SequentialCommandGroup(
-                        new InstantCommand(() -> dcatss.fireCatapultMotor()),
-                        new WaitCommand(Constants.CatapultConstants.MOTOR_RUN_MILLISECONDS),
-                        new InstantCommand(() -> dcatss.stopMotor())));
+        //coDriver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenPressed(
+
 
 
         // coDriver.getGamepadButton(GamepadKeys.Button.LEFT_STICK_BUTTON)

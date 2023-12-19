@@ -64,35 +64,32 @@ public class LookForTeamProp extends CommandBase {
 
         myOpMode.telemetry.clearAll();
 
-
     }
 
 
     @Override
     public void execute() {
 
-        if (!vss.getCameraOpened()) endTimer.reset();
 
         fps = vss.getWebcam().getFps();
 
 
+        currentLCR = vss.sptop.getLCR();
 
-        if (fps > 1) {
-            currentLCR = vss.sptop.getLCR();
-
-            if (lastlcr != 0 && currentLCR == lastlcr) {
-                lcrCheckCount++;
-            }
-
-            if (currentLCR != 0 && lastlcr == 0) {
-                lastlcr = currentLCR;
-            }
-            
-            if (currentLCR != lastlcr) {
-                lcrCheckCount = 0;
-                lastlcr = currentLCR;
-            }
+        if (lastlcr != 0 && currentLCR == lastlcr) {
+            lcrCheckCount++;
         }
+
+        if (currentLCR != 0 && lastlcr == 0) {
+            lastlcr = currentLCR;
+        }
+
+        if (currentLCR != lastlcr) {
+            lcrCheckCount = 0;
+            lastlcr = currentLCR;
+        }
+
+
         myOpMode.telemetry.addData("LCR ", currentLCR);
         myOpMode.telemetry.addData("LCRChkCnt ", lcrCheckCount);
         myOpMode.telemetry.addData("LookForProp Secs", endTimer.seconds());
