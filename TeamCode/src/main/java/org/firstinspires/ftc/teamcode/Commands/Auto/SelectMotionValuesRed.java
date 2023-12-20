@@ -7,6 +7,7 @@ import com.arcrobotics.ftclib.command.CommandOpMode;
 
 import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
 import org.firstinspires.ftc.teamcode.Constants;
+import org.firstinspires.ftc.teamcode.FieldConstantsBlue;
 import org.firstinspires.ftc.teamcode.FieldConstantsRed;
 
 public class SelectMotionValuesRed extends CommandBase {
@@ -246,13 +247,15 @@ public class SelectMotionValuesRed extends CommandBase {
 
             ActiveMotionValues.setTrussSDLineUpPose(FieldConstantsRed.nearTrussLineUpPose);
 
-            ActiveMotionValues.setOptionStopPose(FieldConstantsRed.nearOptionPose);
 
-            if (!secondPixel)
+            if (!secondPixel) {
 
                 ActiveMotionValues.setParkPose(FieldConstantsRed.nearParkPose);
 
-            else {
+            } else {
+                ActiveMotionValues.setWaitPartnerClearPose(FieldConstantsRed.nearPartnerClearPose);
+
+                ActiveMotionValues.setOptionStopPose(FieldConstantsRed.nearOptionPose);
                 ActiveMotionValues.setClearToTurnPose(FieldConstantsRed.XMYM.clearToTurnPose);
                 ActiveMotionValues.setTurnAngle(FieldConstantsRed.turnToTagRadians);
                 ActiveMotionValues.setStopSecs(stop2PixelSecs);
@@ -268,15 +271,18 @@ public class SelectMotionValuesRed extends CommandBase {
                 ActiveMotionValues.setTrussSDLineUpPose((FieldConstantsRed.stageDoorLineUpPose13));
             }
             if (lcr == 12) {
-
+                ActiveMotionValues.setClearPose(FieldConstantsRed.XMYM.centerSDClearPixePose);
                 ActiveMotionValues.setTrussSDLineUpPose((FieldConstantsRed.stageDoorLineUpPose2));
             }
 
-            ActiveMotionValues.setOptionStopPose(FieldConstantsRed.centerOptionPose);
 
             if (!secondPixel) {
+                ActiveMotionValues.setOptionStopPose(FieldConstantsRed.centerParkOptionPose);
                 ActiveMotionValues.setParkPose(FieldConstantsRed.centerParkPose);
             } else {
+                ActiveMotionValues.setWaitPartnerClearPose(FieldConstantsRed.centerPartnerClearPose);
+                ActiveMotionValues.setOptionStopPose(FieldConstantsRed.centerOptionPose);
+
                 ActiveMotionValues.setTurnAngle(FieldConstantsRed.turnToTagRadians);
                 ActiveMotionValues.setStopSecs(stop2PixelSecs);
                 ActiveMotionValues.setTargetPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())

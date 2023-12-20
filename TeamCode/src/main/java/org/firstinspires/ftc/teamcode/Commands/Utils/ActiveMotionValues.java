@@ -6,6 +6,18 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 
 public class ActiveMotionValues {
 
+    public static Pose2d getWaitPartnerClearPose() {
+        return waitPartnerClearPose;
+    }
+
+    public static void setWaitPartnerClearPose(Pose2d clearPose) {
+        waitPartnerClearPose = clearPose;
+    }
+
+    private static Pose2d waitPartnerClearPose = new Pose2d();
+
+
+
     public static double getActiveTagDistance() {
         return activeTagDistance;
     }

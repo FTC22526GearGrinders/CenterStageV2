@@ -25,9 +25,9 @@ public class SelectAndBuildTrajectory extends CommandBase {
     boolean bbstart = false;
     boolean useSD = false;
 
-    boolean found = false;
+    boolean useTruss = false;
 
-    boolean secondPixel = false;
+    boolean found = false;
     int lcr = 0;
 
     boolean logTrajectory = false;
@@ -43,7 +43,9 @@ public class SelectAndBuildTrajectory extends CommandBase {
     public void initialize() {
         bbstart = ActiveMotionValues.getBBStart();
         useSD = ActiveMotionValues.getUseStageDoor();
+        useTruss = !useSD;
         lcr = ActiveMotionValues.getLcrpos();
+        if (!bbstart) lcr += 10;
         drive.trajectoryBuilding = false;
         runTime = new ElapsedTime();
         opmode.telemetry.addData("SABTinit", "");
@@ -52,9 +54,9 @@ public class SelectAndBuildTrajectory extends CommandBase {
 
     @Override
     public void execute() {
-
         found = false;
-        if (bbstart && lcr == 2) {
+
+        if (lcr == 2) {
             drive.runningTrajName = "BB Center";
             new BuildBBCenterTraj(drive, phss, opmode).schedule();
             drive.trajectoryBuilding = true;
@@ -62,7 +64,7 @@ public class SelectAndBuildTrajectory extends CommandBase {
         }
 
 
-        if (bbstart && (lcr == 1 || lcr == 3)) {
+        if (lcr == 1 || lcr == 3) {
             drive.runningTrajName = "BB LR";
             new BuildBBLRTraj(drive, phss, opmode).schedule();
             drive.trajectoryBuilding = true;
@@ -70,29 +72,29 @@ public class SelectAndBuildTrajectory extends CommandBase {
         }
 
 
-        if (!bbstart && useSD && (lcr == 1 || lcr == 3)) {
-            drive.runningTrajName = "Not BB Center";
+        if (useSD && (lcr == 11 || lcr == 13)) {
+            drive.runningTrajName = "SD LR";
             new BuildStageDoorLRTape(drive, phss).schedule();
             drive.trajectoryBuilding = true;
             found = true;
         }
 
-        if (!bbstart && useSD && lcr == 2) {
-            drive.runningTrajName = "Not BB LR";
+        if (useSD && lcr == 12) {
+            drive.runningTrajName = "SD Center";
             new BuildStageDoorCenterTape(drive, phss).schedule();
             drive.trajectoryBuilding = true;
             found = true;
         }
 
-        if (!bbstart && !useSD && (lcr == 1 || lcr == 3)) {
-            drive.runningTrajName = "Not BB Center";
+        if (useTruss && (lcr == 11 || lcr == 13)) {
+            drive.runningTrajName = "Truss Center";
             new BuildTrussLRTape(drive, phss).schedule();
             drive.trajectoryBuilding = true;
             found = true;
         }
 
-        if (!bbstart && !useSD && lcr == 2) {
-            drive.runningTrajName = "Not BB LR";
+        if (useTruss && lcr == 12) {
+            drive.runningTrajName = "Truss LR";
             new BuildTrussCenterTape(drive, phss).schedule();
             drive.trajectoryBuilding = true;
             found = true;

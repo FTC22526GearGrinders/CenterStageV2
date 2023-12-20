@@ -13,11 +13,11 @@ public class MeepMeepTesting {
     public static void main(String[] args) {
 
 
-        boolean redAlliance =false;
+        boolean redAlliance = false;
 
         boolean bbstart = false;//aaset to false for start on stack side of truss
 
-        int lcr = 2;//left tape ==1, center tape = 2, right tape = 3 from robot view
+        int lcr = 3;//left tape ==1, center tape = 2, right tape = 3 from robot view
 
         if (lcr < 0 || lcr > 3) lcr = 2;
 
@@ -29,7 +29,7 @@ public class MeepMeepTesting {
 
         boolean centerPark = false;
 
-        boolean secondPixel =true;
+        boolean secondPixel = true;
 
 
         ActiveMotionValues.setRedAlliance(redAlliance);
@@ -80,7 +80,7 @@ public class MeepMeepTesting {
 
                                     .lineToLinearHeading(ActiveMotionValues.getRetractPose())//LR tapes only
 
-                                   .lineToLinearHeading(ActiveMotionValues.getClearPose()) // truss side tape only
+                                    .lineToLinearHeading(ActiveMotionValues.getClearPose()) // truss side tape only
 
                                     .lineToLinearHeading(ActiveMotionValues.getTagLineupPose())
 
@@ -92,9 +92,9 @@ public class MeepMeepTesting {
 
                                     .forward(5)
 
-                                 .lineToLinearHeading(ActiveMotionValues.getPreParkPose())//park only
+                                    .lineToLinearHeading(ActiveMotionValues.getPreParkPose())//park only
 
-                                  .lineToLinearHeading(ActiveMotionValues.getParkPose())//park only
+                                    .lineToLinearHeading(ActiveMotionValues.getParkPose())//park only
 
                                     .build());
 
@@ -118,31 +118,32 @@ public class MeepMeepTesting {
                             drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
 
 //
-                          //          .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
+                                    .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
 
                                     .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
 
                                     .waitSeconds(1)
 
-                                //    .lineToLinearHeading(ActiveMotionValues.getRetractPose())
+                                    .lineToLinearHeading(ActiveMotionValues.getRetractPose())
 
-                                 //   .lineToLinearHeading(ActiveMotionValues.getClearPose())
+                                    .lineToLinearHeading(ActiveMotionValues.getClearPose())
 
-                                   .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
+                                    .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
 
-                                    .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
-
+                                    .lineToLinearHeading(ActiveMotionValues.getWaitPartnerClearPose())
+//
                                     .waitSeconds(ActiveMotionValues.getStopSecs())
-
+//
+                                    .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
+//
                                     .lineToLinearHeading(ActiveMotionValues.getClearToTurnPose())
+//
+                                    .turn(ActiveMotionValues.getTurnAngle())
 
-                                   .turn(ActiveMotionValues.getTurnAngle())
+                                   .lineToLinearHeading(ActiveMotionValues.getTargetPose())
 
-
-
-
-                                   .lineToLinearHeading(ActiveMotionValues.getOptionTargetPose())
-
+                                    //   .waitSeconds(.1)
+                                    //   .lineToLinearHeading(ActiveMotionValues.getParkPose())
 
                                     .build());
 

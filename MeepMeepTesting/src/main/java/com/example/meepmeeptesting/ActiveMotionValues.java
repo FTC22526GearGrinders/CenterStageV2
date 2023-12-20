@@ -4,6 +4,17 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 
 public class ActiveMotionValues {
 
+    public static Pose2d getWaitPartnerClearPose() {
+        return waitPartnerClearPose;
+    }
+
+    public static void setWaitPartnerClearPose(Pose2d clearPose) {
+        waitPartnerClearPose = clearPose;
+    }
+
+    private static Pose2d waitPartnerClearPose = new Pose2d();
+
+
     public static double getTurnAngle() {
         return turnAngle;
     }
@@ -12,7 +23,7 @@ public class ActiveMotionValues {
         turnAngle = angle;
     }
 
-    public static double turnAngle;
+    private static double turnAngle;
 
     public static double getStopSecs() {
         return stopSecs;
@@ -278,14 +289,14 @@ public class ActiveMotionValues {
         return useStageDoor;
     }
 
-    private static Pose2d optionTargetPose = new Pose2d();
+    private static Pose2d targetPose = new Pose2d();
 
-    public static void setOptionTargetPose(Pose2d opt) {
-        optionTargetPose = opt;
+    public static void setTargetPose(Pose2d opt) {
+        targetPose = opt;
     }
 
-    public static Pose2d getOptionTargetPose() {
-        return optionTargetPose;
+    public static Pose2d getTargetPose() {
+        return targetPose;
     }
 
     private static Pose2d endAutoPose = new Pose2d();

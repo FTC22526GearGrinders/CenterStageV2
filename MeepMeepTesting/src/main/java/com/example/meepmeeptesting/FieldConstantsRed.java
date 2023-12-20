@@ -18,11 +18,19 @@ public final class FieldConstantsRed {
     public static Pose2d nearParkPose = new Pose2d(60, -60, startAngle);
     public static Pose2d centerParkPose = new Pose2d(60, -12, startAngle);
 
+    public static Pose2d nearParkOptionPose = new Pose2d(36, -60, startAngle);
 
+    public static Pose2d centerParkOptionPose = new Pose2d(36, -12, startAngle);
 
     public static Pose2d nearOptionPose = new Pose2d(36, -60, startAngle);
 
+
+
     public static Pose2d centerOptionPose = new Pose2d(36, -12, startAngle);
+
+    public static Pose2d nearPartnerClearPose = new Pose2d(12, -60, startAngle);
+
+    public static Pose2d centerPartnerClearPose = new Pose2d(12, -12, startAngle);
 
     public static Pose2d stageDoorLineUpPose13 = new Pose2d(-36, -12, startAngle);
 
@@ -94,6 +102,7 @@ public final class FieldConstantsRed {
         }
     }
 
+
     public static final class XPYM {
         //left and right are from the view of the robot
 
@@ -164,9 +173,9 @@ public final class FieldConstantsRed {
         public static final Pose2d rightRetractPose = rightDropPose.plus(retPose);
         public static final Pose2d clearPose = advancePose.plus(retPose);
 
-        public static final Pose2d centerSDClearPixelPose = new Pose2d(leftTapeMid.getX(),centerRetractPose.getY(), startAngle);
+        public static final Pose2d centerSDClearPixelPose = new Pose2d(leftTapeMid.getX(), centerRetractPose.getY(), startAngle);
 
-        public static final Pose2d clearToTurnPose = new Pose2d(36, -50, startAngle);
+        public static final Pose2d clearToTurnPose = new Pose2d(36, -55, startAngle);
 
 
     }

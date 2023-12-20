@@ -45,6 +45,8 @@ public class BuildStageDoorCenterTape extends CommandBase {
 
                     .waitSeconds(1)
 
+                    .lineToLinearHeading(ActiveMotionValues.getClearPose())
+
                     .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
 
                     .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
@@ -67,6 +69,8 @@ public class BuildStageDoorCenterTape extends CommandBase {
                     .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
 
                     .waitSeconds(1)
+
+                    .lineToLinearHeading(ActiveMotionValues.getClearPose())
 
                     .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
 

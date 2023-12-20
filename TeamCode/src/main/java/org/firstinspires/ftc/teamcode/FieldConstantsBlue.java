@@ -37,6 +37,8 @@ public final class FieldConstantsBlue {
     public static Pose2d centerParkPoseBB = new Pose2d(59, 12,0);
 
 
+    public static Pose2d nearPartnerClearPose = new Pose2d(24, 60, startAngle);
+
     public static Pose2d nearTrussLineUpPose = new Pose2d(-36, 60, startAngle);
 
     public static double addedYdist = 2;

@@ -189,6 +189,8 @@ public class SelectMotionValuesRed {
 
                 ActiveMotionValues.setRetractPose(FieldConstantsRed.XMYM.centerRetractPose);
 
+                ActiveMotionValues.setClearPose(FieldConstantsRed.XMYM.leftRetractPose);
+
 
                 ActiveMotionValues.setActTag(5);
 
@@ -227,64 +229,62 @@ public class SelectMotionValuesRed {
     private void setOptions() {
 
         int lcr = ActiveMotionValues.getLcrpos() + 10;
-        boolean centerTape = lcr == 12;
         boolean useStageDoor = ActiveMotionValues.getUseStageDoor();
         boolean secondPixel = ActiveMotionValues.getSecondPixel();
+        ActiveMotionValues.setParkPose(new Pose2d());
 
         boolean useTruss = !useStageDoor;
 
-        double stopTimeSecs = 10;
+        double stop2PixelSecs = 2;
 
         if (useTruss) {
 
-
             ActiveMotionValues.setTrussSDLineUpPose(FieldConstantsRed.nearTrussLineUpPose);
 
-            ActiveMotionValues.setOptionStopPose(FieldConstantsRed.nearOptionPose);
 
             if (!secondPixel) {
-                ActiveMotionValues.setOptionTargetPose(FieldConstantsRed.nearParkPose);
+
+                ActiveMotionValues.setParkPose(FieldConstantsRed.nearParkPose);
 
             } else {
+                ActiveMotionValues.setWaitPartnerClearPose(FieldConstantsRed.nearPartnerClearPose);
+
+                ActiveMotionValues.setOptionStopPose(FieldConstantsRed.nearOptionPose);
                 ActiveMotionValues.setClearToTurnPose(FieldConstantsRed.XMYM.clearToTurnPose);
                 ActiveMotionValues.setTurnAngle(FieldConstantsRed.turnToTagRadians);
-                ActiveMotionValues.setStopSecs(stopTimeSecs);
-                ActiveMotionValues.setOptionTargetPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
+                ActiveMotionValues.setStopSecs(stop2PixelSecs);
+                ActiveMotionValues.setTargetPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
                         .plus(FieldConstantsRed.AprilTagConstants.tagStrafeOffsetPose));
             }
         }
 
         if (useStageDoor) {
 
-            if (lcr == 11) {
+            if (lcr == 11 || lcr == 13) {
 
                 ActiveMotionValues.setTrussSDLineUpPose((FieldConstantsRed.stageDoorLineUpPose13));
             }
             if (lcr == 12) {
                 ActiveMotionValues.setClearPose(FieldConstantsRed.XMYM.centerSDClearPixelPose);
-
                 ActiveMotionValues.setTrussSDLineUpPose((FieldConstantsRed.stageDoorLineUpPose2));
             }
-            if (lcr == 13) {
 
-                ActiveMotionValues.setTrussSDLineUpPose((FieldConstantsRed.stageDoorLineUpPose13));
-            }
-
-            ActiveMotionValues.setOptionStopPose(FieldConstantsRed.centerOptionPose);
 
             if (!secondPixel) {
-                {
-                    ActiveMotionValues.setTurnAngle(Math.toRadians(0));
-                    ActiveMotionValues.setOptionTargetPose(FieldConstantsRed.centerParkPose);
-
-                }
-
+                ActiveMotionValues.setOptionStopPose(FieldConstantsRed.centerParkOptionPose);
+                ActiveMotionValues.setParkPose(FieldConstantsRed.centerParkPose);
             } else {
-                ActiveMotionValues.setStopSecs(stopTimeSecs);
+                ActiveMotionValues.setWaitPartnerClearPose(FieldConstantsRed.centerPartnerClearPose);
+                ActiveMotionValues.setOptionStopPose(FieldConstantsRed.centerOptionPose);
+
                 ActiveMotionValues.setTurnAngle(FieldConstantsRed.turnToTagRadians);
-                ActiveMotionValues.setOptionTargetPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
+                ActiveMotionValues.setStopSecs(stop2PixelSecs);
+                ActiveMotionValues.setTargetPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
                         .plus(FieldConstantsRed.AprilTagConstants.tagStrafeOffsetPose));
             }
         }
     }
+
+
 }
+
