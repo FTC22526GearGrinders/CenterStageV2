@@ -5,14 +5,12 @@ import com.arcrobotics.ftclib.command.CommandBase;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.ConditionalCommand;
 import com.arcrobotics.ftclib.command.InstantCommand;
-import com.arcrobotics.ftclib.command.ParallelRaceGroup;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 
 import org.firstinspires.ftc.teamcode.Commands.Arm.PositionArm;
 import org.firstinspires.ftc.teamcode.Commands.Drive.MoveToPark;
 import org.firstinspires.ftc.teamcode.Commands.Drive.PositionToBackboardUsingTags;
 import org.firstinspires.ftc.teamcode.Commands.Drive.TrajectoryToBackboardSimple;
-import org.firstinspires.ftc.teamcode.Commands.Trajectories.LogTrajectory;
 import org.firstinspires.ftc.teamcode.Commands.Trajectories.RunTrajSequence;
 import org.firstinspires.ftc.teamcode.Commands.Trajectories.SelectAndBuildTrajectory;
 import org.firstinspires.ftc.teamcode.Commands.Trajectories.ShowTrajectoryInfo;
@@ -67,9 +65,7 @@ public class AutoFactory extends CommandBase {
         return new SequentialCommandGroup(
                 new SelectAndBuildTrajectory(opMode, drive, phss),
                 new ShowTrajectoryInfo(drive, opMode),
-                new ParallelRaceGroup(
-                        new RunTrajSequence(drive, opMode),
-                        new LogTrajectory(drive, opMode)));
+                new RunTrajSequence(drive, opMode));
     }
 
     public Command detectAprilTag() {
@@ -107,9 +103,9 @@ public class AutoFactory extends CommandBase {
 
     }
 
-    public Command trajToBackboard(){
+    public Command trajToBackboard() {
 
-        return  new TrajectoryToBackboardSimple(drive, opMode);
+        return new TrajectoryToBackboardSimple(drive, opMode);
     }
 
     public Command positionArmHome() {
