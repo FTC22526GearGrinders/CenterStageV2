@@ -183,13 +183,14 @@ public class TestMotionData extends CommandOpMode {
         telemetry.addData("RetractPose", ActiveMotionValues.getRetractPose().toString());
         telemetry.addData("ClearPose", ActiveMotionValues.getClearPose().toString());
 
-
         telemetry.addLine();
+
         if (ActiveMotionValues.getBBStart()) {
 
             telemetry.addData("TagLineupPose", ActiveMotionValues.getTagLineupPose().toString());
             telemetry.addData("Turn Angle", Math.toDegrees(ActiveMotionValues.getTurnAngle()));
             telemetry.addData("PreTagPose", ActiveMotionValues.getPreTagPose().toString());
+            telemetry.addData("ClearToTurnPose", ActiveMotionValues.getClearToTurnPose().toString());
 
             if (ActiveMotionValues.getCenterPark() || ActiveMotionValues.getNearPark()) {
                 telemetry.addData("ParkPose", ActiveMotionValues.getParkPose());
@@ -208,7 +209,7 @@ public class TestMotionData extends CommandOpMode {
                         FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
                                 .plus(FieldConstantsRed.AprilTagConstants.tagStrafeOffsetPose));
 
-            telemetry.addData("OptTgtPose", ActiveMotionValues.getOptionTargetPose().toString());
+            telemetry.addData("OptTgtPose", ActiveMotionValues.getTargetPose().toString());
 
             telemetry.addData("Atag", ActiveMotionValues.getActTag());
             telemetry.addLine();

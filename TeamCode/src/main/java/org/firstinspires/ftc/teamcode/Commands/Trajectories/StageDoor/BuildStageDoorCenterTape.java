@@ -20,39 +20,45 @@ public class BuildStageDoorCenterTape extends CommandBase {
 
     @Override
     public void initialize() {
+    }
 
-        /**
-         * Use th 5 step center for stage door selection
-         * <p>
-         * It has the pixel delivery after the first step
-         */
+    /**
+     * Use th 5 step center for stage door selection
+     * <p>
+     * It has the pixel delivery after the first step
+     */
+    @Override
+    public void execute() {
 
-            if(ActiveMotionValues.getSecondPixel()) {
 
-                drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
+        boolean secondPixel = ActiveMotionValues.getSecondPixel();
+        boolean park = !secondPixel;
 
-                        .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
 
-                        .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
+        if (secondPixel) {
 
-                        .waitSeconds(1)
+            drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
 
-                        .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
+                    .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
 
-                        .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
+                    .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
 
-                        .turn(ActiveMotionValues.getTurnAngle())
+                    .waitSeconds(1)
 
-                        .waitSeconds(ActiveMotionValues.getStopSecs())
+                    .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
 
-                        .lineToLinearHeading(ActiveMotionValues.getOptionTargetPose())
+                    .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
 
-                        .build();
-            }
+                    .waitSeconds(ActiveMotionValues.getStopSecs())
 
-        else
-        //park
-        {
+                    .turn(ActiveMotionValues.getTurnAngle())
+
+                    .lineToLinearHeading(ActiveMotionValues.getTargetPose())
+
+                    .build();
+        }
+
+        if (park) {
 
             drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
 
@@ -68,7 +74,7 @@ public class BuildStageDoorCenterTape extends CommandBase {
 
                     .waitSeconds(.1)
 
-                    .lineToLinearHeading(ActiveMotionValues.getOptionTargetPose())
+                    .lineToLinearHeading(ActiveMotionValues.getParkPose())
 
                     .build();
         }
@@ -76,11 +82,6 @@ public class BuildStageDoorCenterTape extends CommandBase {
         drive.trajName = "TSDCenter";
 
         drive.trajectoryBuilt = drive.currentTrajSeq != null;
-    }
-
-    @Override
-    public void execute() {
-
     }
 
     @Override

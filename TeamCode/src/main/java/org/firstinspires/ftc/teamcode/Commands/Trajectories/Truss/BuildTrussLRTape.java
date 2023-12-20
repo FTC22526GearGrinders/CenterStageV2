@@ -20,16 +20,29 @@ public class BuildTrussLRTape extends CommandBase {
 
     @Override
     public void initialize() {
-
-        /**
-         * Use th 5 step center for stage door selection
-         * <p>
-         * It has the pixel delivery after the first step
-         */
+    }
 
 
+    @Override
+    public void execute() {
 
-            if(ActiveMotionValues.getSecondPixel()) {
+
+        boolean trussSideTapeRed = ActiveMotionValues.getRedAlliance() &&
+                ActiveMotionValues.getLcrpos() == 3;
+
+        boolean trussSideTapeBlue = !ActiveMotionValues.getRedAlliance() &&
+                ActiveMotionValues.getLcrpos() == 1;
+
+        boolean trussSideTape = trussSideTapeRed || trussSideTapeBlue;
+
+        boolean secondPixel = ActiveMotionValues.getSecondPixel();
+
+        boolean park = !secondPixel;
+
+
+        if (secondPixel) {
+
+            if (trussSideTape) {
 
                 drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
 
@@ -55,49 +68,102 @@ public class BuildTrussLRTape extends CommandBase {
 
                         .turn(ActiveMotionValues.getTurnAngle())
 
-                        .lineToLinearHeading(ActiveMotionValues.getOptionTargetPose())
+                        .lineToLinearHeading(ActiveMotionValues.getTargetPose())
 
                         .build();
             }
 
+            if (!trussSideTape) {
 
+                drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
 
-        else{
-//park near
-            drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
+                        .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
 
-                    .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
+                        .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
 
-                    .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
+                        .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
 
-                    .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
+                        .waitSeconds(1)
 
-                    .waitSeconds(1)
+                        .lineToLinearHeading(ActiveMotionValues.getRetractPose())
 
-                    .lineToLinearHeading(ActiveMotionValues.getRetractPose())
+                        .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
 
-                    .lineToLinearHeading((ActiveMotionValues.getClearPose()))
+                        .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
 
-                    .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
+                        .waitSeconds(ActiveMotionValues.getStopSecs())
 
-                    .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
+                        .lineToLinearHeading(ActiveMotionValues.getClearToTurnPose())
 
-                    .waitSeconds(.1)
+                        .turn(ActiveMotionValues.getTurnAngle())
 
-                    .lineToLinearHeading(ActiveMotionValues.getOptionTargetPose())
+                        .lineToLinearHeading(ActiveMotionValues.getTargetPose())
 
-                    .build();
+                        .build();
+            }
         }
+
+        if (park) {
+
+            if (trussSideTape) {
+
+                drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
+
+                        .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
+
+                        .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
+
+                        .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
+
+                        .waitSeconds(1)
+
+                        .lineToLinearHeading(ActiveMotionValues.getRetractPose())
+
+                        .lineToLinearHeading((ActiveMotionValues.getClearPose()))
+
+                        .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
+
+                        .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
+
+                        .waitSeconds(.1)
+
+                        .lineToLinearHeading(ActiveMotionValues.getParkPose())
+
+                        .build();
+            }
+
+            if (!trussSideTape) {
+
+                drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
+
+                        .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
+
+                        .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
+
+                        .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
+
+                        .waitSeconds(1)
+
+                        .lineToLinearHeading(ActiveMotionValues.getRetractPose())
+
+                        .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
+
+                        .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
+
+                        .waitSeconds(.1)
+
+                        .lineToLinearHeading(ActiveMotionValues.getParkPose())
+
+                        .build();
+            }
+        }
+
 
         drive.trajName = "TSDCenter";
 
         drive.trajectoryBuilt = drive.currentTrajSeq != null;
     }
 
-    @Override
-    public void execute() {
-
-    }
 
     @Override
     public void end(boolean interrupted) {

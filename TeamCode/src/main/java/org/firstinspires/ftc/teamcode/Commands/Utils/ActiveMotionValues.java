@@ -117,16 +117,6 @@ public class ActiveMotionValues {
         return preTagPose;
     }
 
-    public static double getStrafeDistance() {
-        return strafeDistance;
-    }
-
-    public static void setStrafeDistance(double dist) {
-        strafeDistance = dist;
-    }
-
-    private static double strafeDistance = 0;
-
     public static void setPreTagPose(Pose2d pose) {
         preTagPose = pose;
     }
@@ -283,14 +273,14 @@ public class ActiveMotionValues {
         return useStageDoor;
     }
 
-    private static Pose2d optionTargetPose = new Pose2d();
+    private static Pose2d targetPose = new Pose2d();
 
-    public static void setOptionTargetPose(Pose2d opt) {
-        optionTargetPose = opt;
+    public static void setTargetPose(Pose2d target) {
+        targetPose = target;
     }
 
-    public static Pose2d getOptionTargetPose() {
-        return optionTargetPose;
+    public static Pose2d getTargetPose() {
+        return targetPose;
     }
 
     private static Pose2d endAutoPose = new Pose2d();
