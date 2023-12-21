@@ -42,120 +42,64 @@ public class BuildTrussLRTape extends CommandBase {
 
         if (secondPixel) {
 
-            if (trussSideTape) {
+            drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
 
-                drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
+                    .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
 
-                        .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
+                    .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
 
-                        .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
+                    .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
 
-                        .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
+                    .waitSeconds(1)
 
-                        .waitSeconds(1)
+                    .lineToLinearHeading(ActiveMotionValues.getRetractPose())
 
-                        .lineToLinearHeading(ActiveMotionValues.getRetractPose())
+                    .lineToLinearHeading((ActiveMotionValues.getClearPose()))
 
-                        .lineToLinearHeading((ActiveMotionValues.getClearPose()))
+                    .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
 
-                        .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
+                    .lineToLinearHeading(ActiveMotionValues.getWaitPartnerClearPose())
 
-                        .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
+                    .waitSeconds(ActiveMotionValues.getStopSecs())
 
-                        .waitSeconds(ActiveMotionValues.getStopSecs())
+                    .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
 
-                        .lineToLinearHeading(ActiveMotionValues.getClearToTurnPose())
+                    .lineToLinearHeading(ActiveMotionValues.getClearToTurnPose())
 
-                        .turn(ActiveMotionValues.getTurnAngle())
+                    .turn(ActiveMotionValues.getTurnAngle())
 
-                        .lineToLinearHeading(ActiveMotionValues.getTargetPose())
+                    .lineToLinearHeading(ActiveMotionValues.getTargetPose())
 
-                        .build();
-            }
-
-            if (!trussSideTape) {
-
-                drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
-
-                        .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
-
-                        .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
-
-                        .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
-
-                        .waitSeconds(1)
-
-                        .lineToLinearHeading(ActiveMotionValues.getRetractPose())
-
-                        .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
-
-                        .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
-
-                        .waitSeconds(ActiveMotionValues.getStopSecs())
-
-                        .lineToLinearHeading(ActiveMotionValues.getClearToTurnPose())
-
-                        .turn(ActiveMotionValues.getTurnAngle())
-
-                        .lineToLinearHeading(ActiveMotionValues.getTargetPose())
-
-                        .build();
-            }
+                    .build();
         }
+
 
         if (park) {
 
-            if (trussSideTape) {
 
-                drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
+            drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
 
-                        .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
+                    .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
 
-                        .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
+                    .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
 
-                        .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
+                    .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
 
-                        .waitSeconds(1)
+                    .waitSeconds(1)
 
-                        .lineToLinearHeading(ActiveMotionValues.getRetractPose())
+                    .lineToLinearHeading(ActiveMotionValues.getRetractPose())
 
-                        .lineToLinearHeading((ActiveMotionValues.getClearPose()))
+                    .lineToLinearHeading((ActiveMotionValues.getClearPose()))
 
-                        .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
+                    .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
 
-                        .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
+                    .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
 
-                        .waitSeconds(.1)
+                    .waitSeconds(.1)
 
-                        .lineToLinearHeading(ActiveMotionValues.getParkPose())
+                    .lineToLinearHeading(ActiveMotionValues.getParkPose())
 
-                        .build();
-            }
-
-            if (!trussSideTape) {
-
-                drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
-
-                        .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
-
-                        .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
-
-                        .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
-
-                        .waitSeconds(1)
-
-                        .lineToLinearHeading(ActiveMotionValues.getRetractPose())
-
-                        .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
-
-                        .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
-
-                        .waitSeconds(.1)
-
-                        .lineToLinearHeading(ActiveMotionValues.getParkPose())
-
-                        .build();
-            }
+                    .build();
         }
 
 

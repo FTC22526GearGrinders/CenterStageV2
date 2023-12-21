@@ -246,19 +246,18 @@ public class SelectMotionValuesRed extends CommandBase {
         if (useTruss) {
 
             ActiveMotionValues.setTrussSDLineUpPose(FieldConstantsRed.nearTrussLineUpPose);
-
+            ActiveMotionValues.setOptionStopPose(FieldConstantsRed.nearOptionPose);
 
             if (!secondPixel) {
-
+                ActiveMotionValues.setOptionStopPose(FieldConstantsRed.centerParkOptionPose);
                 ActiveMotionValues.setParkPose(FieldConstantsRed.nearParkPose);
 
             } else {
                 ActiveMotionValues.setWaitPartnerClearPose(FieldConstantsRed.nearPartnerClearPose);
-
+                ActiveMotionValues.setStopSecs(stop2PixelSecs);
                 ActiveMotionValues.setOptionStopPose(FieldConstantsRed.nearOptionPose);
                 ActiveMotionValues.setClearToTurnPose(FieldConstantsRed.XMYM.clearToTurnPose);
                 ActiveMotionValues.setTurnAngle(FieldConstantsRed.turnToTagRadians);
-                ActiveMotionValues.setStopSecs(stop2PixelSecs);
                 ActiveMotionValues.setTargetPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
                         .plus(FieldConstantsRed.AprilTagConstants.tagStrafeOffsetPose));
             }
@@ -267,29 +266,25 @@ public class SelectMotionValuesRed extends CommandBase {
         if (useStageDoor) {
 
             if (lcr == 11 || lcr == 13) {
-
                 ActiveMotionValues.setTrussSDLineUpPose((FieldConstantsRed.stageDoorLineUpPose13));
             }
             if (lcr == 12) {
-                ActiveMotionValues.setClearPose(FieldConstantsRed.XMYM.centerSDClearPixePose);
+                ActiveMotionValues.setClearPose(FieldConstantsRed.XMYM.centerSDClearPixelPose);
                 ActiveMotionValues.setTrussSDLineUpPose((FieldConstantsRed.stageDoorLineUpPose2));
             }
-
 
             if (!secondPixel) {
                 ActiveMotionValues.setOptionStopPose(FieldConstantsRed.centerParkOptionPose);
                 ActiveMotionValues.setParkPose(FieldConstantsRed.centerParkPose);
             } else {
                 ActiveMotionValues.setWaitPartnerClearPose(FieldConstantsRed.centerPartnerClearPose);
-                ActiveMotionValues.setOptionStopPose(FieldConstantsRed.centerOptionPose);
-
-                ActiveMotionValues.setTurnAngle(FieldConstantsRed.turnToTagRadians);
                 ActiveMotionValues.setStopSecs(stop2PixelSecs);
+                ActiveMotionValues.setOptionStopPose(FieldConstantsRed.centerOptionPose);
+                ActiveMotionValues.setTurnAngle(FieldConstantsRed.turnToTagRadians);
                 ActiveMotionValues.setTargetPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
                         .plus(FieldConstantsRed.AprilTagConstants.tagStrafeOffsetPose));
             }
-        }
-    }
+        }    }
 
 
     @Override

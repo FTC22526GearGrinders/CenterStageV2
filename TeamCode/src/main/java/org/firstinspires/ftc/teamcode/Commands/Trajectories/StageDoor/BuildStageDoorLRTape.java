@@ -26,13 +26,6 @@ public class BuildStageDoorLRTape extends CommandBase {
     @Override
     public void execute() {
 
-        boolean trussSideTapeRed = ActiveMotionValues.getRedAlliance() &&
-                ActiveMotionValues.getLcrpos() == 3;
-
-        boolean trussSideTapeBlue = !ActiveMotionValues.getRedAlliance() &&
-                ActiveMotionValues.getLcrpos() == 1;
-
-        boolean trussSideTape = trussSideTapeRed || trussSideTapeBlue;
 
         boolean secondPixel = ActiveMotionValues.getSecondPixel();
 
@@ -40,122 +33,67 @@ public class BuildStageDoorLRTape extends CommandBase {
 
         if (secondPixel) {
 
-            if (trussSideTape) {
 
-                drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
+            drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
 
-                        .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
+                    .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
 
-                        .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
+                    .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
 
-                        .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
+                    .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
 
-                        .waitSeconds(1)
+                    .waitSeconds(1)
 
-                        .lineToLinearHeading(ActiveMotionValues.getRetractPose())
+                    .lineToLinearHeading(ActiveMotionValues.getRetractPose())
 
-                        .lineToLinearHeading(ActiveMotionValues.getClearPose())
+                    .lineToLinearHeading(ActiveMotionValues.getClearPose())
 
-                        .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
+                    .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
 
-                        .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
+                    .lineToLinearHeading(ActiveMotionValues.getWaitPartnerClearPose())
 
-                        .waitSeconds(ActiveMotionValues.getStopSecs())
+                    .waitSeconds(ActiveMotionValues.getStopSecs())
 
-                        .turn(ActiveMotionValues.getTurnAngle())
+                    .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
 
-                        .lineToLinearHeading(ActiveMotionValues.getTargetPose())
+                    .turn(ActiveMotionValues.getTurnAngle())
 
-                        .build();
+                    .lineToLinearHeading(ActiveMotionValues.getTargetPose())
 
-                if (!trussSideTape) {
-
-                    drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
-
-                            .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
-
-                            .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
-
-                            .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
-
-                            .waitSeconds(1)
-
-                            .lineToLinearHeading(ActiveMotionValues.getRetractPose())
-
-                            .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
-
-                            .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
-
-                            .waitSeconds(ActiveMotionValues.getStopSecs())
-
-                            .turn(ActiveMotionValues.getTurnAngle())
-
-                            .lineToLinearHeading(ActiveMotionValues.getTargetPose())
-
-
-                            .build();
-                }
-            }
-
-            if (park) {
-
-                if (trussSideTape) {
-
-                    drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
-
-                            .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
-
-                            .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
-
-                            .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
-
-                            .waitSeconds(1)
-
-                            .lineToLinearHeading(ActiveMotionValues.getRetractPose())
-
-                            .lineToLinearHeading(ActiveMotionValues.getClearPose())
-
-                            .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
-
-                            .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
-
-                            .waitSeconds(.1)
-
-                            .lineToLinearHeading(ActiveMotionValues.getParkPose())
-
-                            .build();
-
-                    if (!trussSideTape) {
-
-                        drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
-
-                                .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
-
-                                .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
-
-                                .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
-
-                                .waitSeconds(1)
-
-                                .lineToLinearHeading(ActiveMotionValues.getRetractPose())
-
-                                .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
-
-                                .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
-
-                                .waitSeconds(.1)
-
-                                .lineToLinearHeading(ActiveMotionValues.getParkPose())
-
-                                .build();
-
-                    }
-                }
-
-                drive.trajectoryBuilt = drive.currentTrajSeq != null;
-            }
+                    .build();
 
         }
+
+        if (park) {
+
+
+            drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
+
+                    .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
+
+                    .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
+
+                    .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
+
+                    .waitSeconds(1)
+
+                    .lineToLinearHeading(ActiveMotionValues.getRetractPose())
+
+                    .lineToLinearHeading(ActiveMotionValues.getClearPose())
+
+                    .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
+
+                    .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
+
+                    .waitSeconds(.1)
+
+                    .lineToLinearHeading(ActiveMotionValues.getParkPose())
+
+                    .build();
+
+        }
+
+        drive.trajectoryBuilt = drive.currentTrajSeq != null;
     }
 
 

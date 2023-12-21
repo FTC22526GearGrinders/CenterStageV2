@@ -26,7 +26,8 @@ public final class FieldConstantsBlue {
     public static Pose2d nearOptionPose = new Pose2d(36, 60, startAngle);
     public static Pose2d centerOptionPose = new Pose2d(36, 12, startAngle);
 
-
+    public static Pose2d nearParkOptionPose = new Pose2d(36, 60, startAngle);
+    public static Pose2d centerParkOptionPose = new Pose2d(36, 12, startAngle);
 
     public static Pose2d nearParkPose = new Pose2d(59, 60, startAngle);
     public static Pose2d centerParkPose = new Pose2d(59, 12, startAngle);
@@ -37,7 +38,12 @@ public final class FieldConstantsBlue {
     public static Pose2d centerParkPoseBB = new Pose2d(59, 12,0);
 
 
-    public static Pose2d nearPartnerClearPose = new Pose2d(24, 60, startAngle);
+    public static Pose2d nearPartnerClearPose = new Pose2d(12, 60, startAngle);
+
+
+    public static Pose2d centerPartnerClearPose = new Pose2d(-12, 12, startAngle);
+
+
 
     public static Pose2d nearTrussLineUpPose = new Pose2d(-36, 60, startAngle);
 

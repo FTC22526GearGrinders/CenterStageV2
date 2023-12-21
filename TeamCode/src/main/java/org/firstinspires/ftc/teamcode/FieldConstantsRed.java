@@ -167,5 +167,8 @@ public final class FieldConstantsRed {
         public static final Pose2d centerSDClearPixePose = new Pose2d(leftTapeMid.getX(),centerRetractPose.getY(), startAngle);
 
         public static final Pose2d clearToTurnPose = new Pose2d(36, -50, startAngle);
+
+        public static final Pose2d centerSDClearPixelPose = new Pose2d(leftTapeMid.getX(), centerRetractPose.getY(), startAngle);
+
     }
 }

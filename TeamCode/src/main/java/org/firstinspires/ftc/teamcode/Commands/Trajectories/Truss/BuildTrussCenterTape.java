@@ -49,9 +49,11 @@ public class BuildTrussCenterTape extends CommandBase {
 
                     .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
 
-                    .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
+                    .lineToLinearHeading(ActiveMotionValues.getWaitPartnerClearPose())
 
                     .waitSeconds(ActiveMotionValues.getStopSecs())
+
+                    .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
 
                     .lineToLinearHeading(ActiveMotionValues.getClearToTurnPose())
 

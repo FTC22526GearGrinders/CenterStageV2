@@ -240,7 +240,7 @@ public class SelectMotionValuesRed {
         if (useTruss) {
 
             ActiveMotionValues.setTrussSDLineUpPose(FieldConstantsRed.nearTrussLineUpPose);
-
+            ActiveMotionValues.setOptionStopPose(FieldConstantsRed.nearOptionPose);
 
             if (!secondPixel) {
 

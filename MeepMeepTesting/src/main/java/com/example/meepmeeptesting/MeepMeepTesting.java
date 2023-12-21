@@ -13,11 +13,11 @@ public class MeepMeepTesting {
     public static void main(String[] args) {
 
 
-        boolean redAlliance = false;
+        boolean redAlliance = true;
 
-        boolean bbstart = false;//aaset to false for start on stack side of truss
+        boolean bbstart = true;//aaset to false for start on stack side of truss
 
-        int lcr = 3;//left tape ==1, center tape = 2, right tape = 3 from robot view
+        int lcr = 1;//left tape ==1, center tape = 2, right tape = 3 from robot view
 
         if (lcr < 0 || lcr > 3) lcr = 2;
 
@@ -29,7 +29,7 @@ public class MeepMeepTesting {
 
         boolean centerPark = false;
 
-        boolean secondPixel = true;
+        boolean secondPixel = false;
 
 
         ActiveMotionValues.setRedAlliance(redAlliance);
@@ -58,104 +58,47 @@ public class MeepMeepTesting {
 
         MeepMeep meepMeep = new MeepMeep(800);
 
-        if (ActiveMotionValues.getBBStart()) {
+
+        RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
+
+                .setDimensions(Constants.RobotConstants.width, Constants.RobotConstants.length)
+
+                // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
+                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
+
+                .followTrajectorySequence(drive ->
+
+                        drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
+
+                                .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
+
+                                .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
+
+                              //  .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
+
+                                .waitSeconds(1.)
+
+                                .lineToLinearHeading(ActiveMotionValues.getRetractPose())
+
+                                .lineToLinearHeading(ActiveMotionValues.getClearPose())
+
+                                .lineToLinearHeading(ActiveMotionValues.getTagLineupPose())
+
+                                .turn(ActiveMotionValues.getTurnAngle())
+
+                                .lineToLinearHeading(ActiveMotionValues.getPreTagPose())
+
+                                .build());
 
 
-            RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
+        myBot.getDrive().setPoseEstimate(startPose);
 
-                    .setDimensions(Constants.RobotConstants.width, Constants.RobotConstants.length)
+        ShowField.showIt(meepMeep, myBot);
 
-                    // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                    .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
-
-                    .followTrajectorySequence(drive ->
-
-                            drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
-
-                                    .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
-
-                                    .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
-
-                                    .waitSeconds(1)
-
-                                    .lineToLinearHeading(ActiveMotionValues.getRetractPose())//LR tapes only
-
-                                    .lineToLinearHeading(ActiveMotionValues.getClearPose()) // truss side tape only
-
-                                    .lineToLinearHeading(ActiveMotionValues.getTagLineupPose())
-
-                                    .turn(ActiveMotionValues.getTurnAngle())
-
-                                    .lineToLinearHeading(ActiveMotionValues.getPreTagPose())
-
-                                    .waitSeconds(.1)
-
-                                    .forward(5)
-
-                                    .lineToLinearHeading(ActiveMotionValues.getPreParkPose())//park only
-
-                                    .lineToLinearHeading(ActiveMotionValues.getParkPose())//park only
-
-                                    .build());
-
-
-            myBot.getDrive().setPoseEstimate(startPose);
-
-            ShowField.showIt(meepMeep, myBot);
-
-
-        } else {
-
-            RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
-
-                    .setDimensions(Constants.RobotConstants.width, Constants.RobotConstants.length)
-
-                    // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                    .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
-
-                    .followTrajectorySequence(drive ->
-
-                            drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
-
-//
-                                    .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
-
-                                    .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
-
-                                    .waitSeconds(1)
-
-                                    .lineToLinearHeading(ActiveMotionValues.getRetractPose())
-
-                                    .lineToLinearHeading(ActiveMotionValues.getClearPose())
-
-                                    .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
-
-                                    .lineToLinearHeading(ActiveMotionValues.getWaitPartnerClearPose())
-//
-                                    .waitSeconds(ActiveMotionValues.getStopSecs())
-//
-                                    .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
-//
-                                    .lineToLinearHeading(ActiveMotionValues.getClearToTurnPose())
-//
-                                    .turn(ActiveMotionValues.getTurnAngle())
-
-                                   .lineToLinearHeading(ActiveMotionValues.getTargetPose())
-
-                                    //   .waitSeconds(.1)
-                                    //   .lineToLinearHeading(ActiveMotionValues.getParkPose())
-
-                                    .build());
-
-
-            myBot.getDrive().setPoseEstimate(startPose);
-
-            ShowField.showIt(meepMeep, myBot);
-
-
-        }
 
     }
 
 }
+
+
 
