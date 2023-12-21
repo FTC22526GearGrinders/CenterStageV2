@@ -170,7 +170,6 @@ public final class FieldConstantsBlue {
         public static final Pose2d rightDropPose = new Pose2d(rightTapeMid.getX() - pixelCenterComp,
                 rightTapeMid.getY() + addedYdist, startAngle)
                 .minus(Constants.RobotConstants.pixelDropPose);
-
         public static final Pose2d retPose = new Pose2d(0, 2);
         public static final Pose2d leftRetractPose = leftDropPose.plus(retPose);
         public static final Pose2d centerRetractPose = centerDropPose.plus(retPose);
