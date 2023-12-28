@@ -41,6 +41,10 @@ public class AutoActionsSequences extends SequentialCommandGroup {
 
                                         af.raiseArmToPosition(),
 
+                                        af.turnGripperToBoard(),
+
+                                        new WaitCommand(500),
+
                                         new InstantCommand(phss::flipGrippersToLeftDown),
 
                                         af.detectTags(),

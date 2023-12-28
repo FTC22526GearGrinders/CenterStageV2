@@ -4,6 +4,8 @@ import com.arcrobotics.ftclib.command.CommandBase;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.Commands.Auto.AutoActionsSequences;
+import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
 import org.firstinspires.ftc.teamcode.Subsystems.Drive_Subsystem;
 
 
@@ -45,7 +47,7 @@ public class RunTrajSequence extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        drive.savePoseFromAuto(drive.drive.getPoseEstimate());
+        ActiveMotionValues.setFinalTagPose(drive.currentTrajSeq.end());
         if (interrupted) {
             drive.drive.stop();
         }

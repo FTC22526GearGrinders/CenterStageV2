@@ -48,6 +48,7 @@ public class Vision_Subsystem extends SubsystemBase {
     public Vision_Subsystem(CommandOpMode opMode) {
         myOpMode = opMode;
 
+//
 // Get the AprilTagLibrary for the current season.
         myAprilTagLibrary = AprilTagGameDatabase.getCurrentGameTagLibrary();
         myAprilTagProcessor = AprilTagProcessor.easyCreateWithDefaults();
@@ -55,8 +56,10 @@ public class Vision_Subsystem extends SubsystemBase {
                 .setTagLibrary(myAprilTagLibrary)
                 .setDrawTagID(true)
                 .setDrawTagOutline(true)
-             //   .setLensIntrinsics(634.549, 634.549, 303.319, 235.933) //C920HD
-                //  .setLensIntrinsics( 634.549, 634.549, 303.319, 235.933)//ms2
+                .setLensIntrinsics(622.001f, 622.001f, 319.003f, 241.251f) //see TeamCode/src/main/res/xml/teamwebcamcalibrations.xml for details).
+             //   .setLensIntrinsics(634.549, 634.549, 303.319, 235.933) //C920HD our calib
+               // .setLensIntrinsics(678.154f,678.154f,318.135f, 228.374f)//Microsoft 3000HD V1 fron teamcode file
+                //  .setLensIntrinsics( 634.549, 634.549, 303.319, 235.933)//ms2 our calib
                 //   .setLensIntrinsics( 3849, 3849, 265.559, 514.408)//wide angle
                 .setDrawAxes(true)
                 .setDrawCubeProjection(true)

@@ -3,12 +3,12 @@ package org.firstinspires.ftc.teamcode.Commands.Drive;
 import com.arcrobotics.ftclib.command.CommandBase;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 
+import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
 import org.firstinspires.ftc.teamcode.Subsystems.Drive_Subsystem;
 
 
 public class JogDrive2 extends CommandBase {
     private Drive_Subsystem drive;
-
 
     private GamepadEx gamepad;
 
@@ -24,50 +24,57 @@ public class JogDrive2 extends CommandBase {
 
     @Override
     public void initialize() {
-        startRadians = drive.drive.getRawExternalHeading();
+        double gyro_radians = startRadians - drive.drive.getRawExternalHeading();
     }
 
-    //    public void driveFieldCentric(double yaxis, double turn, double xaxis, double speed) {
-//        double angle = startHeading - getHeading();
-//        double forward = Math.cos(angle) * yaxis + Math.sin(angle) * xaxis;
-//        double strafe = -Math.sin(angle) * yaxis + Math.cos(angle) * xaxis;
-//        driveSimple(forward, turn, strafe, speed);
-//    }
+
     @Override
     public void execute() {
 
-//        if (!drive.drive.fieldCentric) {
-//
-//            double y = this.gamepad.getLeftY();
-//            double x = this.gamepad.getLeftX();
-//            double rx = this.gamepad.getRightX();
-//
-//            drive.drive.jog(y, x, rx);
-//
-//        }
+        if (!drive.drive.fieldCentric) {
 
-        // if (drive.drive.fieldCentric) {
+            double y = this.gamepad.getLeftY();
+            double x = this.gamepad.getLeftX();
+            double rx = this.gamepad.getRightX();
 
-        double strafe = -this.gamepad.getLeftY()/2; /* Invert stick Y axis */
-        double forward = this.gamepad.getLeftX()/2;
-        double rcw = this.gamepad.getRightX()/2;
+            drive.drive.jog(y, x, rx);
 
-        /* Adjust Joystick X/Y inputs by navX MXP yaw angle */
+        }
 
-        double gyro_radians =startRadians - drive.drive.getRawExternalHeading();
-
-        //     new drive  = strafe * sin(heading) + drive * cos(heading)
-        //    new strafe = strafe * cos(heading) - drive * sin(heading)
+        if (drive.drive.fieldCentric) {
 
 
-        double temp = strafe * Math.sin(gyro_radians) + forward * (float) Math.cos(gyro_radians);
 
-        strafe = strafe * Math.cos(gyro_radians) - forward * Math.sin(gyro_radians);
 
-        forward = temp;
 
-        drive.drive.jog(forward, strafe, rcw);
-        //  }
+            double strafe = -this.gamepad.getLeftY(); /* Invert stick Y axis */
+            double forward = this.gamepad.getLeftX();
+            double rcw = this.gamepad.getRightX();
+
+
+            if(!ActiveMotionValues.getRedAlliance()) {
+
+                strafe = this.gamepad.getLeftY(); /* Invert stick Y axis */
+                forward = -this.gamepad.getLeftX();
+                rcw = this.gamepad.getRightX();
+            }
+
+
+
+
+            /* Adjust Joystick X/Y inputs by navX MXP yaw angle */
+
+            double gyro_radians = startRadians - drive.drive.getRawExternalHeading();
+
+
+            double temp = strafe * Math.sin(gyro_radians) + forward * (float) Math.cos(gyro_radians);
+
+            strafe = strafe * Math.cos(gyro_radians) - forward * Math.sin(gyro_radians);
+
+            forward = temp;
+
+            drive.drive.jog(forward, strafe, rcw);
+        }
 
     }
 

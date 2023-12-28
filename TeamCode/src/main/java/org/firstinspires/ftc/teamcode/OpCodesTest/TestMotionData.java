@@ -193,7 +193,9 @@ public class TestMotionData extends CommandOpMode {
             telemetry.addData("ClearToTurnPose", ActiveMotionValues.getClearToTurnPose().toString());
 
             if (ActiveMotionValues.getCenterPark() || ActiveMotionValues.getNearPark()) {
+                telemetry.addData("PreParkPose", ActiveMotionValues.getPreParkPose());
                 telemetry.addData("ParkPose", ActiveMotionValues.getParkPose());
+
             }
         }
 

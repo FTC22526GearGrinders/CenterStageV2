@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Commands.Drive;
 import com.arcrobotics.ftclib.command.CommandBase;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 
+import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
 import org.firstinspires.ftc.teamcode.Subsystems.Drive_Subsystem;
 
 
@@ -26,12 +27,7 @@ public class JogDrive extends CommandBase {
         double gyro_radians = startRadians - drive.drive.getRawExternalHeading();
     }
 
-    //    public void driveFieldCentric(double yaxis, double turn, double xaxis, double speed) {
-//        double angle = startHeading - getHeading();
-//        double forward = Math.cos(angle) * yaxis + Math.sin(angle) * xaxis;
-//        double strafe = -Math.sin(angle) * yaxis + Math.cos(angle) * xaxis;
-//        driveSimple(forward, turn, strafe, speed);
-//    }
+
     @Override
     public void execute() {
 
@@ -47,16 +43,28 @@ public class JogDrive extends CommandBase {
 
         if (drive.drive.fieldCentric) {
 
-            double strafe = -this.gamepad.getLeftY(); /* Invert stick Y axis */
-            double forward = this.gamepad.getLeftX();
-            double rcw = this.gamepad.getRightX();
+
+
+
+
+                double strafe = -this.gamepad.getLeftY(); /* Invert stick Y axis */
+                double forward = this.gamepad.getLeftX();
+                double rcw = this.gamepad.getRightX();
+
+
+            if(!ActiveMotionValues.getRedAlliance()) {
+
+                 strafe = this.gamepad.getLeftY(); /* Invert stick Y axis */
+                forward = -this.gamepad.getLeftX();
+                 rcw = this.gamepad.getRightX();
+            }
+
+
+
 
             /* Adjust Joystick X/Y inputs by navX MXP yaw angle */
 
             double gyro_radians = startRadians - drive.drive.getRawExternalHeading();
-
-            //     new drive  = strafe * sin(heading) + drive * cos(heading)
-            //    new strafe = strafe * cos(heading) - drive * sin(heading)
 
 
             double temp = strafe * Math.sin(gyro_radians) + forward * (float) Math.cos(gyro_radians);

@@ -20,7 +20,7 @@ public final class Constants {
         public static Pose2d rightGripperPose = new Pose2d(gripperXOffset, -RobotConstants.length / 2 + 1, 0);
 
 
-        public static Pose2d kCameraToRobot = new Pose2d(RobotConstants.length / 2, 2);
+        public static Pose2d kCameraToRobot = new Pose2d(RobotConstants.length / 2, 3.5);
     }
 
     public static final class FieldConstants {
@@ -131,10 +131,10 @@ public final class Constants {
         public static final double DROP_CLOSED_POSITION = .7;
 
         public enum LeftGripperSet {
-            WIDE_OPEN(.85),
-            OPEN(.7),//open position
+            WIDE_OPEN(.6),
+            OPEN(.5),//open position
             MID(.7),//mid
-            CLOSED(.4);//closed
+            CLOSED(.2);//closed
 
             public final double position;
 
@@ -145,10 +145,10 @@ public final class Constants {
 
 
         public enum RightGripperSet {
-            WIDE_OPEN(0),
-            OPEN(.1),
+            WIDE_OPEN(.3),
+            OPEN(.4),
             MID(.3),
-            CLOSED(.4);
+            CLOSED(.7);
 
             public final double position;
 
@@ -171,11 +171,11 @@ public final class Constants {
         }
 
         public enum FlipGripperSet {
-            PICKUP(0.08),
-            LEFT_DOWN(.2),
-            DELIVER(.3),
+            PICKUP(0.195),
+            LEFT_DOWN(.33),
+            DELIVER(.427),
 
-            RIGHT_DOWN(.0);
+            RIGHT_DOWN(0.06);
 
             public final double position;
 

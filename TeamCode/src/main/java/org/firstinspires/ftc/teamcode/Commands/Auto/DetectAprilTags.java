@@ -77,7 +77,7 @@ public class DetectAprilTags extends CommandBase {
 
                     ActiveMotionValues.setActiveTagDistance(distance);
 
-                    ActiveMotionValues.setCameraYaw( detection.ftcPose.yaw);
+                    ActiveMotionValues.setCameraYaw(detection.ftcPose.yaw);
 
                     if (noEnd) {
                         myOpMode.telemetry.addData("Active Tag", n);
@@ -119,6 +119,8 @@ public class DetectAprilTags extends CommandBase {
     @Override
 
     public void end(boolean interrupted) {
+        if (!ActiveMotionValues.getAprilTagSeen())
+            ActiveMotionValues.setActiveTagDistance(7);
         myOpMode.telemetry.addData("Ending detect Tags", "");
         myOpMode.telemetry.update();
 
@@ -126,7 +128,7 @@ public class DetectAprilTags extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return !noEnd && et.seconds() > .5 && ActiveMotionValues.getAprilTagSeen();
+        return !noEnd && ((et.seconds() > .5 && ActiveMotionValues.getAprilTagSeen()) || et.seconds() > 5);
 
     }
 }

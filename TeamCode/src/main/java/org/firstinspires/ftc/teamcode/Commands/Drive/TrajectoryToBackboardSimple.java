@@ -43,9 +43,9 @@ public class TrajectoryToBackboardSimple extends CommandBase {
 
         if (distance > 10 | distance < 6) distance = 8;
 
-        Pose2d currentRobotPose = new Pose2d(0,0,0);// Math.toRadians(ActiveMotionValues.getCameraYaw()));
+        Pose2d currentRobotPose = ActiveMotionValues.getFinalTagPose();// Math.toRadians(ActiveMotionValues.getCameraYaw()));
 
-        Pose2d finalPose = new Pose2d(distance, 0);
+        Pose2d finalPose = currentRobotPose.plus(new Pose2d(distance, 0));
 
 
         tagTraj = drive.drive.trajectoryBuilder(currentRobotPose)

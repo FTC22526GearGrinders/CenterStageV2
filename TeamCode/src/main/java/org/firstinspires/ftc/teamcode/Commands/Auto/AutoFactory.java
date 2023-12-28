@@ -11,6 +11,7 @@ import org.firstinspires.ftc.teamcode.Commands.Arm.PositionArm;
 import org.firstinspires.ftc.teamcode.Commands.Drive.MoveToPark;
 import org.firstinspires.ftc.teamcode.Commands.Drive.PositionToBackboardUsingTags;
 import org.firstinspires.ftc.teamcode.Commands.Drive.TrajectoryToBackboardSimple;
+import org.firstinspires.ftc.teamcode.Commands.PixelHandler.TurnGrippersCommand;
 import org.firstinspires.ftc.teamcode.Commands.Trajectories.RunTrajSequence;
 import org.firstinspires.ftc.teamcode.Commands.Trajectories.SelectAndBuildTrajectory;
 import org.firstinspires.ftc.teamcode.Commands.Trajectories.ShowTrajectoryInfo;
@@ -93,7 +94,7 @@ public class AutoFactory extends CommandBase {
     }
 
     public Command raiseArmToPosition() {
-        return new PositionArm(arm, 10).asProxy();
+        return new PositionArm(arm, 9).asProxy();
     }
 
     public Command detectTags() {
@@ -106,6 +107,10 @@ public class AutoFactory extends CommandBase {
     public Command trajToBackboard() {
 
         return new TrajectoryToBackboardSimple(drive, opMode);
+    }
+
+    public Command turnGripperToBoard(){
+        return new InstantCommand(()-> phss.raiseGrippersToDeliver());
     }
 
     public Command positionArmHome() {

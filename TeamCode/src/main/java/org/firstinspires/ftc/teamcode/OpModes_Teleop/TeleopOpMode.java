@@ -17,6 +17,7 @@ import org.firstinspires.ftc.teamcode.Commands.Climber.PositionHoldClimber;
 import org.firstinspires.ftc.teamcode.Commands.Drive.CancelJog2;
 import org.firstinspires.ftc.teamcode.Commands.Drive.JogDrive;
 import org.firstinspires.ftc.teamcode.Commands.Drive.JogDrive2;
+import org.firstinspires.ftc.teamcode.Commands.Drive.TrajectoryToBackboardSimple;
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.Subsystems.ArmSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.ClimberSubsystem;
@@ -185,7 +186,7 @@ public class TeleopOpMode extends CommandOpMode {
 //        coDriver.getGamepadButton(GamepadKeys.Button.Y).whenPressed(new InstantCommand(() -> climber.climberToLiftPosition()));
 
 
-        // coDriver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whileHeld(
+         coDriver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenPressed(new TrajectoryToBackboardSimple(drive, this));
 
 
         coDriver.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenPressed(new JogDrive2(drive, coDriver));
