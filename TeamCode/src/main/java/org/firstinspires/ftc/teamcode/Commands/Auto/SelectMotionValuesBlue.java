@@ -76,12 +76,11 @@ public class SelectMotionValuesBlue extends CommandBase {
 
                 ActiveMotionValues.setDropOffPose(FieldConstantsBlue.XPYP.leftDropPose.minus(xyOffsetPose));
 
+                ActiveMotionValues.setRetractPose(FieldConstantsBlue.XPYP.leftRetractPose);
+
                 ActiveMotionValues.setTurnAngle(FieldConstantsBlue.turnToTagRadians);
 
                 ActiveMotionValues.setActTag(1);
-
-                ActiveMotionValues.setTagLineupPose(FieldConstantsBlue.getActiveTagLineupPose(ActiveMotionValues.getActTag())
-                        .minus(dropOffsetPose));
 
                 ActiveMotionValues.setPreTagPose(FieldConstantsBlue.getActiveTagPose(ActiveMotionValues.getActTag())
                         .minus(FieldConstantsBlue.AprilTagConstants.tagLookAheadPose));
@@ -110,11 +109,11 @@ public class SelectMotionValuesBlue extends CommandBase {
 
                 ActiveMotionValues.setDropOffPose(FieldConstantsBlue.XPYP.centerDropPose.minus(xyOffsetPose));
 
+                ActiveMotionValues.setRetractPose((FieldConstantsBlue.XPYP.centerRetractPose));
+
                 ActiveMotionValues.setTurnAngle(FieldConstantsBlue.turnToTagRadians);
 
                 ActiveMotionValues.setActTag(2);
-
-                ActiveMotionValues.setTagLineupPose(FieldConstantsBlue.getActiveTagLineupPose(ActiveMotionValues.getActTag()));
 
                 ActiveMotionValues.setPreTagPose(FieldConstantsBlue.getActiveTagPose(ActiveMotionValues.getActTag())
                         .minus(FieldConstantsBlue.AprilTagConstants.tagLookAheadPose));
@@ -153,8 +152,6 @@ public class SelectMotionValuesBlue extends CommandBase {
 
                 ActiveMotionValues.setActTag(3);
 
-                ActiveMotionValues.setTagLineupPose(FieldConstantsBlue.getActiveTagLineupPose(ActiveMotionValues.getActTag()));
-
                 ActiveMotionValues.setPreTagPose(FieldConstantsBlue.getActiveTagPose(ActiveMotionValues.getActTag())
                         .minus(FieldConstantsBlue.AprilTagConstants.tagLookAheadPose));
 
@@ -186,7 +183,6 @@ public class SelectMotionValuesBlue extends CommandBase {
                 ActiveMotionValues.setRetractPose(FieldConstantsBlue.XMYP.leftRetractPose);
 
                 ActiveMotionValues.setClearPose(FieldConstantsBlue.XMYP.clearPose);
-
 
                 ActiveMotionValues.setActTag(1);
 

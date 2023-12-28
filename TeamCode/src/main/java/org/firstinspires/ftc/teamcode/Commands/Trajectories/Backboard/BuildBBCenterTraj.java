@@ -50,7 +50,7 @@ public class BuildBBCenterTraj extends CommandBase {
 
                 .waitSeconds(1)
 
-                .lineToLinearHeading(ActiveMotionValues.getTagLineupPose())
+                .lineToLinearHeading(ActiveMotionValues.getRetractPose())
 
                 .turn(ActiveMotionValues.getTurnAngle())
 

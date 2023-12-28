@@ -7,7 +7,6 @@ import com.arcrobotics.ftclib.command.CommandOpMode;
 
 import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
 import org.firstinspires.ftc.teamcode.Constants;
-import org.firstinspires.ftc.teamcode.FieldConstantsBlue;
 import org.firstinspires.ftc.teamcode.FieldConstantsRed;
 
 public class SelectMotionValuesRed extends CommandBase {
@@ -62,7 +61,6 @@ public class SelectMotionValuesRed extends CommandBase {
 
                 ActiveMotionValues.setStartPose(FieldConstantsRed.XPYM.startPos);//start pose
 
-
                 ActiveMotionValues.setAdvancePose(FieldConstantsRed.XPYM.advancePose);
 
                 ActiveMotionValues.setDropOffPose(FieldConstantsRed.XPYM.leftDropPose.minus(xyOffsetPose));
@@ -74,8 +72,6 @@ public class SelectMotionValuesRed extends CommandBase {
                 ActiveMotionValues.setTurnAngle(FieldConstantsRed.turnToTagRadians);
 
                 ActiveMotionValues.setActTag(4);
-
-                ActiveMotionValues.setTagLineupPose(FieldConstantsRed.getActiveTagLineupPose(ActiveMotionValues.getActTag()));
 
                 ActiveMotionValues.setPreTagPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
                         .minus(FieldConstantsRed.AprilTagConstants.tagLookAheadPose));
@@ -104,11 +100,12 @@ public class SelectMotionValuesRed extends CommandBase {
 
                 ActiveMotionValues.setDropOffPose(FieldConstantsRed.XPYM.centerDropPose.minus(xyOffsetPose));
 
+                ActiveMotionValues.setRetractPose((FieldConstantsRed.XPYM.retCPose));
+
                 ActiveMotionValues.setTurnAngle(FieldConstantsRed.turnToTagRadians);
 
                 ActiveMotionValues.setActTag(5);
 
-                ActiveMotionValues.setTagLineupPose(FieldConstantsRed.getActiveTagLineupPose(ActiveMotionValues.getActTag()));
 
                 ActiveMotionValues.setPreTagPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
                         .minus(FieldConstantsRed.AprilTagConstants.tagLookAheadPose));
@@ -140,13 +137,11 @@ public class SelectMotionValuesRed extends CommandBase {
 
                 ActiveMotionValues.setDropOffPose(FieldConstantsRed.XPYM.rightDropPose.minus(xyOffsetPose));
 
+                ActiveMotionValues.setRetractPose((FieldConstantsRed.XPYM.leftRetractPose));
+
                 ActiveMotionValues.setTurnAngle(FieldConstantsRed.turnToTagRadians);
 
                 ActiveMotionValues.setActTag(6);
-
-                ActiveMotionValues.setTagLineupPose(FieldConstantsRed.getActiveTagLineupPose(ActiveMotionValues.getActTag())
-                        .plus(dropOffsetPose));
-
 
                 ActiveMotionValues.setPreTagPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
                         .minus(FieldConstantsRed.AprilTagConstants.tagLookAheadPose));
@@ -284,7 +279,8 @@ public class SelectMotionValuesRed extends CommandBase {
                 ActiveMotionValues.setTargetPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
                         .plus(FieldConstantsRed.AprilTagConstants.tagStrafeOffsetPose));
             }
-        }    }
+        }
+    }
 
 
     @Override
