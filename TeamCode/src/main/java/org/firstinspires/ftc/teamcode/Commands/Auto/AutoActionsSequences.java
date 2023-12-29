@@ -33,8 +33,7 @@ public class AutoActionsSequences extends SequentialCommandGroup {
                         af.getAllianceData(opMode, red),
 
                         af.buildAndRunTrajectory(),
-
-
+                        
                         new ConditionalCommand(
 
                                 new SequentialCommandGroup(

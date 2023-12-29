@@ -114,9 +114,9 @@ public class TeleopOpMode extends CommandOpMode {
                         new InstantCommand(() -> arm.setTargetInches(0.8))));
 
 
-        driver.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenPressed(new InstantCommand(() -> phss.openLeftGripper()));
+        driver.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenPressed(new InstantCommand(() -> phss.toggleLeftGripper()));
 
-        driver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenPressed(new InstantCommand(() -> phss.openRightGripper()));
+        driver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenPressed(new InstantCommand(() -> phss.toggleRightGripper()));
 
         driver.getGamepadButton(GamepadKeys.Button.START).whenPressed(
                 new InstantCommand(() -> drive.drive.toggleFieldCentric()));

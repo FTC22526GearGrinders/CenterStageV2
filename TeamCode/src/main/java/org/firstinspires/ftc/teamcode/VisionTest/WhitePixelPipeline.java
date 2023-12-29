@@ -34,7 +34,7 @@ public class WhitePixelPipeline extends OpenCvPipeline {
     int maskTop = 92;
     int maskBottom = 180;
 
-    public int lpctr = 0;
+     int lpctr = 0;
 
     Mat src = new Mat();
     Mat dst = new Mat(src.rows(), src.cols(), src.type(), new Scalar(0));
@@ -62,12 +62,16 @@ public class WhitePixelPipeline extends OpenCvPipeline {
 
     Telemetry telemetry;
 
+    double pixelWidthInches = 3.5;
+    double pixelHeightInches = .5;
+    double pixelLengthInches = 3;
+
 
     public WhitePixelPipeline(Telemetry telemetry) {
         frameList = new ArrayList<>();
         this.telemetry = telemetry;
 
-     //   lpctr = 0;
+        //   lpctr = 0;
 
     }
 
@@ -121,12 +125,21 @@ public class WhitePixelPipeline extends OpenCvPipeline {
         Point points[] = new Point[4];
 
         MatOfPoint2f approxCurve = new MatOfPoint2f();
-        //For each contour found
+        //For each contour foundImgproc.approxPolyDP(yourImage, approx, Imgproc.arcLength(yourImage, true) * 0.02, true);
+        //long count = approx.total();
+        //if (count == 5) {
+        //    // this is a pentagon
+        //
         for (int i = 0; i < numContours; i++) {
             //Convert contours(i) from MatOfPoint to MatOfPoint2f
             MatOfPoint2f contour2f = new MatOfPoint2f(contours.get(i).toArray());
             //Processing on mMOP2f1 which is in type MatOfPoint2f
             double approxDistance = Imgproc.arcLength(contour2f, true) * 0.02;
+
+//            Imgproc.approxPolyDP(contour2f, contour2f, approxDistance, true);
+//            long count =contour2f.total();
+//            telemetry.addData("Count",count);
+//
 
             Imgproc.approxPolyDP(contour2f, approxCurve, approxDistance, true);
 
@@ -143,9 +156,15 @@ public class WhitePixelPipeline extends OpenCvPipeline {
 
                 rrxval.add(temp.center.x);
                 rryval.add(temp.center.y);
-                rrHeight.add((temp.size.height));
-                rrHeight.add((temp.size.width));
-                rrAngle.add((temp.angle));
+                if (temp.size.width > temp.size.height) {
+                    rrHeight.add(temp.size.height);
+                    rrWidth.add(temp.size.width);
+                } else {
+                    rrHeight.add(temp.size.width);
+                    rrWidth.add(temp.size.height);
+
+                }
+                rrAngle.add(temp.angle);
 
 
                 usableContours++;
@@ -156,20 +175,24 @@ public class WhitePixelPipeline extends OpenCvPipeline {
 
         }
 
-//        telemetry.addData("NumContours", numContours);
-//        telemetry.addData("UsableContours", usableContours);
+        //  telemetry.addData("NumContours", numContours);
+        telemetry.addData("UsableContours", usableContours);
+        if (!rr.isEmpty()) {
+            //  telemetry.addData("RRSize", rr.size());
+            for (int n = 0; n < rr.size(); n++) {
+                telemetry.addData("Width " + String.valueOf(n), rrWidth.get(n));
+                telemetry.addData("Height " + String.valueOf(n), rrHeight.get(n));
+                telemetry.addData("Px per Inch " + String.valueOf(n), rrWidth.get(n)/pixelWidthInches);
 
-        // telemetry.addData("RRSize", rr.size());
-//        for (int n = 0; n < rr.size(); n++) {
-//            telemetry.addData("XVal " + String.valueOf(n), rrxval.get(n));
-//            telemetry.addData("YVal " + String.valueOf(n), rryval.get(n));
-//            telemetry.addData("Area " + String.valueOf(n), rrAreas.get(n));
-//            telemetry.addData("Width " + String.valueOf(n), rrWidth.get(n));
-//            telemetry.addData("Height " + String.valueOf(n), rrHeight.get(n));
-//            telemetry.addData("Angle " + String.valueOf(n), rrAngle.get(n));
-//
-//          ;
-//        }
+                telemetry.addData("Angle " + String.valueOf(n), rrAngle.get(n));
+                telemetry.addData("XVal " + String.valueOf(n), rrxval.get(n));
+                telemetry.addData("YVal " + String.valueOf(n), rryval.get(n));
+                telemetry.addData("Area " + String.valueOf(n), rrAreas.get(n));
+
+
+            }
+            ;
+        }
         telemetry.update();
 
         if (frameList.size() > 5) {

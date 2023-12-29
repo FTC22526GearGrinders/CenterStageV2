@@ -29,6 +29,9 @@ public class PixelHandlerSubsystem extends SubsystemBase {
 
     public double turnGrippersPosition;
 
+    public boolean leftOpen;
+
+    public boolean rightOpen;
 
     public PixelHandlerSubsystem(CommandOpMode opMode) {
         myOpMode = opMode;
@@ -87,36 +90,55 @@ public class PixelHandlerSubsystem extends SubsystemBase {
 
     public void openLeftGripperWide() {
         leftGripper.setPosition(Constants.PixelHandlerConstants.LeftGripperSet.WIDE_OPEN.position);
+        leftOpen = true;
     }
 
 
     public void openLeftGripper() {
         leftGripper.setPosition(Constants.PixelHandlerConstants.LeftGripperSet.OPEN.position);
+        leftOpen = true;
     }
 
     public void midLeftGripper() {
         leftGripper.setPosition(Constants.PixelHandlerConstants.LeftGripperSet.MID.position);
+        leftOpen = true;
     }
 
     public void closeLeftGripper() {
         leftGripper.setPosition(Constants.PixelHandlerConstants.LeftGripperSet.CLOSED.position);
+        leftOpen = false;
+    }
+
+    public void toggleLeftGripper() {
+        if (leftOpen) closeLeftGripper();
+        else openLeftGripperWide();
     }
 
     public void openRightGripperWide() {
         rightGripper.setPosition(Constants.PixelHandlerConstants.LeftGripperSet.WIDE_OPEN.position);
+        rightOpen=true;
     }
 
 
     public void openRightGripper() {
         rightGripper.setPosition(Constants.PixelHandlerConstants.LeftGripperSet.OPEN.position);
+        rightOpen=true;
     }
 
     public void midRightGripper() {
         rightGripper.setPosition(Constants.PixelHandlerConstants.LeftGripperSet.MID.position);
+        rightOpen=true;
     }
 
     public void closeRightGripper() {
         rightGripper.setPosition(Constants.PixelHandlerConstants.LeftGripperSet.CLOSED.position);
+        rightOpen=false;
+    }
+
+
+    public void toggleRightGripper() {
+        if (rightOpen) closeRightGripper();
+        else openRightGripperWide();
     }
 
     public void openBothGrippers() {
@@ -129,7 +151,7 @@ public class PixelHandlerSubsystem extends SubsystemBase {
         closeRightGripper();
     }
 
-    public void toWideOpen(){
+    public void toWideOpen() {
         rightGripper.setPosition(Constants.PixelHandlerConstants.RightGripperSet.WIDE_OPEN.position);
         leftGripper.setPosition(Constants.PixelHandlerConstants.LeftGripperSet.WIDE_OPEN.position);
     }
@@ -139,10 +161,12 @@ public class PixelHandlerSubsystem extends SubsystemBase {
         turnGrippers.setPosition(Constants.PixelHandlerConstants.TurnGripperSet.DELIVER.position);
         turnGrippersPosition = Constants.PixelHandlerConstants.TurnGripperSet.DELIVER.position;
     }
+
     public void turnGrippersToMid() {
         turnGrippers.setPosition(Constants.PixelHandlerConstants.TurnGripperSet.MID.position);
         turnGrippersPosition = Constants.PixelHandlerConstants.TurnGripperSet.MID.position;
     }
+
     public void lowerGrippersToPickup() {
         turnGrippers.setPosition(Constants.PixelHandlerConstants.TurnGripperSet.PICKUP.position);
         turnGrippersPosition = Constants.PixelHandlerConstants.TurnGripperSet.PICKUP.position;
@@ -155,9 +179,11 @@ public class PixelHandlerSubsystem extends SubsystemBase {
     public void flipGrippersToDeliver() {
         flipGrippers.setPosition(Constants.PixelHandlerConstants.FlipGripperSet.DELIVER.position);
     }
+
     public void flipGrippersToLeftDown() {
         flipGrippers.setPosition(Constants.PixelHandlerConstants.FlipGripperSet.LEFT_DOWN.position);
     }
+
     public void flipGrippersToRightDown() {
         flipGrippers.setPosition(Constants.PixelHandlerConstants.FlipGripperSet.RIGHT_DOWN.position);
     }

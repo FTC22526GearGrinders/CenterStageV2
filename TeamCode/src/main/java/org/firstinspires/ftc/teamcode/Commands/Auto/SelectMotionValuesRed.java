@@ -65,13 +65,15 @@ public class SelectMotionValuesRed extends CommandBase {
 
                 ActiveMotionValues.setDropOffPose(FieldConstantsRed.XPYM.leftDropPose.minus(xyOffsetPose));
 
+                ActiveMotionValues.setActTag(4);
+
                 ActiveMotionValues.setRetractPose(FieldConstantsRed.XPYM.leftRetractPose);
 
-                ActiveMotionValues.setClearPose(FieldConstantsRed.XPYM.clearPose);
+                ActiveMotionValues.setClearPose(FieldConstantsRed.XPYM.leftClearPose);
 
                 ActiveMotionValues.setTurnAngle(FieldConstantsRed.turnToTagRadians);
 
-                ActiveMotionValues.setActTag(4);
+
 
                 ActiveMotionValues.setPreTagPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
                         .minus(FieldConstantsRed.AprilTagConstants.tagLookAheadPose));
@@ -94,7 +96,6 @@ public class SelectMotionValuesRed extends CommandBase {
 
 
                 xyOffsetPose = new Pose2d();
-
 
                 ActiveMotionValues.setStartPose(FieldConstantsRed.XPYM.startPos);//start pose
 
@@ -137,7 +138,7 @@ public class SelectMotionValuesRed extends CommandBase {
 
                 ActiveMotionValues.setDropOffPose(FieldConstantsRed.XPYM.rightDropPose.minus(xyOffsetPose));
 
-                ActiveMotionValues.setRetractPose((FieldConstantsRed.XPYM.leftRetractPose));
+                ActiveMotionValues.setRetractPose((FieldConstantsRed.getActiveTagLineupPose(ActiveMotionValues.getActTag()).minus(dropOffsetPose)));
 
                 ActiveMotionValues.setTurnAngle(FieldConstantsRed.turnToTagRadians);
 

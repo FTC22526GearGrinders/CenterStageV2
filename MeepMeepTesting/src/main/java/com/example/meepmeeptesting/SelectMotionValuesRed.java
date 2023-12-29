@@ -39,7 +39,7 @@ public class SelectMotionValuesRed {
                 ActiveMotionValues.setStartPose(FieldConstantsRed.XPYM.startPos);//start pose
 
 
-                ActiveMotionValues.setAdvancePose(FieldConstantsRed.XPYM.advancePose);
+                ActiveMotionValues.setAdvancePose(FieldConstantsRed.XPYM.leftAdvancePose);
 
 
                 ActiveMotionValues.setDropOffPose(FieldConstantsRed.XPYM.leftDropPose.minus(xyOffsetPose));
@@ -47,13 +47,11 @@ public class SelectMotionValuesRed {
 
                 ActiveMotionValues.setRetractPose(FieldConstantsRed.XPYM.leftRetractPose);
 
+                ActiveMotionValues.setClearPose(FieldConstantsRed.XPYM.leftClearPose);
+
                 ActiveMotionValues.setTurnAngle(FieldConstantsRed.turnToTagRadians);
 
                 ActiveMotionValues.setActTag(4);
-
-                ActiveMotionValues.setClearPose(FieldConstantsRed.XPYM.clearPose);
-
-                ActiveMotionValues.setTagLineupPose(FieldConstantsRed.getActiveTagLineupPose(ActiveMotionValues.getActTag()));
 
 
                 ActiveMotionValues.setPreTagPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
@@ -87,11 +85,13 @@ public class SelectMotionValuesRed {
 
                 ActiveMotionValues.setDropOffPose(FieldConstantsRed.XPYM.centerDropPose.minus(xyOffsetPose));
 
+
+                ActiveMotionValues.setRetractPose(FieldConstantsRed.XPYM.centerRetractPose);
+
                 ActiveMotionValues.setTurnAngle(FieldConstantsRed.turnToTagRadians);
 
-                ActiveMotionValues.setActTag(5);
 
-                ActiveMotionValues.setTagLineupPose(FieldConstantsRed.getActiveTagLineupPose(ActiveMotionValues.getActTag()));
+                ActiveMotionValues.setActTag(5);
 
                 ActiveMotionValues.setPreTagPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
                         .minus(FieldConstantsRed.AprilTagConstants.tagLookAheadPose));
@@ -114,24 +114,24 @@ public class SelectMotionValuesRed {
             //******************************************************************************************
             case 3://right ta
 
-                double dropOffsetX = Constants.RobotConstants.activeDropOffsetPose.getX();
+                double dropOffsetX = FieldConstantsRed.pixelRightDropX;
 
-                Pose2d dropOffsetPose = new Pose2d(dropOffsetX, 0, 0);
+               Pose2d dropOffsetPose = new Pose2d(dropOffsetX, 0, 0);
 
                 xyOffsetPose = new Pose2d();
 
                 ActiveMotionValues.setStartPose(FieldConstantsRed.XPYM.startPos);//start pose
 
-                ActiveMotionValues.setAdvancePose(FieldConstantsRed.XPYM.advancePose);
+                ActiveMotionValues.setAdvancePose(FieldConstantsRed.XPYM.rightAdvancePose);
 
                 ActiveMotionValues.setDropOffPose(FieldConstantsRed.XPYM.rightDropPose.minus(xyOffsetPose));
 
-                ActiveMotionValues.setTurnAngle(FieldConstantsRed.turnToTagRadians);
-
                 ActiveMotionValues.setActTag(6);
 
-                ActiveMotionValues.setTagLineupPose(FieldConstantsRed.getActiveTagLineupPose(ActiveMotionValues.getActTag())
+                ActiveMotionValues.setRetractPose(FieldConstantsRed.getActiveTagLineupPose(ActiveMotionValues.getActTag())
                         .plus(dropOffsetPose));
+
+                ActiveMotionValues.setTurnAngle(FieldConstantsRed.turnToTagRadians);
 
                 ActiveMotionValues.setPreTagPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
                         .minus(FieldConstantsRed.AprilTagConstants.tagLookAheadPose));
@@ -159,7 +159,7 @@ public class SelectMotionValuesRed {
 
                 ActiveMotionValues.setStartPose(FieldConstantsRed.XMYM.startPose);//start pose
 
-                ActiveMotionValues.setAdvancePose(FieldConstantsRed.XMYM.advancePose);
+                ActiveMotionValues.setAdvancePose(FieldConstantsRed.XMYM.leftAdvancePose);
 
                 ActiveMotionValues.setDropOffPose(FieldConstantsRed.XMYM.leftDropPose.minus(xyOffsetPose));
 
@@ -209,7 +209,7 @@ public class SelectMotionValuesRed {
 
                 ActiveMotionValues.setStartPose(FieldConstantsRed.XMYM.startPose);//start pose
 
-                ActiveMotionValues.setAdvancePose(FieldConstantsRed.XMYM.advancePose);
+                ActiveMotionValues.setAdvancePose(FieldConstantsRed.XMYM.rightAdvancePose);
 
                 ActiveMotionValues.setDropOffPose(FieldConstantsRed.XMYM.rightDropPose.minus(xyOffsetPose));
 
