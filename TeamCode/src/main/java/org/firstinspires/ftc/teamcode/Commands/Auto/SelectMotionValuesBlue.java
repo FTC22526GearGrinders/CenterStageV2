@@ -284,7 +284,7 @@ public class SelectMotionValuesBlue extends CommandBase {
                 ActiveMotionValues.setClearToTurnPose(FieldConstantsBlue.XMYP.clearToTurnPose);
                 ActiveMotionValues.setTurnAngle(FieldConstantsBlue.turnToTagRadians);
                 ActiveMotionValues.setTargetPose(FieldConstantsBlue.getActiveTagPose(ActiveMotionValues.getActTag())
-                        .plus(FieldConstantsBlue.AprilTagConstants.tagStrafeOffsetPose));
+                        .plus(FieldConstantsBlue.AprilTagConstants.tagStrafeOffsetPoseTruss));
             }
         }
 
@@ -309,7 +309,7 @@ public class SelectMotionValuesBlue extends CommandBase {
                 ActiveMotionValues.setTurnAngle(FieldConstantsBlue.turnToTagRadians);
                 ActiveMotionValues.setStopSecs(stop2PixelSecs);
                 ActiveMotionValues.setTargetPose(FieldConstantsBlue.getActiveTagPose(ActiveMotionValues.getActTag())
-                        .plus(FieldConstantsBlue.AprilTagConstants.tagStrafeOffsetPose));
+                        .plus(FieldConstantsBlue.AprilTagConstants.tagStrafeOffsetPoseSD));
             }
 
         }

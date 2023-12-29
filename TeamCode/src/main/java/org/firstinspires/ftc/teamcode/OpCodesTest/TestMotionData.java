@@ -209,7 +209,7 @@ public class TestMotionData extends CommandOpMode {
             if (ActiveMotionValues.getSecondPixel())
                 telemetry.addData("OptTagPose",
                         FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
-                                .plus(FieldConstantsRed.AprilTagConstants.tagStrafeOffsetPose));
+                                .plus(FieldConstantsRed.AprilTagConstants.tagStrafeOffsetPoseTruss));
 
             telemetry.addData("OptTgtPose", ActiveMotionValues.getTargetPose().toString());
 
