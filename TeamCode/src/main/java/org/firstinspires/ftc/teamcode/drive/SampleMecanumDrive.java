@@ -94,6 +94,7 @@ public class SampleMecanumDrive extends MecanumDrive {
     private List<Integer> lastEncPositions = new ArrayList<>();
     private List<Integer> lastEncVels = new ArrayList<>();
     public boolean fieldCentric = false;
+    public double jogPower;
 
 
     public SampleMecanumDrive(HardwareMap hardwareMap) {
@@ -339,6 +340,7 @@ public class SampleMecanumDrive extends MecanumDrive {
 
 
     public void jog(double y, double x, double rx) {
+        jogPower = y;
         double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
         leftFront.setPower((y + x + rx) / denominator);
         rightFront.setPower((y - x - rx) / denominator);
@@ -405,6 +407,10 @@ public class SampleMecanumDrive extends MecanumDrive {
     public double getAveragePosition() {
         return encoderTicksToInches((leftFront.getCurrentPosition() + leftRear.getCurrentPosition()
                 + rightFront.getCurrentPosition() + rightRear.getCurrentPosition()) / 4);
+    }
+
+    public double getLeftFrontPower(){
+        return leftFront.getPower();
     }
 
     public void showTelemetry(Telemetry telemetry) {

@@ -18,6 +18,7 @@ public class Drive_Subsystem extends SubsystemBase {
     public String runningTrajName = "";
     public boolean trajectoryBuilt;
     public boolean trajectoryBuilding;
+    public int slowMode;
 
     private ElapsedTime runtime = new ElapsedTime();
 
@@ -101,7 +102,10 @@ public class Drive_Subsystem extends SubsystemBase {
         setCurrentPose(pose);
     }
 
-    public void showtelemetry(Telemetry telemetry) {
+    public void showTelemetry(Telemetry telemetry) {
+
+        telemetry.addData("SlowMode",slowMode);
+        telemetry.addData("LFPower", drive.jogPower);
 
         telemetry.update();
     }

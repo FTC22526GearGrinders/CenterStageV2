@@ -74,6 +74,6 @@ public class TestTrajectories extends CommandOpMode {
 
         CommandScheduler.getInstance().run();
 
-        drive.showtelemetry(this.telemetry);
+        drive.showTelemetry(this.telemetry);
     }
 }

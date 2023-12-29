@@ -7,14 +7,14 @@ import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
 import org.firstinspires.ftc.teamcode.Subsystems.Drive_Subsystem;
 
 
-public class JogDrive2 extends CommandBase {
+public class JogDriveSlow extends CommandBase {
     private Drive_Subsystem drive;
 
     private GamepadEx gamepad;
 
     private double startRadians;
 
-    public JogDrive2(Drive_Subsystem drive, GamepadEx gamepad) {
+    public JogDriveSlow(Drive_Subsystem drive, GamepadEx gamepad) {
         this.drive = drive;
         this.gamepad = gamepad;
         addRequirements(this.drive);
@@ -31,11 +31,13 @@ public class JogDrive2 extends CommandBase {
     @Override
     public void execute() {
 
+        drive.slowMode++;
+
         if (!drive.drive.fieldCentric) {
 
-            double y = this.gamepad.getLeftY();
-            double x = this.gamepad.getLeftX();
-            double rx = this.gamepad.getRightX();
+            double y = this.gamepad.getLeftY()/3;
+            double x = this.gamepad.getLeftX()/3;
+            double rx = this.gamepad.getRightX()/3;
 
             drive.drive.jog(y, x, rx);
 
@@ -43,20 +45,16 @@ public class JogDrive2 extends CommandBase {
 
         if (drive.drive.fieldCentric) {
 
+            double strafe = -this.gamepad.getLeftY()/3; /* Invert stick Y axis */
+            double forward = this.gamepad.getLeftX()/3;
+            double rcw = this.gamepad.getRightX()/3;
 
 
+            if (!ActiveMotionValues.getRedAlliance()) {
 
-
-            double strafe = -this.gamepad.getLeftY(); /* Invert stick Y axis */
-            double forward = this.gamepad.getLeftX();
-            double rcw = this.gamepad.getRightX();
-
-
-            if(!ActiveMotionValues.getRedAlliance()) {
-
-                strafe = this.gamepad.getLeftY(); /* Invert stick Y axis */
-                forward = -this.gamepad.getLeftX();
-                rcw = this.gamepad.getRightX();
+                strafe = this.gamepad.getLeftY()/3; /* Invert stick Y axis */
+                forward = -this.gamepad.getLeftX()/3;
+                rcw = this.gamepad.getRightX()/3;
             }
 
 
@@ -80,7 +78,7 @@ public class JogDrive2 extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-
+        drive.slowMode = 0;
     }
 
     @Override
