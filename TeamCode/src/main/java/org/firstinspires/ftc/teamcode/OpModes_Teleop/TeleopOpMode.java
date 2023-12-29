@@ -41,13 +41,6 @@ public class TeleopOpMode extends CommandOpMode {
 
     private int teleSwitch;
 
-    TriggerReader drlt;
-    TriggerReader drrt;
-
-    TriggerReader cdlt;
-    TriggerReader cdrt;
-
-
     @Override
     public void initialize() {
 
