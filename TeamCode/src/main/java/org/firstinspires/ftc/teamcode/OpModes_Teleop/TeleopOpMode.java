@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.OpModes_Teleop;
 
-import com.acmerobotics.roadrunner.drive.MecanumDrive;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.InstantCommand;
@@ -18,7 +17,6 @@ import org.firstinspires.ftc.teamcode.Commands.Drive.CancelJog2;
 import org.firstinspires.ftc.teamcode.Commands.Drive.JogDrive;
 import org.firstinspires.ftc.teamcode.Commands.Drive.JogDrive2;
 import org.firstinspires.ftc.teamcode.Commands.Drive.TrajectoryToBackboardSimple;
-import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.Subsystems.ArmSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.ClimberSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.Drive_Subsystem;
@@ -129,7 +127,7 @@ public class TeleopOpMode extends CommandOpMode {
         driver.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenPressed(new InstantCommand(() -> climber.climberToLiftPosition()));
 
         driver.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenPressed(
-                new JogDrive2(drive, driver))
+                        new JogDrive2(drive, driver))
                 .whenPressed(new InstantCommand(() -> phss.toWideOpen()));
 
         coDriver.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenPressed(new InstantCommand(() -> dcatss.releaseCatapult()));
@@ -186,7 +184,7 @@ public class TeleopOpMode extends CommandOpMode {
 //        coDriver.getGamepadButton(GamepadKeys.Button.Y).whenPressed(new InstantCommand(() -> climber.climberToLiftPosition()));
 
 
-         coDriver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenPressed(new TrajectoryToBackboardSimple(drive, this));
+        coDriver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenPressed(new TrajectoryToBackboardSimple(drive, this));
 
 
         coDriver.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenPressed(new JogDrive2(drive, coDriver));
@@ -210,7 +208,6 @@ public class TeleopOpMode extends CommandOpMode {
                 new InstantCommand(() -> drive.drive.toggleFieldCentric()));
 
         //coDriver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenPressed(
-
 
 
         // coDriver.getGamepadButton(GamepadKeys.Button.LEFT_STICK_BUTTON)
@@ -247,9 +244,9 @@ public class TeleopOpMode extends CommandOpMode {
         cdlt.readValue();
         cdrt.readValue();
 
-        if (drlt.wasJustPressed()) new InstantCommand(() -> phss.closeLeftGripper()).schedule();
+        if (drlt.isDown()) schedule(new JogDrive2(drive, driver));
 
-        if (drrt.wasJustPressed()) new InstantCommand(() -> phss.closeRightGripper()).schedule();
+        if (drrt.wasJustPressed()) schedule(new InstantCommand(() -> phss.closeBothGrippers()));
 
         if (drlt.isDown() && drrt.isDown()) new SequentialCommandGroup(new CancelJog2(drive),
                 new WaitCommand(1000),
