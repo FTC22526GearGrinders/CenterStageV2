@@ -4,7 +4,6 @@ import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.arcrobotics.ftclib.command.CommandOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -48,6 +47,13 @@ public class GripperServoSettings extends CommandOpMode {
     public static boolean FLIP_GRIPPER = true;
 
     public static boolean CATAPULT = true;
+
+    public static boolean INPUT_ROLLER = true;
+
+    public static double rollerPower = 0;
+
+    static double lastRollerPower = 0;
+
 
     FtcDashboard dashboard;
     private PixelHandlerSubsystem phss;
@@ -142,6 +148,12 @@ public class GripperServoSettings extends CommandOpMode {
             if (CATAPULT)
                 drcatss.setCatapultPosition(CATAPULT_POSITION);
 
+            if (INPUT_ROLLER) {
+                if (lastRollerPower != rollerPower) {
+                    phss.runIntakeRoller(rollerPower);
+                    lastRollerPower = rollerPower;
+                }
+            } else phss.stopIntakeRoller();
 
         }
         reset();

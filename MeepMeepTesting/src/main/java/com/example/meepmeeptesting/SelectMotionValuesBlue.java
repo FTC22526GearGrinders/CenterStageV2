@@ -13,10 +13,17 @@ public class SelectMotionValuesBlue {
         int lcr = ActiveMotionValues.getLcrpos();
 
         ActiveMotionValues.setAdvancePose(new Pose2d());
+        ActiveMotionValues.setRetractPose(new Pose2d());
         ActiveMotionValues.setClearPose(new Pose2d());
+        ActiveMotionValues.setClearToTurnPose(new Pose2d());
         ActiveMotionValues.setParkPose(new Pose2d());
+        ActiveMotionValues.setPreParkPose(new Pose2d());
+        ActiveMotionValues.setPreTagPose(new Pose2d());
+        ActiveMotionValues.setTagLineupPose(new Pose2d());
+        ActiveMotionValues.setTurnAngle(0);
 
         ActiveMotionValues.setStopSecs(.1);
+
 
 
         if (lcr < 1 || lcr > 3) lcr = 1;

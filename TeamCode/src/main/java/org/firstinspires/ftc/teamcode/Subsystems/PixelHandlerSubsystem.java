@@ -2,7 +2,10 @@ package org.firstinspires.ftc.teamcode.Subsystems;
 
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.SubsystemBase;
+
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -23,6 +26,8 @@ public class PixelHandlerSubsystem extends SubsystemBase {
 
     public Servo flipGrippers;
 
+    public CRServo intakeRoller;
+
     ColorSensor colorSensor;
 
     private CommandOpMode myOpMode = null;
@@ -40,6 +45,7 @@ public class PixelHandlerSubsystem extends SubsystemBase {
         rightGripper = myOpMode.hardwareMap.get(Servo.class, "right gripper");
         turnGrippers = myOpMode.hardwareMap.get(Servo.class, "turn gripper");
         flipGrippers = myOpMode.hardwareMap.get(Servo.class, "flip gripper");
+        intakeRoller=myOpMode.hardwareMap.get(CRServo.class, "intake roller");
 
 
         pixelDrop = myOpMode.hardwareMap.get(Servo.class, "pixel drop");
@@ -54,6 +60,8 @@ public class PixelHandlerSubsystem extends SubsystemBase {
         turnGrippers.setDirection(Servo.Direction.FORWARD);
 
         flipGrippers.setDirection(Servo.Direction.FORWARD);
+
+        intakeRoller.setDirection(DcMotorSimple.Direction.FORWARD);
 
     }
 
@@ -186,6 +194,14 @@ public class PixelHandlerSubsystem extends SubsystemBase {
 
     public void flipGrippersToRightDown() {
         flipGrippers.setPosition(Constants.PixelHandlerConstants.FlipGripperSet.RIGHT_DOWN.position);
+    }
+
+    public void runIntakeRoller(double power){
+        intakeRoller.setPower(power);
+    }
+
+    public void stopIntakeRoller(){
+        intakeRoller.setPower(0);
     }
 
     public double getSensorDistanceInches() {
