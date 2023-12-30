@@ -14,6 +14,11 @@ public class JogDriveSlow extends CommandBase {
 
     private double startRadians;
 
+    private double forwardRatio = .3;
+    private double strafeRatio = .3;
+    private double rotRatio = .3;
+
+
     public JogDriveSlow(Drive_Subsystem drive, GamepadEx gamepad) {
         this.drive = drive;
         this.gamepad = gamepad;
@@ -35,26 +40,26 @@ public class JogDriveSlow extends CommandBase {
 
         if (!drive.drive.fieldCentric) {
 
-            double y = this.gamepad.getLeftY()/3;
-            double x = this.gamepad.getLeftX()/3;
-            double rx = this.gamepad.getRightX()/3;
+            double forward = this.gamepad.getLeftY() * forwardRatio;
+            double strafe = this.gamepad.getLeftX() * strafeRatio;
+            double rx = this.gamepad.getRightX() * rotRatio;
 
-            drive.drive.jog(y, x, rx);
+            drive.drive.jog(forward, strafe, rx);
 
         }
 
         if (drive.drive.fieldCentric) {
 
-            double strafe = -this.gamepad.getLeftY()/3; /* Invert stick Y axis */
-            double forward = this.gamepad.getLeftX()/3;
-            double rcw = this.gamepad.getRightX()/3;
+            double strafe = -this.gamepad.getLeftY() * strafeRatio; /* Invert stick Y axis */
+            double forward = this.gamepad.getLeftX() * forwardRatio;
+            double rcw = this.gamepad.getRightX() * rotRatio;
 
 
             if (!ActiveMotionValues.getRedAlliance()) {
 
-                strafe = this.gamepad.getLeftY()/3; /* Invert stick Y axis */
-                forward = -this.gamepad.getLeftX()/3;
-                rcw = this.gamepad.getRightX()/3;
+                strafe = this.gamepad.getLeftY() * strafe; /* Invert stick Y axis */
+                forward = -this.gamepad.getLeftX() * forward;
+                rcw = this.gamepad.getRightX() * rotRatio;
             }
 
 
