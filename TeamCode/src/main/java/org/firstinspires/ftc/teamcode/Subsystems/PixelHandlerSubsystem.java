@@ -55,7 +55,7 @@ public class PixelHandlerSubsystem extends SubsystemBase {
 
         leftGripper.setDirection(Servo.Direction.FORWARD);
 
-        rightGripper.setDirection(Servo.Direction.FORWARD);
+        rightGripper.setDirection(Servo.Direction.REVERSE);
 
         turnGrippers.setDirection(Servo.Direction.FORWARD);
 

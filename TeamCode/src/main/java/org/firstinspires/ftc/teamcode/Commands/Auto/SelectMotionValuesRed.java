@@ -79,7 +79,7 @@ public class SelectMotionValuesRed extends CommandBase {
 
 
                 ActiveMotionValues.setPreTagPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
-                        .minus(FieldConstantsRed.AprilTagConstants.tagLookAheadPose));
+                        .minus(FieldConstantsRed.AprilTagConstants.tagLookAheadPoseLeft));
 
                 ActiveMotionValues.setParkPose(new Pose2d());
                 ActiveMotionValues.setPreParkPose(new Pose2d());
@@ -118,7 +118,7 @@ public class SelectMotionValuesRed extends CommandBase {
                 ActiveMotionValues.setActTag(5);
 
                 ActiveMotionValues.setPreTagPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
-                        .minus(FieldConstantsRed.AprilTagConstants.tagLookAheadPose));
+                        .minus(FieldConstantsRed.AprilTagConstants.tagLookAheadPoseCenter));
 
                 ActiveMotionValues.setParkPose(new Pose2d());
                 ActiveMotionValues.setPreParkPose(new Pose2d());
@@ -158,7 +158,7 @@ public class SelectMotionValuesRed extends CommandBase {
                 ActiveMotionValues.setTurnAngle(FieldConstantsRed.turnToTagRadians);
 
                 ActiveMotionValues.setPreTagPose(FieldConstantsRed.getActiveTagPose(ActiveMotionValues.getActTag())
-                        .minus(FieldConstantsRed.AprilTagConstants.tagLookAheadPose));
+                        .minus(FieldConstantsRed.AprilTagConstants.tagLookAheadPoseRight));
 
                 ActiveMotionValues.setParkPose(new Pose2d());
                 ActiveMotionValues.setPreParkPose(new Pose2d());
@@ -298,7 +298,7 @@ public class SelectMotionValuesRed extends CommandBase {
                 ActiveMotionValues.setOptionStopPose(FieldConstantsRed.centerParkOptionPose);
                 ActiveMotionValues.setParkPose(FieldConstantsRed.centerParkPose);
             } else {
-                ActiveMotionValues.setWaitPartnerClearPose(FieldConstantsRed.centerPartnerClearPose);
+             //   ActiveMotionValues.setWaitPartnerClearPose(FieldConstantsRed.centerPartnerClearPose);
                 ActiveMotionValues.setOptionStopPose(FieldConstantsRed.centerOptionPose);
 
                 ActiveMotionValues.setTurnAngle(FieldConstantsRed.turnToTagRadians);

@@ -194,7 +194,7 @@ public class AutoSelectAndRunRedBBStart extends CommandOpMode {
 
             run();
 
-            arm.showTelemetry(telemetry);
+         //   arm.showTelemetry(telemetry);
           //  telemetry.update();
 
         }

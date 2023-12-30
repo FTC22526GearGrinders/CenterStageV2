@@ -69,13 +69,6 @@ public class TeleopOpMode extends CommandOpMode {
  * Driver gamepad assignmnents
  * */
 
-        if (driver.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) == 1)
-            new JogDriveSlow(drive, driver).execute();
-
-        if (driver.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) == 1)
-            new InstantCommand(() -> phss.closeBothGrippers()).execute();
-
-
         driver.getGamepadButton(GamepadKeys.Button.Y).whenPressed(
                 new SequentialCommandGroup(
                         new InstantCommand(() -> arm.setTargetInches(15)),
@@ -226,6 +219,14 @@ public class TeleopOpMode extends CommandOpMode {
     }
 
     void checkTriggers() {
+
+        if (driver.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) == 1) {
+            new JogDriveSlow(drive, driver).execute();
+        }
+
+        if (driver.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) == 1)
+            new InstantCommand(() -> phss.closeBothGrippers()).initialize();
+
 
 
         //  if (drlt.isDown())schedule(new JogDrive2(drive, driver));

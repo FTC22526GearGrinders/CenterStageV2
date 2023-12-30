@@ -194,7 +194,7 @@ public class AutoSelectAndRunBlue extends CommandOpMode {
 
             run();
 
-            telemetry.update();
+           // telemetry.update();
 
         }
         reset();

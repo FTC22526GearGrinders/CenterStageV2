@@ -128,7 +128,7 @@ public class DetectAprilTags extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return !noEnd && ((et.seconds() > .5 && ActiveMotionValues.getAprilTagSeen()) || et.seconds() > 5);
+        return !noEnd && ((et.seconds() > .5 && ActiveMotionValues.getAprilTagSeen()) || et.seconds() > 7);
 
     }
 }

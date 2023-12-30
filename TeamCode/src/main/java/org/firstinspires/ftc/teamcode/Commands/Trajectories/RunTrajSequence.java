@@ -41,7 +41,7 @@ public class RunTrajSequence extends CommandBase {
         drive.drive.update();
 
         opMode.telemetry.addData("Running ", drive.trajName);
-        opMode.telemetry.addData("Duration", drive.currentTrajSeq.duration());
+       // opMode.telemetry.addData("Duration", drive.currentTrajSeq.duration());
         opMode.telemetry.update();
     }
 

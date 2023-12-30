@@ -36,6 +36,10 @@ public class JogDriveSlow extends CommandBase {
     @Override
     public void execute() {
 
+        forwardRatio=.2;
+        strafeRatio=.2;
+        rotRatio=.2;
+
         drive.slowMode++;
 
         if (!drive.drive.fieldCentric) {

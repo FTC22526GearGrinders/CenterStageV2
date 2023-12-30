@@ -65,10 +65,10 @@ public final class Constants {
         public static final double POSN_ACCEL = 4 ;
         public static final double FORWARD_GAIN = .032;
 
-        public static double MAX_VEL = MAX_IPS * .8;
-        public static double MAX_ACCEL = 30;
-        public static double MAX_ANG_VEL = Math.toRadians(60);
-        public static double MAX_ANG_ACCEL = Math.toRadians(60);
+        public static double MAX_VEL = MAX_IPS * .9;
+        public static double MAX_ACCEL = 40;
+        public static double MAX_ANG_VEL = Math.toRadians(75);
+        public static double MAX_ANG_ACCEL = Math.toRadians(120);
         public static double TRAJ_VEL = 40;
         public static double TRAJ_ACCEL = 40;
         public static double TRAJ_ANG_VEL = Math.toRadians(40);
@@ -86,9 +86,9 @@ public final class Constants {
         }
 
         //     */
-        public static double kV = .0171;//12 volts/60 ips = .02 max
-        public static double kA = 0.002;// 0.0005;
-        public static double kStatic = 0.022;//0.08;
+        public static double kV = .0195;//12 volts/60 ips = .02 max
+        public static double kA = 0.003;// 0.0005;
+        public static double kStatic = 0.0;//0.08;
 
 
 //        public static double kV =  0.0140;
@@ -147,10 +147,10 @@ public final class Constants {
 
 
         public enum RightGripperSet {
-            WIDE_OPEN(.3),
+            WIDE_OPEN(.35),
             OPEN(.4),
-            MID(.3),
-            CLOSED(.7);
+            MID(.5),
+            CLOSED(.65);
 
             public final double position;
 

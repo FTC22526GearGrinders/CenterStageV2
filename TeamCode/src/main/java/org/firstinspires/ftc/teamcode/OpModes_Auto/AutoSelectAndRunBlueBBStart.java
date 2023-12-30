@@ -194,7 +194,7 @@ public class AutoSelectAndRunBlueBBStart extends CommandOpMode {
 
             run();
 
-            telemetry.update();
+          //  telemetry.update();
 
         }
         reset();

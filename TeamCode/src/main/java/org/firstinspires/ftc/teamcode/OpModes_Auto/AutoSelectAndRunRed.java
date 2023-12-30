@@ -197,7 +197,7 @@ public class AutoSelectAndRunRed extends CommandOpMode {
 
             run();
 
-            telemetry.update();
+           // telemetry.update();
         }
         reset();
 

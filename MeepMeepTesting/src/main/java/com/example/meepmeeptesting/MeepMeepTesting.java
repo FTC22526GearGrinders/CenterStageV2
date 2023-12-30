@@ -16,7 +16,7 @@ public class MeepMeepTesting {
 
         boolean bbstart = false;//                   aaset to false for start on stack side of truss
 
-        int lcr = 1;//                    left tape ==1, center tape = 2, right tape = 3 from robot view
+        int lcr = 2;//                    left tape ==1, center tape = 2, right tape = 3 from robot view
 
         boolean useStageDoor = true;
 
@@ -411,13 +411,12 @@ public class MeepMeepTesting {
 
                                             .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
 
-                                            .lineToLinearHeading(ActiveMotionValues.getWaitPartnerClearPose())
+                                            .turn(ActiveMotionValues.getTurnAngle())
+                                           // .lineToLinearHeading(ActiveMotionValues.getWaitPartnerClearPose())
 
                                             .waitSeconds(ActiveMotionValues.getStopSecs())
 
                                             .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
-
-                                            .turn(ActiveMotionValues.getTurnAngle())
 
                                             .lineToLinearHeading(ActiveMotionValues.getTargetPose())
 

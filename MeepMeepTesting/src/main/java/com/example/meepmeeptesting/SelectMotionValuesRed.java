@@ -273,8 +273,9 @@ public class SelectMotionValuesRed {
             if (!secondPixel) {
                 ActiveMotionValues.setOptionStopPose(FieldConstantsRed.centerParkOptionPose);
                 ActiveMotionValues.setParkPose(FieldConstantsRed.centerParkPose);
+
             } else {
-                ActiveMotionValues.setWaitPartnerClearPose(FieldConstantsRed.centerPartnerClearPose);
+               // ActiveMotionValues.setWaitPartnerClearPose(FieldConstantsRed.centerPartnerClearPose);
                 ActiveMotionValues.setOptionStopPose(FieldConstantsRed.centerOptionPose);
 
                 ActiveMotionValues.setTurnAngle(FieldConstantsRed.turnToTagRadians);
