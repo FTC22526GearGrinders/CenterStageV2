@@ -14,22 +14,22 @@ public class MeepMeepTesting {
 
         boolean redAlliance = true;
 
-        boolean bbstart = false;//aaset to false for start on stack side of truss
+        boolean bbstart = false;//                   aaset to false for start on stack side of truss
 
-        int lcr = 3;//left tape ==1, center tape = 2, right tape = 3 from robot view
-
-        if (lcr < 0 || lcr > 3) lcr = 2;
+        int lcr = 1;//                    left tape ==1, center tape = 2, right tape = 3 from robot view
 
         boolean useStageDoor = true;
-
-        boolean truss = !useStageDoor;
 
         boolean nearPark = false;
 
         boolean centerPark = false;
 
-        boolean secondPixel = false;
+        boolean secondPixel = true;
 
+        if (lcr < 0 || lcr > 3) lcr = 2;
+
+
+        boolean truss = !useStageDoor;
 
         ActiveMotionValues.setRedAlliance(redAlliance);
 
