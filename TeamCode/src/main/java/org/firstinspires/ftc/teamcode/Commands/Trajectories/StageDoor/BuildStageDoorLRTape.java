@@ -48,6 +48,8 @@ public class BuildStageDoorLRTape extends CommandBase {
 
                     .lineToLinearHeading(ActiveMotionValues.getClearPose())
 
+                    .turn(ActiveMotionValues.getTurnAngle())
+
                     .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
 
                     .lineToLinearHeading(ActiveMotionValues.getWaitPartnerClearPose())
@@ -55,8 +57,6 @@ public class BuildStageDoorLRTape extends CommandBase {
                     .waitSeconds(ActiveMotionValues.getStopSecs())
 
                     .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
-
-                    .turn(ActiveMotionValues.getTurnAngle())
 
                     .lineToLinearHeading(ActiveMotionValues.getTargetPose())
 

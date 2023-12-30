@@ -18,37 +18,32 @@ public final class FieldConstantsRed {
     public static Pose2d nearParkPose = new Pose2d(55, -60, startAngle);
     public static Pose2d centerParkPose = new Pose2d(55, -12, startAngle);
 
-    public static Pose2d nearParkOptionPose = new Pose2d(36, -60, startAngle);
-
     public static Pose2d centerParkOptionPose = new Pose2d(36, -12, startAngle);
 
-    public static Pose2d nearOptionPose = new Pose2d(36, -60, startAngle);
+    public static Pose2d nearOptionPose = new Pose2d(48 - Constants.RobotConstants.length / 2, -60, 0);
+    public static Pose2d nearOptionPoseNoTurn = new Pose2d(48 - Constants.RobotConstants.length / 2, -60, startAngle);
 
 
-    public static Pose2d centerOptionPose = new Pose2d(36, -12, 0);
+    public static Pose2d centerOptionPose = new Pose2d(48 - Constants.RobotConstants.length / 2, -12, 0);
 
-    public static Pose2d nearPartnerClearPose = new Pose2d(-12, -60, startAngle);
-
-    public static Pose2d centerPartnerClearPose = new Pose2d(-12, -12, startAngle);
-
+    public static Pose2d nearPartnerClearPose = new Pose2d(-6, -60, 0);
+    public static Pose2d centerPartnerClearPose = new Pose2d(-6, -12, 0);
     public static Pose2d stageDoorLineUpPose13 = new Pose2d(-36, -12, startAngle);
-
     public static Pose2d stageDoorLineUpPose2 = new Pose2d(-48, -12, startAngle);
-
-    public static Pose2d nearTrussLineUpPose = new Pose2d(-36, -60, startAngle);
-
+    public static Pose2d nearTrussLineUpPose = new Pose2d(-36, -60, 0);
+    public static Pose2d nearTrussLineUpPoseNoturn = new Pose2d(-36, -60, startAngle);
     public static double turnToTagRadians = Math.toRadians(90);
 
-    public static double pixelRightDropX = 2;
+    public static double pixelRightDropX = -2;//2;
     public static double pixelRightDropY = 3;
-    public static double pixelLeftDropX = 2;
+    public static double pixelLeftDropX = -1;//2;
     public static double pixelLeftDropY = 3;
     public static double leftClearX = 15;
 
     public static double pixelCenterDropY = 2;
 
 
-    public static Pose2d pixelLeftDropPose = new Pose2d(pixelLeftDropX, -Constants.RobotConstants.length / 2 + pixelRightDropY, 0);
+    public static Pose2d pixelLeftDropPose = new Pose2d(pixelLeftDropX, -Constants.RobotConstants.length / 2 + pixelLeftDropY, 0);
     public static Pose2d pixelCenterDropPose = new Pose2d(0, -Constants.RobotConstants.length / 2 + pixelCenterDropY, 0);
     public static Pose2d pixelRightDropPose = new Pose2d(pixelRightDropX, -Constants.RobotConstants.length / 2 + pixelRightDropY, 0);
 
@@ -63,10 +58,14 @@ public final class FieldConstantsRed {
         static final double atagAngle = 0;
 
 
-        public static final Pose2d tagLookAheadPose = new Pose2d(12 + Constants.RobotConstants.length / 2, 0, Math.toRadians(0));
+        public static final Pose2d tagLookAheadPoseLeft = new Pose2d(12 + Constants.RobotConstants.length / 2, 0, Math.toRadians(0));
+        public static final Pose2d tagLookAheadPoseCenter = new Pose2d(12 + Constants.RobotConstants.length / 2, 1, Math.toRadians(0));
+        public static final Pose2d tagLookAheadPoseRight = new Pose2d(12 + Constants.RobotConstants.length / 2, 2, Math.toRadians(0));
 
 
-        public static final Pose2d tagStrafeOffsetPose = new Pose2d(-60.25 + 36, 0, 0);
+        public static final Pose2d tagStrafeOffsetPoseTruss = new Pose2d(-60.25 + 48 - Constants.RobotConstants.length/2, 0, 0);
+        public static final Pose2d tagStrafeOffsetPoseSD = new Pose2d(-60.25 + 48 - Constants.RobotConstants.length/2, 0, 0);
+
 
 
         // tages 4,5 6
@@ -187,11 +186,11 @@ public final class FieldConstantsRed {
         public static final Pose2d leftRetractPose = leftDropPose.plus(retLPose);
         public static final Pose2d centerRetractPose = centerDropPose.plus(retCPose);
         public static final Pose2d rightRetractPose = rightDropPose.plus(retRPose);
-        public static final Pose2d clearPose = leftRetractPose.plus(new Pose2d(9.5, 0));
+        public static final Pose2d leftClearPose = new Pose2d(centerDropPose.getX(),leftRetractPose.getY(),startAngle);
+        public static final Pose2d rightClearPose = new Pose2d(centerDropPose.getX(),rightRetractPose.getY(),startAngle);
 
         public static final Pose2d centerSDClearPixelPose = new Pose2d(leftTapeMid.getX(), centerRetractPose.getY(), startAngle);
 
-        public static final Pose2d clearToTurnPose = new Pose2d(36, -55, startAngle);
 
 
     }

@@ -56,6 +56,12 @@ public class BuildTrussLRTape extends CommandBase {
 
                     .lineToLinearHeading((ActiveMotionValues.getClearPose()))
 
+                    .waitSeconds(.1)
+
+                    .turn(ActiveMotionValues.getTurnAngle())
+
+                    .waitSeconds(.1)
+
                     .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
 
                     .lineToLinearHeading(ActiveMotionValues.getWaitPartnerClearPose())
@@ -66,7 +72,6 @@ public class BuildTrussLRTape extends CommandBase {
 
                     .lineToLinearHeading(ActiveMotionValues.getClearToTurnPose())
 
-                    .turn(ActiveMotionValues.getTurnAngle())
 
                     .lineToLinearHeading(ActiveMotionValues.getTargetPose())
 

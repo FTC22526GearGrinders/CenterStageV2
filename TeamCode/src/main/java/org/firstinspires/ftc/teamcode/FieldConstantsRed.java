@@ -25,7 +25,7 @@ public final class FieldConstantsRed {
     public static Pose2d nearOptionPose = new Pose2d(36, -60, startAngle);
 
 
-    public static Pose2d centerOptionPose = new Pose2d(60 - Constants.RobotConstants.length, -12, 0);
+    public static Pose2d centerOptionPose = new Pose2d(48 - Constants.RobotConstants.length/2, -12, 0);
 
     public static Pose2d nearPartnerClearPose = new Pose2d(-12, -60, startAngle);
 
@@ -48,7 +48,7 @@ public final class FieldConstantsRed {
     public static double pixelCenterDropY = 2;
 
 
-    public static Pose2d pixelLeftDropPose = new Pose2d(pixelLeftDropX, -Constants.RobotConstants.length / 2 + pixelRightDropY, 0);
+    public static Pose2d pixelLeftDropPose = new Pose2d(pixelLeftDropX, -Constants.RobotConstants.length / 2 + pixelLeftDropY, 0);
     public static Pose2d pixelCenterDropPose = new Pose2d(0, -Constants.RobotConstants.length / 2 + pixelCenterDropY, 0);
     public static Pose2d pixelRightDropPose = new Pose2d(pixelRightDropX, -Constants.RobotConstants.length / 2 + pixelRightDropY, 0);
 
@@ -68,8 +68,8 @@ public final class FieldConstantsRed {
         public static final Pose2d tagLookAheadPoseRight = new Pose2d(12 + Constants.RobotConstants.length / 2, 2, Math.toRadians(0));
 
 
-        public static final Pose2d tagStrafeOffsetPoseTruss = new Pose2d(-60.25 + 60 - Constants.RobotConstants.length, 0, 0);
-        public static final Pose2d tagStrafeOffsetPoseSD = new Pose2d(-60.25 + 60 - Constants.RobotConstants.length, 0, 0);
+        public static final Pose2d tagStrafeOffsetPoseTruss = new Pose2d(-60.25 + 48 - Constants.RobotConstants.length/2, 0, 0);
+        public static final Pose2d tagStrafeOffsetPoseSD = new Pose2d(-60.25 + 48 - Constants.RobotConstants.length/2, 0, 0);
 
 
         // tages 4,5 6

@@ -49,16 +49,19 @@ public class BuildStageDoorCenterTape extends CommandBase {
 
                     .lineToLinearHeading(ActiveMotionValues.getClearPose())
 
-                    .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
+                    .waitSeconds(.1)
 
                     .turn(ActiveMotionValues.getTurnAngle())
 
+                    .waitSeconds(.1)
+
+                    .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
+
+                   .lineToLinearHeading(ActiveMotionValues.getWaitPartnerClearPose())
+
                     .waitSeconds(ActiveMotionValues.getStopSecs())
 
-            //        .lineToLinearHeading(ActiveMotionValues.getWaitPartnerClearPose())
-
                     .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
-
 
                     .lineToLinearHeading(ActiveMotionValues.getTargetPose())
 

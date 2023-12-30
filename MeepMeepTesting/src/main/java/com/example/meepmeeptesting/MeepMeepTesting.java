@@ -14,9 +14,9 @@ public class MeepMeepTesting {
 
         boolean redAlliance = true;
 
-        boolean bbstart = false;//                   aaset to false for start on stack side of truss
+        boolean bbstart = true;//                   aaset to false for start on stack side of truss
 
-        int lcr = 2;//                    left tape ==1, center tape = 2, right tape = 3 from robot view
+        int lcr = 3;//                    left tape ==1, center tape = 2, right tape = 3 from robot view
 
         boolean useStageDoor = true;
 
@@ -24,7 +24,7 @@ public class MeepMeepTesting {
 
         boolean centerPark = false;
 
-        boolean secondPixel = true;
+        boolean secondPixel = false;
 
         if (lcr < 0 || lcr > 3) lcr = 2;
 
@@ -169,355 +169,352 @@ public class MeepMeepTesting {
 
             }
 
-        } else {
+        }
+
+        if (!bbstart) {
+
             MeepMeep meepMeep = new MeepMeep(800);
 
-            if (truss) {
 
-                if (lcr == 2 && !secondPixel) {
-                    RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
+            if (truss && lcr == 2 && !secondPixel) {
+                RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
 
-                            .setDimensions(Constants.RobotConstants.width, Constants.RobotConstants.length)
+                        .setDimensions(Constants.RobotConstants.width, Constants.RobotConstants.length)
 
-                            // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                            .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
+                        // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
+                        .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
 
-                            .followTrajectorySequence(drive ->
+                        .followTrajectorySequence(drive ->
 
-                                    drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
+                                drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
 
-                                            .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
+                                        .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
 
-                                            //.UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
+                                        //.UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
 
-                                            .waitSeconds(1)
+                                        .waitSeconds(1)
 
-                                            .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
+                                        .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
 
-                                            .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
+                                        .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
 
-                                            .waitSeconds(.1)
+                                        .waitSeconds(.1)
 
-                                            .lineToLinearHeading(ActiveMotionValues.getParkPose())
+                                        .lineToLinearHeading(ActiveMotionValues.getParkPose())
 
 
-                                            .build());
+                                        .build());
 
 
-                    myBot.getDrive().setPoseEstimate(startPose);
+                myBot.getDrive().setPoseEstimate(startPose);
 
-                    ShowField.showIt(meepMeep, myBot);
+                ShowField.showIt(meepMeep, myBot);
 
-                }
-                if (lcr == 2 && secondPixel) {
+            }
+            if (truss && lcr == 2 && secondPixel) {
 
-                    RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
+                RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
 
-                            .setDimensions(Constants.RobotConstants.width, Constants.RobotConstants.length)
+                        .setDimensions(Constants.RobotConstants.width, Constants.RobotConstants.length)
 
-                            // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                            .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
+                        // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
+                        .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
 
-                            .followTrajectorySequence(drive ->
+                        .followTrajectorySequence(drive ->
 
-                                    drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
+                                drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
 
-                                            .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
+                                        .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
 
-                                            //.UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
+                                        //.UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
 
-                                            .waitSeconds(1)
+                                        .waitSeconds(1)
 
-                                            .lineToLinearHeading(ActiveMotionValues.getRetractPose())
+                                        .lineToLinearHeading(ActiveMotionValues.getRetractPose())
 
-                                            .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
+                                        .turn(ActiveMotionValues.getTurnAngle())
 
-                                            .lineToLinearHeading(ActiveMotionValues.getWaitPartnerClearPose())
+                                        .waitSeconds(.1)
 
-                                            .waitSeconds(ActiveMotionValues.getStopSecs())
+                                        .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
 
-                                            .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
+                                        .lineToLinearHeading(ActiveMotionValues.getWaitPartnerClearPose())
 
-                                            .lineToLinearHeading(ActiveMotionValues.getClearToTurnPose())
+                                        .waitSeconds(ActiveMotionValues.getStopSecs())
 
-                                            .turn(ActiveMotionValues.getTurnAngle())
+                                        .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
 
-                                            .lineToLinearHeading(ActiveMotionValues.getTargetPose())
-                                            .build());
+                                        .lineToLinearHeading(ActiveMotionValues.getTargetPose())
+                                        .build());
 
 
-                    myBot.getDrive().setPoseEstimate(startPose);
+                myBot.getDrive().setPoseEstimate(startPose);
 
-                    ShowField.showIt(meepMeep, myBot);
-
-                }
-
-
-                if ((lcr == 1 || lcr == 3) && !secondPixel) {
-                    RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
-
-                            .setDimensions(Constants.RobotConstants.width, Constants.RobotConstants.length)
-
-                            // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                            .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
-
-                            .followTrajectorySequence(drive ->
-
-                                    drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
-
-                                            .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
-
-                                            .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
-
-                                            // .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
-
-                                            .waitSeconds(1)
-
-                                            .lineToLinearHeading(ActiveMotionValues.getRetractPose())
-
-                                            .lineToLinearHeading((ActiveMotionValues.getClearPose()))
-
-                                            .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
-
-                                            .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
-
-                                            .waitSeconds(.1)
-
-                                            .lineToLinearHeading(ActiveMotionValues.getParkPose())
-
-
-                                            .build());
-
-
-                    myBot.getDrive().setPoseEstimate(startPose);
-
-                    ShowField.showIt(meepMeep, myBot);
-
-                }
-                if ((lcr == 1 || lcr == 3) && secondPixel) {
-
-                    RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
-
-                            .setDimensions(Constants.RobotConstants.width, Constants.RobotConstants.length)
-
-                            // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                            .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
-
-                            .followTrajectorySequence(drive ->
-
-                                    drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
-
-                                            .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
-
-                                            .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
-
-                                            // .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
-
-                                            .waitSeconds(1)
-
-                                            .lineToLinearHeading(ActiveMotionValues.getRetractPose())
-
-                                            .lineToLinearHeading((ActiveMotionValues.getClearPose()))
-
-                                            .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
-
-                                            .lineToLinearHeading(ActiveMotionValues.getWaitPartnerClearPose())
-
-                                            .waitSeconds(ActiveMotionValues.getStopSecs())
-
-                                            .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
-
-                                            .lineToLinearHeading(ActiveMotionValues.getClearToTurnPose())
-
-                                            .turn(ActiveMotionValues.getTurnAngle())
-
-                                            .lineToLinearHeading(ActiveMotionValues.getTargetPose())
-
-                                            .build());
-
-
-                    myBot.getDrive().setPoseEstimate(startPose);
-
-                    ShowField.showIt(meepMeep, myBot);
-
-                }
-
+                ShowField.showIt(meepMeep, myBot);
 
             }
 
-            if (useStageDoor) {
 
-                if (lcr == 2 && !secondPixel) {
-                    RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
+            if (truss && (lcr == 1 || lcr == 3) && !secondPixel) {
+                RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
 
-                            .setDimensions(Constants.RobotConstants.width, Constants.RobotConstants.length)
+                        .setDimensions(Constants.RobotConstants.width, Constants.RobotConstants.length)
 
-                            // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                            .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
+                        // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
+                        .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
 
-                            .followTrajectorySequence(drive ->
+                        .followTrajectorySequence(drive ->
 
-                                    drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
+                                drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
 
-                                            .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
+                                        .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
 
-                                            .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
+                                        .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
 
-                                           // .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
+                                        // .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
 
-                                            .waitSeconds(1)
+                                        .waitSeconds(1)
 
-                                            .lineToLinearHeading(ActiveMotionValues.getRetractPose())
+                                        .lineToLinearHeading(ActiveMotionValues.getRetractPose())
 
-                                            .lineToLinearHeading(ActiveMotionValues.getClearPose())
+                                        .lineToLinearHeading((ActiveMotionValues.getClearPose()))
 
-                                            .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
+                                        .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
 
-                                            .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
+                                        .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
 
-                                            .waitSeconds(.1)
+                                        .waitSeconds(.1)
 
-                                            .lineToLinearHeading(ActiveMotionValues.getParkPose())
-                                            .build());
+                                        .lineToLinearHeading(ActiveMotionValues.getParkPose())
 
 
-                    myBot.getDrive().setPoseEstimate(startPose);
+                                        .build());
 
-                    ShowField.showIt(meepMeep, myBot);
 
-                }
-                if (lcr == 2 && secondPixel) {
+                myBot.getDrive().setPoseEstimate(startPose);
 
-                    RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
+                ShowField.showIt(meepMeep, myBot);
 
-                            .setDimensions(Constants.RobotConstants.width, Constants.RobotConstants.length)
+            }
+            if (truss && (lcr == 1 || lcr == 3) && secondPixel) {
 
-                            // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                            .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
+                RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
 
-                            .followTrajectorySequence(drive ->
+                        .setDimensions(Constants.RobotConstants.width, Constants.RobotConstants.length)
 
-                                    drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
+                        // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
+                        .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
 
-                                            .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
+                        .followTrajectorySequence(drive ->
 
-                                            //.UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
+                                drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
 
-                                            .waitSeconds(1)
+                                        .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
 
-                                            .lineToLinearHeading(ActiveMotionValues.getRetractPose())
+                                        .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
 
-                                            .lineToLinearHeading(ActiveMotionValues.getClearPose())
+                                        // .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
 
-                                            .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
+                                        .waitSeconds(1)
 
-                                            .turn(ActiveMotionValues.getTurnAngle())
-                                           // .lineToLinearHeading(ActiveMotionValues.getWaitPartnerClearPose())
+                                        .lineToLinearHeading(ActiveMotionValues.getRetractPose())
 
-                                            .waitSeconds(ActiveMotionValues.getStopSecs())
+                                        .lineToLinearHeading((ActiveMotionValues.getClearPose()))
 
-                                            .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
+                                        .turn(ActiveMotionValues.getTurnAngle())
 
-                                            .lineToLinearHeading(ActiveMotionValues.getTargetPose())
+                                        .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
 
-                                            .build());
+                                        .lineToLinearHeading(ActiveMotionValues.getWaitPartnerClearPose())
 
+                                        .waitSeconds(ActiveMotionValues.getStopSecs())
 
-                    myBot.getDrive().setPoseEstimate(startPose);
+                                        .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
 
-                    ShowField.showIt(meepMeep, myBot);
+                                        .lineToLinearHeading(ActiveMotionValues.getTargetPose())
 
-                }
+                                        .build());
 
 
-                if ((lcr == 1 || lcr == 3) && !secondPixel) {
-                    RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
+                myBot.getDrive().setPoseEstimate(startPose);
 
-                            .setDimensions(Constants.RobotConstants.width, Constants.RobotConstants.length)
+                ShowField.showIt(meepMeep, myBot);
+            }
 
-                            // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                            .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
 
-                            .followTrajectorySequence(drive ->
+            if (useStageDoor && lcr == 2 && !secondPixel) {
 
-                                    drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
+                RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
 
-                                            .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
+                        .setDimensions(Constants.RobotConstants.width, Constants.RobotConstants.length)
 
-                                            .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
+                        // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
+                        .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
 
-                                            // .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
 
-                                            .waitSeconds(1)
+                        .followTrajectorySequence(drive ->
 
-                                            .lineToLinearHeading(ActiveMotionValues.getRetractPose())
+                                drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
 
-                                            .lineToLinearHeading((ActiveMotionValues.getClearPose()))
 
-                                            .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
+                                        .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
 
-                                            .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
+                                        // .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
 
-                                            .waitSeconds(.1)
+                                        .waitSeconds(1)
 
-                                            .lineToLinearHeading(ActiveMotionValues.getParkPose())
+                                        .lineToLinearHeading(ActiveMotionValues.getRetractPose())
 
+                                        .lineToLinearHeading(ActiveMotionValues.getClearPose())
 
-                                            .build());
+                                        .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
 
+                                        .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
 
-                    myBot.getDrive().setPoseEstimate(startPose);
+                                        .waitSeconds(.1)
 
-                    ShowField.showIt(meepMeep, myBot);
+                                        .lineToLinearHeading(ActiveMotionValues.getParkPose())
+                                        .build());
 
-                }
-                if ((lcr == 1 || lcr == 3) && secondPixel) {
 
-                    RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
+                myBot.getDrive().setPoseEstimate(startPose);
 
-                            .setDimensions(Constants.RobotConstants.width, Constants.RobotConstants.length)
+                ShowField.showIt(meepMeep, myBot);
 
-                            // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                            .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
+            }
+            if (useStageDoor && lcr == 2 && secondPixel) {
 
-                            .followTrajectorySequence(drive ->
+                RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
 
-                                    drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
+                        .setDimensions(Constants.RobotConstants.width, Constants.RobotConstants.length)
 
+                        // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
+                        .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
 
-                                            .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
+                        .followTrajectorySequence(drive ->
 
-                                            .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
+                                drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
 
-                                           // .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
+                                        .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
 
-                                            .waitSeconds(1)
+                                        //.UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
 
-                                            .lineToLinearHeading(ActiveMotionValues.getRetractPose())
+                                        .waitSeconds(1)
 
-                                            .lineToLinearHeading(ActiveMotionValues.getClearPose())
+                                        .lineToLinearHeading(ActiveMotionValues.getRetractPose())
 
-                                            .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
+                                        .lineToLinearHeading(ActiveMotionValues.getClearPose())
 
-                                            .lineToLinearHeading(ActiveMotionValues.getWaitPartnerClearPose())
+                                        .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
 
-                                            .waitSeconds(ActiveMotionValues.getStopSecs())
+                                        .turn(ActiveMotionValues.getTurnAngle())
 
-                                            .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
+                                        .waitSeconds(.1)
 
-                                            .turn(ActiveMotionValues.getTurnAngle())
+                                        .lineToLinearHeading(ActiveMotionValues.getWaitPartnerClearPose())
 
-                                            .lineToLinearHeading(ActiveMotionValues.getTargetPose())
+                                        .waitSeconds(ActiveMotionValues.getStopSecs())
 
-                                            .build());
+                                        .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
 
+                                        .lineToLinearHeading(ActiveMotionValues.getTargetPose())
 
-                    myBot.getDrive().setPoseEstimate(startPose);
+                                        .build());
 
-                    ShowField.showIt(meepMeep, myBot);
 
-                }
+                myBot.getDrive().setPoseEstimate(startPose);
 
+                ShowField.showIt(meepMeep, myBot);
+
+            }
+
+
+            if (useStageDoor && (lcr == 1 || lcr == 3) && !secondPixel) {
+                RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
+
+                        .setDimensions(Constants.RobotConstants.width, Constants.RobotConstants.length)
+
+                        // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
+                        .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
+
+                        .followTrajectorySequence(drive ->
+
+                                drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
+
+                                        .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
+
+                                        .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
+
+                                        // .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
+
+                                        .waitSeconds(1)
+
+                                        .lineToLinearHeading(ActiveMotionValues.getRetractPose())
+
+                                        .lineToLinearHeading((ActiveMotionValues.getClearPose()))
+
+                                        .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
+
+                                        .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
+
+                                        .waitSeconds(.1)
+
+                                        .lineToLinearHeading(ActiveMotionValues.getParkPose())
+
+
+                                        .build());
+
+
+                myBot.getDrive().setPoseEstimate(startPose);
+
+                ShowField.showIt(meepMeep, myBot);
+
+            }
+            if (useStageDoor && (lcr == 1 || lcr == 3) && secondPixel) {
+
+                RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
+
+                        .setDimensions(Constants.RobotConstants.width, Constants.RobotConstants.length)
+
+                        // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
+                        .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
+
+                        .followTrajectorySequence(drive ->
+
+                                drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
+
+
+                                        .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
+
+                                        .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
+
+                                        // .UNSTABLE_addTemporalMarkerOffset(.5, () -> phss.dropPixel())
+
+                                        .waitSeconds(1)
+
+                                        .lineToLinearHeading(ActiveMotionValues.getRetractPose())
+
+                                        .lineToLinearHeading(ActiveMotionValues.getClearPose())
+
+                                        .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
+
+                                        .turn(ActiveMotionValues.getTurnAngle())
+
+                                        .lineToLinearHeading(ActiveMotionValues.getWaitPartnerClearPose())
+
+                                        .waitSeconds(ActiveMotionValues.getStopSecs())
+
+                                        .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
+
+
+                                        .lineToLinearHeading(ActiveMotionValues.getTargetPose())
+
+                                        .build());
+
+
+                myBot.getDrive().setPoseEstimate(startPose);
+
+                ShowField.showIt(meepMeep, myBot);
 
             }
 
