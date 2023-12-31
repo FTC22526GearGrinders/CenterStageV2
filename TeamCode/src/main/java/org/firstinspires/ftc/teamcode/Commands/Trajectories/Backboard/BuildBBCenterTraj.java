@@ -4,9 +4,7 @@ import com.arcrobotics.ftclib.command.CommandBase;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcontroller.external.samples.ConceptScanServo;
 import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
-import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.Subsystems.Drive_Subsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.PixelHandlerSubsystem;
 
@@ -30,6 +28,7 @@ public class BuildBBCenterTraj extends CommandBase {
         et = new ElapsedTime();
 
         drive.trajectoryBuilt = false;
+
     }
 
     @Override
@@ -42,12 +41,6 @@ public class BuildBBCenterTraj extends CommandBase {
          *
          */
         drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
-
-                // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track wid
-
-
-
-                .setTurnConstraint(Constants.DriveConstants.MAX_ANG_VEL, Constants.DriveConstants.MAX_ANG_ACCEL)
 
                 .lineToLinearHeading(ActiveMotionValues.getDropOffPose())
 

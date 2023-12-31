@@ -40,11 +40,10 @@ public class SelectMotionValuesBlue {
 
 
             case 1://left tape not truss side
-                double dropOffsetX = FieldConstantsBlue.pixelLeftDropX;
+                double dropOffsetX = -FieldConstantsBlue.pixelLeftDropX;
 
                 Pose2d dropOffsetPose = new Pose2d(dropOffsetX, 0, 0);
 
-                Pose2d xyOffsetPose = new Pose2d();
 
                 ActiveMotionValues.setStartPose(FieldConstantsBlue.XPYP.startPos);//start pose
 
@@ -52,9 +51,7 @@ public class SelectMotionValuesBlue {
 
                 ActiveMotionValues.setActTag(1);
 
-
-
-                ActiveMotionValues.setDropOffPose(FieldConstantsBlue.XPYP.leftDropPose.minus(xyOffsetPose));
+                ActiveMotionValues.setDropOffPose(FieldConstantsBlue.XPYP.leftDropPose);
 
                 ActiveMotionValues.setRetractPose(FieldConstantsBlue.getActiveTagLineupPose(ActiveMotionValues.getActTag())
                        .minus(dropOffsetPose));
@@ -82,14 +79,11 @@ public class SelectMotionValuesBlue {
             //******************************************************************************************
             case 2://center straight motion to midddle of center tape
 
-
-                xyOffsetPose = new Pose2d();
-
                 //robot moves in Y
 
                 ActiveMotionValues.setStartPose(FieldConstantsBlue.XPYP.startPos);//start pose
 
-                ActiveMotionValues.setDropOffPose(FieldConstantsBlue.XPYP.centerDropPose.minus(xyOffsetPose));
+                ActiveMotionValues.setDropOffPose(FieldConstantsBlue.XPYP.centerDropPose);
 
                 ActiveMotionValues.setRetractPose(FieldConstantsBlue.XPYP.centerRetractPose);
 
@@ -120,7 +114,6 @@ public class SelectMotionValuesBlue {
             //******************************************************************************************
             case 3://truss side
 
-                xyOffsetPose = new Pose2d();
 
                 ActiveMotionValues.setStartPose(FieldConstantsBlue.XPYP.startPos);//start pose
 
@@ -128,7 +121,7 @@ public class SelectMotionValuesBlue {
                 ActiveMotionValues.setAdvancePose(FieldConstantsBlue.XPYP.rightAdvancePose);
 
 
-                ActiveMotionValues.setDropOffPose(FieldConstantsBlue.XPYP.rightDropPose.minus(xyOffsetPose));
+                ActiveMotionValues.setDropOffPose(FieldConstantsBlue.XPYP.rightDropPose);
 
 
                 ActiveMotionValues.setRetractPose(FieldConstantsBlue.XPYP.rightRetractPose);
@@ -165,13 +158,11 @@ public class SelectMotionValuesBlue {
 
             case 11://left tape
 
-                xyOffsetPose = new Pose2d();
-
                 ActiveMotionValues.setStartPose(FieldConstantsBlue.XMYP.startPose);//start pose
 
                 ActiveMotionValues.setAdvancePose(FieldConstantsBlue.XMYP.leftAdvancePose);
 
-                ActiveMotionValues.setDropOffPose(FieldConstantsBlue.XMYP.leftDropPose.minus(xyOffsetPose));
+                ActiveMotionValues.setDropOffPose(FieldConstantsBlue.XMYP.leftDropPose);
 
                 ActiveMotionValues.setRetractPose(FieldConstantsBlue.XMYP.leftRetractPose);
 
@@ -190,11 +181,9 @@ public class SelectMotionValuesBlue {
 
             case 12://center
 
-                xyOffsetPose = new Pose2d();
-
                 ActiveMotionValues.setStartPose(FieldConstantsBlue.XMYP.startPose);//start pose
 
-                ActiveMotionValues.setDropOffPose(FieldConstantsBlue.XMYP.centerDropPose.minus(xyOffsetPose));
+                ActiveMotionValues.setDropOffPose(FieldConstantsBlue.XMYP.centerDropPose);
 
                 ActiveMotionValues.setRetractPose(FieldConstantsBlue.XMYP.centerRetractPose);
 
@@ -209,17 +198,11 @@ public class SelectMotionValuesBlue {
             //******************************************************************************************
             case 13://right tape Blue
 
-
-                //robot moves in Y
-
-                xyOffsetPose = new Pose2d();
-
-
                 ActiveMotionValues.setStartPose(FieldConstantsBlue.XMYP.startPose);//start pose
 
                 ActiveMotionValues.setAdvancePose(FieldConstantsBlue.XMYP.rightAdvancePose);
 
-                ActiveMotionValues.setDropOffPose(FieldConstantsBlue.XMYP.rightDropPose.minus(xyOffsetPose));
+                ActiveMotionValues.setDropOffPose(FieldConstantsBlue.XMYP.rightDropPose);
 
                 ActiveMotionValues.setRetractPose(FieldConstantsBlue.XMYP.rightRetractPose);
 

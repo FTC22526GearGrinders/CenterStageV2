@@ -34,10 +34,13 @@ public final class FieldConstantsRed {
     public static Pose2d nearTrussLineUpPoseNoturn = new Pose2d(-36, -60, startAngle);
     public static double turnToTagRadians = Math.toRadians(90);
 
+
+
+    public static double pixelLeftDropX = -2;
+    public static double pixelLeftDropY = 3;
     public static double pixelRightDropX = -2;//2;
     public static double pixelRightDropY = 3;
-    public static double pixelLeftDropX = -1;//2;
-    public static double pixelLeftDropY = 3;
+
     public static double leftClearX = 15;
 
     public static double pixelCenterDropY = 2;
@@ -133,7 +136,8 @@ public final class FieldConstantsRed {
                 leftTapeMid.getY(), startAngle)
                 .plus(pixelLeftDropPose);
         public static final Pose2d centerDropPose = new Pose2d(centerTapeMid.getX(),
-                centerTapeMid.getY(), startAngle).plus(pixelCenterDropPose);
+                centerTapeMid.getY(), startAngle)
+                .plus(pixelCenterDropPose);
 
         public static final Pose2d rightDropPose = new Pose2d(rightTapeMid.getX(),
                 rightTapeMid.getY(), startAngle)
