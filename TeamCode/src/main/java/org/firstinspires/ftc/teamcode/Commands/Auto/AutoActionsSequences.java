@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Commands.Auto;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.ConditionalCommand;
 import com.arcrobotics.ftclib.command.InstantCommand;
+import com.arcrobotics.ftclib.command.ParallelCommandGroup;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.command.WaitCommand;
 
@@ -33,24 +34,26 @@ public class AutoActionsSequences extends SequentialCommandGroup {
                         af.getAllianceData(opMode, red),
 
                         af.buildAndRunTrajectory(),
-                        
+
                         new ConditionalCommand(
 
                                 new SequentialCommandGroup(
 
                                         af.raiseArmToPosition(),
 
-                                        af.turnGripperToBoard(),
+                                        new ParallelCommandGroup(
 
-                                        new WaitCommand(500),
+                                                new SequentialCommandGroup(
 
-                                        new InstantCommand(phss::flipGrippersToLeftDown),
+                                                        af.raiseGripperToBoard(),
 
-                                        af.detectTags(),
+                                                        new WaitCommand(500),
+
+                                                        new InstantCommand(phss::flipGrippersToLeftDown)),
+
+                                                af.detectTags()),
 
                                         af.trajToBackboard(),
-
-                                        //   af.positionToBackboardUsingTags(),
 
                                         new WaitCommand(1000),
 

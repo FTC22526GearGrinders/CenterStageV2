@@ -109,7 +109,7 @@ public class AutoFactory extends CommandBase {
         return new TrajectoryToBackboardSimple(drive, opMode);
     }
 
-    public Command turnGripperToBoard(){
+    public Command raiseGripperToBoard(){
         return new InstantCommand(()-> phss.raiseGrippersToDeliver());
     }
 
