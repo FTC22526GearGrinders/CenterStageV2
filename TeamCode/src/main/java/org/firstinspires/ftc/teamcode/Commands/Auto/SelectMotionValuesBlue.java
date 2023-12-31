@@ -55,11 +55,10 @@ public class SelectMotionValuesBlue extends CommandBase {
 
 
             case 1://left tape not truss side
-                double dropOffsetX = FieldConstantsBlue.pixelLeftDropX;
+                double dropOffsetX = -FieldConstantsBlue.pixelLeftDropX;
 
                 Pose2d dropOffsetPose = new Pose2d(dropOffsetX, 0, 0);
 
-                Pose2d xyOffsetPose = new Pose2d();
 
                 ActiveMotionValues.setStartPose(FieldConstantsBlue.XPYP.startPos);//start pose
 
@@ -67,8 +66,7 @@ public class SelectMotionValuesBlue extends CommandBase {
 
                 ActiveMotionValues.setActTag(1);
 
-
-                ActiveMotionValues.setDropOffPose(FieldConstantsBlue.XPYP.leftDropPose.minus(xyOffsetPose));
+                ActiveMotionValues.setDropOffPose(FieldConstantsBlue.XPYP.leftDropPose);
 
                 ActiveMotionValues.setRetractPose(FieldConstantsBlue.getActiveTagLineupPose(ActiveMotionValues.getActTag())
                         .minus(dropOffsetPose));
@@ -76,7 +74,7 @@ public class SelectMotionValuesBlue extends CommandBase {
                 ActiveMotionValues.setTurnAngle(FieldConstantsBlue.turnToTagRadians);
 
                 ActiveMotionValues.setPreTagPose(FieldConstantsBlue.getActiveTagPose(ActiveMotionValues.getActTag())
-                        .minus(FieldConstantsBlue.AprilTagConstants.tagLookAheadPose));
+                        .minus(FieldConstantsBlue.AprilTagConstants.tagLookAheadPoseLeft));
 
                 ActiveMotionValues.setParkPose(new Pose2d());
                 ActiveMotionValues.setPreParkPose(new Pose2d());
@@ -96,14 +94,11 @@ public class SelectMotionValuesBlue extends CommandBase {
             //******************************************************************************************
             case 2://center straight motion to midddle of center tape
 
-
-                xyOffsetPose = new Pose2d();
-
                 //robot moves in Y
 
                 ActiveMotionValues.setStartPose(FieldConstantsBlue.XPYP.startPos);//start pose
 
-                ActiveMotionValues.setDropOffPose(FieldConstantsBlue.XPYP.centerDropPose.minus(xyOffsetPose));
+                ActiveMotionValues.setDropOffPose(FieldConstantsBlue.XPYP.centerDropPose);
 
                 ActiveMotionValues.setRetractPose(FieldConstantsBlue.XPYP.centerRetractPose);
 
@@ -112,7 +107,7 @@ public class SelectMotionValuesBlue extends CommandBase {
                 ActiveMotionValues.setActTag(2);
 
                 ActiveMotionValues.setPreTagPose(FieldConstantsBlue.getActiveTagPose(ActiveMotionValues.getActTag())
-                        .minus(FieldConstantsBlue.AprilTagConstants.tagLookAheadPose));
+                        .minus(FieldConstantsBlue.AprilTagConstants.tagLookAheadPoseCenter));
 
                 ActiveMotionValues.setParkPose(new Pose2d());
 
@@ -134,7 +129,6 @@ public class SelectMotionValuesBlue extends CommandBase {
             //******************************************************************************************
             case 3://truss side
 
-                xyOffsetPose = new Pose2d();
 
                 ActiveMotionValues.setStartPose(FieldConstantsBlue.XPYP.startPos);//start pose
 
@@ -142,7 +136,7 @@ public class SelectMotionValuesBlue extends CommandBase {
                 ActiveMotionValues.setAdvancePose(FieldConstantsBlue.XPYP.rightAdvancePose);
 
 
-                ActiveMotionValues.setDropOffPose(FieldConstantsBlue.XPYP.rightDropPose.minus(xyOffsetPose));
+                ActiveMotionValues.setDropOffPose(FieldConstantsBlue.XPYP.rightDropPose);
 
 
                 ActiveMotionValues.setRetractPose(FieldConstantsBlue.XPYP.rightRetractPose);
@@ -156,7 +150,7 @@ public class SelectMotionValuesBlue extends CommandBase {
                 ActiveMotionValues.setTagLineupPose(FieldConstantsBlue.getActiveTagLineupPose(ActiveMotionValues.getActTag()));
 
                 ActiveMotionValues.setPreTagPose(FieldConstantsBlue.getActiveTagPose(ActiveMotionValues.getActTag())
-                        .minus(FieldConstantsBlue.AprilTagConstants.tagLookAheadPose));
+                        .minus(FieldConstantsBlue.AprilTagConstants.tagLookAheadPoseRight));
 
                 ActiveMotionValues.setParkPose(new Pose2d());
 
@@ -179,13 +173,11 @@ public class SelectMotionValuesBlue extends CommandBase {
 
             case 11://left tape
 
-                xyOffsetPose = new Pose2d();
-
                 ActiveMotionValues.setStartPose(FieldConstantsBlue.XMYP.startPose);//start pose
 
                 ActiveMotionValues.setAdvancePose(FieldConstantsBlue.XMYP.leftAdvancePose);
 
-                ActiveMotionValues.setDropOffPose(FieldConstantsBlue.XMYP.leftDropPose.minus(xyOffsetPose));
+                ActiveMotionValues.setDropOffPose(FieldConstantsBlue.XMYP.leftDropPose);
 
                 ActiveMotionValues.setRetractPose(FieldConstantsBlue.XMYP.leftRetractPose);
 
@@ -204,11 +196,9 @@ public class SelectMotionValuesBlue extends CommandBase {
 
             case 12://center
 
-                xyOffsetPose = new Pose2d();
-
                 ActiveMotionValues.setStartPose(FieldConstantsBlue.XMYP.startPose);//start pose
 
-                ActiveMotionValues.setDropOffPose(FieldConstantsBlue.XMYP.centerDropPose.minus(xyOffsetPose));
+                ActiveMotionValues.setDropOffPose(FieldConstantsBlue.XMYP.centerDropPose);
 
                 ActiveMotionValues.setRetractPose(FieldConstantsBlue.XMYP.centerRetractPose);
 
@@ -223,17 +213,11 @@ public class SelectMotionValuesBlue extends CommandBase {
             //******************************************************************************************
             case 13://right tape Blue
 
-
-                //robot moves in Y
-
-                xyOffsetPose = new Pose2d();
-
-
                 ActiveMotionValues.setStartPose(FieldConstantsBlue.XMYP.startPose);//start pose
 
                 ActiveMotionValues.setAdvancePose(FieldConstantsBlue.XMYP.rightAdvancePose);
 
-                ActiveMotionValues.setDropOffPose(FieldConstantsBlue.XMYP.rightDropPose.minus(xyOffsetPose));
+                ActiveMotionValues.setDropOffPose(FieldConstantsBlue.XMYP.rightDropPose);
 
                 ActiveMotionValues.setRetractPose(FieldConstantsBlue.XMYP.rightRetractPose);
 
@@ -271,18 +255,18 @@ public class SelectMotionValuesBlue extends CommandBase {
 
 
         if (useTruss) {
-
-            ActiveMotionValues.setTrussSDLineUpPose(FieldConstantsBlue.nearTrussLineUpPose);
-            ActiveMotionValues.setOptionStopPose(FieldConstantsBlue.nearOptionPose);
-
             if (!secondPixel) {
+                ActiveMotionValues.setTrussSDLineUpPose(FieldConstantsBlue.nearTrussLineUpPoseNoTurn);
+                ActiveMotionValues.setOptionStopPose(FieldConstantsBlue.nearOptionPoseNoTurn);
                 ActiveMotionValues.setParkPose(FieldConstantsBlue.nearParkPose);
+
             } else {
-                ActiveMotionValues.setWaitPartnerClearPose(FieldConstantsBlue.nearPartnerClearPose);
-                ActiveMotionValues.setStopSecs(stop2PixelSecs);
+                ActiveMotionValues.setTrussSDLineUpPose(FieldConstantsBlue.nearTrussLineUpPose);
                 ActiveMotionValues.setOptionStopPose(FieldConstantsBlue.nearOptionPose);
-                ActiveMotionValues.setClearToTurnPose(FieldConstantsBlue.XMYP.clearToTurnPose);
+                ActiveMotionValues.setWaitPartnerClearPose(FieldConstantsBlue.nearPartnerClearPose);
+                ActiveMotionValues.setOptionStopPose(FieldConstantsBlue.nearOptionPose);
                 ActiveMotionValues.setTurnAngle(FieldConstantsBlue.turnToTagRadians);
+                ActiveMotionValues.setStopSecs(stop2PixelSecs);
                 ActiveMotionValues.setTargetPose(FieldConstantsBlue.getActiveTagPose(ActiveMotionValues.getActTag())
                         .plus(FieldConstantsBlue.AprilTagConstants.tagStrafeOffsetPoseTruss));
             }
@@ -311,7 +295,6 @@ public class SelectMotionValuesBlue extends CommandBase {
                 ActiveMotionValues.setTargetPose(FieldConstantsBlue.getActiveTagPose(ActiveMotionValues.getActTag())
                         .plus(FieldConstantsBlue.AprilTagConstants.tagStrafeOffsetPoseSD));
             }
-
         }
     }
 

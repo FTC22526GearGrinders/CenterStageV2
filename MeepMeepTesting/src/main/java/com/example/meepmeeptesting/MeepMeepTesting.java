@@ -14,7 +14,7 @@ public class MeepMeepTesting {
 
         boolean redAlliance = false;
 
-        boolean bbstart = false;//                   aaset to false for start on stack side of truss
+        boolean bbstart = true;//                   aaset to false for start on stack side of truss
 
         int lcr = 1;//                    left tape ==1, center tape = 2, right tape = 3 from robot view
 
@@ -27,7 +27,6 @@ public class MeepMeepTesting {
         boolean centerPark = false;
 
         if (lcr < 0 || lcr > 3) lcr = 2;
-
 
         boolean truss = !useStageDoor;
 
@@ -81,7 +80,11 @@ public class MeepMeepTesting {
 
                                         .lineToLinearHeading(ActiveMotionValues.getRetractPose())
 
+                                        .waitSeconds(.1)
+
                                         .turn(ActiveMotionValues.getTurnAngle())
+
+                                        .waitSeconds(.1)
 
                                         .lineToLinearHeading(ActiveMotionValues.getPreTagPose())
 
@@ -119,7 +122,11 @@ public class MeepMeepTesting {
 
                                         .lineToLinearHeading(ActiveMotionValues.getClearPose())
 
+                                        .waitSeconds(.1)
+
                                         .turn(ActiveMotionValues.getTurnAngle())
+
+                                        .waitSeconds(.1)
 
                                         .lineToLinearHeading(ActiveMotionValues.getPreTagPose())
 
@@ -156,7 +163,11 @@ public class MeepMeepTesting {
 
                                         .lineToLinearHeading(ActiveMotionValues.getRetractPose())
 
+                                        .waitSeconds(.1)
+
                                         .turn(ActiveMotionValues.getTurnAngle())
+
+                                        .waitSeconds(.1)
 
                                         .lineToLinearHeading(ActiveMotionValues.getPreTagPose())
 
@@ -232,6 +243,8 @@ public class MeepMeepTesting {
 
                                         .lineToLinearHeading(ActiveMotionValues.getRetractPose())
 
+                                        .waitSeconds(.1)
+
                                         .turn(ActiveMotionValues.getTurnAngle())
 
                                         .waitSeconds(.1)
@@ -245,6 +258,7 @@ public class MeepMeepTesting {
                                         .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
 
                                         .lineToLinearHeading(ActiveMotionValues.getTargetPose())
+
                                         .build());
 
 
@@ -321,7 +335,11 @@ public class MeepMeepTesting {
 
                                         .lineToLinearHeading((ActiveMotionValues.getClearPose()))
 
+                                        .waitSeconds(.1)
+
                                         .turn(ActiveMotionValues.getTurnAngle())
+
+                                        .waitSeconds(.1)
 
                                         .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
 
@@ -374,6 +392,7 @@ public class MeepMeepTesting {
                                         .waitSeconds(.1)
 
                                         .lineToLinearHeading(ActiveMotionValues.getParkPose())
+
                                         .build());
 
 
@@ -406,6 +425,8 @@ public class MeepMeepTesting {
                                         .lineToLinearHeading(ActiveMotionValues.getClearPose())
 
                                         .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
+
+                                        .waitSeconds(.1)
 
                                         .turn(ActiveMotionValues.getTurnAngle())
 
@@ -498,14 +519,17 @@ public class MeepMeepTesting {
 
                                         .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
 
+                                        .waitSeconds(.1)
+
                                         .turn(ActiveMotionValues.getTurnAngle())
+
+                                        .waitSeconds(.1)
 
                                         .lineToLinearHeading(ActiveMotionValues.getWaitPartnerClearPose())
 
                                         .waitSeconds(ActiveMotionValues.getStopSecs())
 
                                         .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
-
 
                                         .lineToLinearHeading(ActiveMotionValues.getTargetPose())
 

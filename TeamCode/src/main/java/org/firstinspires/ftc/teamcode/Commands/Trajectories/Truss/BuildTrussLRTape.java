@@ -70,9 +70,6 @@ public class BuildTrussLRTape extends CommandBase {
 
                     .lineToLinearHeading(ActiveMotionValues.getOptionStopPose())
 
-                    .lineToLinearHeading(ActiveMotionValues.getClearToTurnPose())
-
-
                     .lineToLinearHeading(ActiveMotionValues.getTargetPose())
 
                     .build();

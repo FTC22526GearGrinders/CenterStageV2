@@ -56,9 +56,6 @@ public class LogTrajectory extends CommandBase {
         dataTimer = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
         logTimer = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
 
-
-        tsDL.addField("Total Time");
-        tsDL.addField("Num Segments");
         tsDL.addField("StartPose");
         tsDL.addField("EndPose");
         tsDL.addField("Running");

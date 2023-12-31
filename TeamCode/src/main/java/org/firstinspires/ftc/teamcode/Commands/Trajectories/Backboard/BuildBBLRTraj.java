@@ -49,7 +49,11 @@ public class BuildBBLRTraj extends CommandBase {
 
                     .lineToLinearHeading(ActiveMotionValues.getClearPose())
 
+                    .waitSeconds(.1)
+
                     .turn(ActiveMotionValues.getTurnAngle())
+
+                    .waitSeconds(.1)
 
                     .lineToLinearHeading(ActiveMotionValues.getPreTagPose())
 
@@ -73,7 +77,11 @@ public class BuildBBLRTraj extends CommandBase {
 
                     .lineToLinearHeading(ActiveMotionValues.getRetractPose())
 
+                    .waitSeconds(.1)
+
                     .turn(ActiveMotionValues.getTurnAngle())
+
+                    .waitSeconds(.1)
 
                     .lineToLinearHeading(ActiveMotionValues.getPreTagPose())
 

@@ -48,9 +48,13 @@ public class BuildStageDoorLRTape extends CommandBase {
 
                     .lineToLinearHeading(ActiveMotionValues.getClearPose())
 
+                    .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
+
+                    .waitSeconds(.1)
+
                     .turn(ActiveMotionValues.getTurnAngle())
 
-                    .lineToLinearHeading(ActiveMotionValues.getTrussSDLineUpPose())
+                    .waitSeconds(.1)
 
                     .lineToLinearHeading(ActiveMotionValues.getWaitPartnerClearPose())
 
