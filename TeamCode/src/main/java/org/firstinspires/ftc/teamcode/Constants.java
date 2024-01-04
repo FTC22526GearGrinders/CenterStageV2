@@ -69,10 +69,10 @@ public final class Constants {
         public static double MAX_ACCEL = 40;
         public static double MAX_ANG_VEL = Math.toRadians(75);
         public static double MAX_ANG_ACCEL = Math.toRadians(120);
-        public static double TRAJ_VEL = 40;
-        public static double TRAJ_ACCEL = 40;
-        public static double TRAJ_ANG_VEL = Math.toRadians(40);
-        public static double TRAJ_ANG_ACCEL = Math.toRadians(40);
+        public static double TRAJ_VEL = 50;
+        public static double TRAJ_ACCEL = 50;
+        public static double TRAJ_ANG_VEL = Math.toRadians(50);
+        public static double TRAJ_ANG_ACCEL = Math.toRadians(50);
 
         public static PIDFCoefficients MOTOR_VELO_PID = new PIDFCoefficients(.1, 0, 0, 0);
 

@@ -16,6 +16,7 @@ import org.firstinspires.ftc.teamcode.Commands.Climber.PositionHoldClimber;
 import org.firstinspires.ftc.teamcode.Commands.Drive.JogDrive;
 import org.firstinspires.ftc.teamcode.Commands.Drive.JogDriveSlow;
 import org.firstinspires.ftc.teamcode.Commands.Drive.TrajectoryToBackboardSimple;
+import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
 import org.firstinspires.ftc.teamcode.Subsystems.ArmSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.ClimberSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.Drive_Subsystem;
@@ -249,7 +250,9 @@ public class TeleopOpMode extends CommandOpMode {
         switch (teleSwitch) {
 
             case 0:
-                drive.showTelemetry(telemetry);
+                telemetry.addData("Dista", ActiveMotionValues.getActiveTagDistance());
+                telemetry.update();
+               // drive.showTelemetry(telemetry);
                 break;
             case 1:
                 drive.drive.showTelemetry(telemetry);

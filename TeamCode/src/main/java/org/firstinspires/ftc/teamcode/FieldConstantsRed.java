@@ -67,7 +67,7 @@ public final class FieldConstantsRed {
 
 
         public static final Pose2d tagStrafeOffsetPoseTruss = new Pose2d(-60.25 + 48 - Constants.RobotConstants.length/2, 0, 0);
-        public static final Pose2d tagStrafeOffsetPoseSD = new Pose2d(-60.25 + 48 - Constants.RobotConstants.length/2, 0, 0);
+        public static final Pose2d tagStrafeOffsetPoseSD = new Pose2d(-60.25 + 48 - Constants.RobotConstants.length/2, 2, 0);
 
 
 

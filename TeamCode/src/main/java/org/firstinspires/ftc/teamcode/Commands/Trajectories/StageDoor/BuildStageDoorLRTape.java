@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Commands.Trajectories.StageDoor;
 import com.arcrobotics.ftclib.command.CommandBase;
 
 import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
+import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.Subsystems.Drive_Subsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.PixelHandlerSubsystem;
 
@@ -35,6 +36,8 @@ public class BuildStageDoorLRTape extends CommandBase {
 
 
             drive.currentTrajSeq = drive.drive.trajectorySequenceBuilder(ActiveMotionValues.getStartPose())
+
+                    .setTurnConstraint(Constants.DriveConstants.MAX_ANG_VEL, Constants.DriveConstants.MAX_ANG_ACCEL)
 
                     .lineToLinearHeading(ActiveMotionValues.getAdvancePose())
 

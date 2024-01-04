@@ -47,7 +47,7 @@ public class AutoActionsSequences extends SequentialCommandGroup {
 
                                                         af.raiseGripperToBoard(),
 
-                                                        new WaitCommand(500),
+                                                        new WaitCommand(1000),
 
                                                         new InstantCommand(phss::flipGrippersToLeftDown)),
 
