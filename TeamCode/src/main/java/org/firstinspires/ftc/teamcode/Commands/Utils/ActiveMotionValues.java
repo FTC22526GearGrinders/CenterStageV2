@@ -16,8 +16,6 @@ public class ActiveMotionValues {
 
     private static Pose2d waitPartnerClearPose = new Pose2d();
 
-
-
     public static double getActiveTagDistance() {
         return activeTagDistance;
     }
@@ -28,15 +26,30 @@ public class ActiveMotionValues {
 
     public static double activeTagDistance = 0;
 
-    public static double getCameraYaw() {
-        return cameraYaw;
+    public static double getActiveTagRange() {
+        return activeTagRange;
     }
 
-    public static void setCameraYaw(double yaw) {
-        cameraYaw = yaw;
+    public static void setActiveTagRange(double tagRange) {
+        activeTagRange = tagRange;
     }
-    
-    static double cameraYaw = 0;
+    public static double activeTagRange = 0;
+
+    public static double getActiveTagBearing() {
+        return activeTagBearing;
+    }
+    public static void setActiveTagBearing(double tagBearing) {
+        activeTagBearing = tagBearing;
+    }
+    public static double activeTagBearing = 0;
+
+    public static double getActiveTagYaw() {
+        return activeTagYaw;
+    }
+    public static void setActiveTagYaw(double yaw) {
+        activeTagYaw = yaw;
+    }
+    static double activeTagYaw = 0;
 
     public static double getTurnAngle() {
         return turnAngle;
@@ -228,21 +241,24 @@ public class ActiveMotionValues {
     }
 
     private static Pose2d parkPose = new Pose2d();
+
     public static void setParkPose(Pose2d pose) {
         parkPose = pose;
     }
+
     public static Pose2d getParkPose() {
         return parkPose;
     }
 
     private static Pose2d preParkPose = new Pose2d();
+
     public static void setPreParkPose(Pose2d pose) {
         preParkPose = pose;
     }
+
     public static Pose2d getPreParkPose() {
         return preParkPose;
     }
-
 
 
     //auto running
@@ -309,6 +325,7 @@ public class ActiveMotionValues {
     public static Pose2d getClearToTurnPose() {
         return clearToTurnPose;
     }
+
     public static void setClearToTurnPose(Pose2d clearTurnPose) {
         ActiveMotionValues.clearToTurnPose = clearTurnPose;
     }

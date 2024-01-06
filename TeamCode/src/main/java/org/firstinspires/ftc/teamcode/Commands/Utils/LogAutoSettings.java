@@ -57,7 +57,6 @@ public class LogAutoSettings extends CommandBase {
         dataTimer.reset();
         opMode.telemetry.addData("LogAutoInit", "");
         opMode.telemetry.update();
-
     }
 
     @Override
@@ -87,7 +86,7 @@ public class LogAutoSettings extends CommandBase {
             e = ActiveMotionValues.getNearPark() ? "true" : "false";
             f = ActiveMotionValues.getCenterPark() ? "true" : "false";
             g = ActiveMotionValues.getStartPose().toString();
-            g=g.replace(",","_");
+            g = g.replace(",", "_");
 
 
             valuesSet = true;
@@ -95,7 +94,6 @@ public class LogAutoSettings extends CommandBase {
         }
 
         if (!headersWritten) {
-
             avDL.addField("Red Alliance");
             avDL.addField("BBStart");
             avDL.addField("StageDoor");

@@ -5,13 +5,13 @@ import com.arcrobotics.ftclib.command.CommandBase;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.ConditionalCommand;
 import com.arcrobotics.ftclib.command.InstantCommand;
+import com.arcrobotics.ftclib.command.ParallelRaceGroup;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 
 import org.firstinspires.ftc.teamcode.Commands.Arm.PositionArm;
 import org.firstinspires.ftc.teamcode.Commands.Drive.MoveToPark;
 import org.firstinspires.ftc.teamcode.Commands.Drive.PositionToBackboardUsingTags;
 import org.firstinspires.ftc.teamcode.Commands.Drive.TrajectoryToBackboardSimple;
-import org.firstinspires.ftc.teamcode.Commands.PixelHandler.TurnGrippersCommand;
 import org.firstinspires.ftc.teamcode.Commands.Trajectories.RunTrajSequence;
 import org.firstinspires.ftc.teamcode.Commands.Trajectories.SelectAndBuildTrajectory;
 import org.firstinspires.ftc.teamcode.Commands.Trajectories.ShowTrajectoryInfo;
@@ -98,10 +98,9 @@ public class AutoFactory extends CommandBase {
     }
 
     public Command detectTags() {
-
-        return new DetectAprilTags(opMode, vss, false);
-
-
+        return new ParallelRaceGroup(
+                new DetectAprilTags(opMode, vss, false),
+                new LogAprilTagDetect(drive, opMode));
     }
 
     public Command trajToBackboard() {
@@ -109,8 +108,8 @@ public class AutoFactory extends CommandBase {
         return new TrajectoryToBackboardSimple(drive, opMode);
     }
 
-    public Command raiseGripperToBoard(){
-        return new InstantCommand(()-> phss.raiseGrippersToDeliver());
+    public Command raiseGripperToBoard() {
+        return new InstantCommand(() -> phss.raiseGrippersToDeliver());
     }
 
     public Command positionArmHome() {

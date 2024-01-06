@@ -3,25 +3,27 @@ package org.firstinspires.ftc.teamcode.OpModes_Teleop;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.InstantCommand;
+import com.arcrobotics.ftclib.command.ParallelRaceGroup;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.command.WaitCommand;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
-import com.arcrobotics.ftclib.gamepad.TriggerReader;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Commands.Arm.JogArm;
+import org.firstinspires.ftc.teamcode.Commands.Auto.DetectAprilTags;
+import org.firstinspires.ftc.teamcode.Commands.Auto.LogAprilTagDetect;
 import org.firstinspires.ftc.teamcode.Commands.Climber.JogClimber;
 import org.firstinspires.ftc.teamcode.Commands.Climber.PositionHoldClimber;
 import org.firstinspires.ftc.teamcode.Commands.Drive.JogDrive;
 import org.firstinspires.ftc.teamcode.Commands.Drive.JogDriveSlow;
 import org.firstinspires.ftc.teamcode.Commands.Drive.TrajectoryToBackboardSimple;
-import org.firstinspires.ftc.teamcode.Commands.Utils.ActiveMotionValues;
 import org.firstinspires.ftc.teamcode.Subsystems.ArmSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.ClimberSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.Drive_Subsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.DroneCatapultSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.PixelHandlerSubsystem;
+import org.firstinspires.ftc.teamcode.Subsystems.Vision_Subsystem;
 
 @TeleOp
 public class TeleopOpMode extends CommandOpMode {
@@ -33,6 +35,8 @@ public class TeleopOpMode extends CommandOpMode {
     protected ArmSubsystem arm;
 
     protected ClimberSubsystem climber;
+
+    protected Vision_Subsystem vss;
     Pose2d poseEstimate;
     GamepadEx driver;
     GamepadEx coDriver;
@@ -56,6 +60,8 @@ public class TeleopOpMode extends CommandOpMode {
         arm = new ArmSubsystem(this);
 
         climber = new ClimberSubsystem(this);
+
+        vss = new Vision_Subsystem(this);
 
 
         dcatss = new DroneCatapultSubsystem(this);
@@ -119,19 +125,21 @@ public class TeleopOpMode extends CommandOpMode {
         coDriver.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenPressed(new InstantCommand(() -> dcatss.releaseCatapult()));
 
 
-       // driver.getGamepadButton(GamepadKeys.Button.BACK)
+        // driver.getGamepadButton(GamepadKeys.Button.BACK)
 
 
-        // driver.getGamepadButton(GamepadKeys.Button.LEFT_STICK_BUTTON)
+        driver.getGamepadButton(GamepadKeys.Button.LEFT_STICK_BUTTON).whenPressed(
+                new ParallelRaceGroup(
+                        new DetectAprilTags(this, vss, false),
+                        new LogAprilTagDetect(drive, this)));
+
         //
         // driver.getGamepadButton(GamepadKeys.Button.RIGHT_STICK_BUTTON)
 
-       // if (coDriver.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) == 1)
+        // if (coDriver.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) == 1)
 
 
-     //   if (coDriver.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) == 1)
-
-
+        //   if (coDriver.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) == 1)
 
 
         coDriver.getGamepadButton(GamepadKeys.Button.B).whenPressed(
@@ -170,10 +178,10 @@ public class TeleopOpMode extends CommandOpMode {
         coDriver.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenPressed(new TrajectoryToBackboardSimple(drive, this));
 
 
-       // coDriver.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER)
+        // coDriver.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER)
 
 
-       // coDriver.getGamepadButton(GamepadKeys.Button.BACK)
+        // coDriver.getGamepadButton(GamepadKeys.Button.BACK)
 
 
         coDriver.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT).whenPressed(new InstantCommand(() -> teleSwitch++));
@@ -228,14 +236,6 @@ public class TeleopOpMode extends CommandOpMode {
         if (driver.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) == 1)
             new InstantCommand(() -> phss.closeBothGrippers()).initialize();
 
-
-
-        //  if (drlt.isDown())schedule(new JogDrive2(drive, driver));
-
-
-//        if (drlt.isDown() && drrt.isDown())
-
-
         telemetry.update();
     }
 
@@ -250,9 +250,7 @@ public class TeleopOpMode extends CommandOpMode {
         switch (teleSwitch) {
 
             case 0:
-                telemetry.addData("Dista", ActiveMotionValues.getActiveTagDistance());
-                telemetry.update();
-               // drive.showTelemetry(telemetry);
+                drive.showTelemetry(telemetry);
                 break;
             case 1:
                 drive.drive.showTelemetry(telemetry);

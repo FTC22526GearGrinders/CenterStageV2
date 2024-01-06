@@ -51,6 +51,8 @@ public class AutoActionsSequences extends SequentialCommandGroup {
 
                                                         new InstantCommand(phss::flipGrippersToLeftDown)),
 
+
+
                                                 af.detectTags()),
 
                                         af.trajToBackboard(),

@@ -38,6 +38,8 @@ public class DetectAprilTags extends CommandBase {
     public void initialize() {
         et = new ElapsedTime();
         n = ActiveMotionValues.getActTag();
+        ActiveMotionValues.setAprilTagSeen(false);
+        ActiveMotionValues.setActiveTagDistance(7.001);
     }
 
     @Override
@@ -57,8 +59,7 @@ public class DetectAprilTags extends CommandBase {
             if (detection.metadata != null) {
                 tagsSeen = true;
 
-
-                ActiveMotionValues.setAprilTagSeen(false);
+                //  ActiveMotionValues.setAprilTagSeen(false);
 
                 if (detection.id == n) {
 
@@ -66,10 +67,13 @@ public class DetectAprilTags extends CommandBase {
 
                     ActiveMotionValues.setAprilTagSeen(true);
 
-
                     //assuming camera is square to target
 
                     double range = detection.ftcPose.range;
+
+                    ActiveMotionValues.setActiveTagRange(range);
+
+                    ActiveMotionValues.setActiveTagBearing(detection.ftcPose.bearing);
 
                     double cameraOffset = Constants.RobotConstants.kCameraToRobot.getY();
 
@@ -77,7 +81,7 @@ public class DetectAprilTags extends CommandBase {
 
                     ActiveMotionValues.setActiveTagDistance(distance);
 
-                    ActiveMotionValues.setCameraYaw(detection.ftcPose.yaw);
+                    ActiveMotionValues.setActiveTagYaw(detection.ftcPose.yaw);
 
                     if (noEnd) {
                         myOpMode.telemetry.addData("Active Tag", n);
@@ -119,8 +123,6 @@ public class DetectAprilTags extends CommandBase {
     @Override
 
     public void end(boolean interrupted) {
-        if (!ActiveMotionValues.getAprilTagSeen())
-            ActiveMotionValues.setActiveTagDistance(7);
         myOpMode.telemetry.addData("Ending detect Tags", "");
         myOpMode.telemetry.update();
 
@@ -129,6 +131,5 @@ public class DetectAprilTags extends CommandBase {
     @Override
     public boolean isFinished() {
         return !noEnd && ((et.seconds() > .5 && ActiveMotionValues.getAprilTagSeen()) || et.seconds() > 7);
-
     }
 }
