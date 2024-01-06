@@ -244,7 +244,7 @@ public class SelectMotionValuesBlue extends CommandBase {
         boolean useTruss = !useStageDoor;
 
 
-        double stop2PixelSecs = 3;
+        double stop2PixelSecs = .2;
 
 
         if (ActiveMotionValues.getCenterPark())
